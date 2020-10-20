@@ -56,5 +56,9 @@
 		where num = #{num}
 	</select>
 	
+	<select id="detail_image" parameterType="int" resultType="com.java.common.ProductImageVO">
+		select * from product_image where p_num=#{p_num}
+	</select>
+	
 	
 </mapper> 

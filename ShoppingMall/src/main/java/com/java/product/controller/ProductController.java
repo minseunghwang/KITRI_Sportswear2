@@ -56,4 +56,13 @@ public class ProductController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/product/detailImgList.do")
+	public ModelAndView productDetailImgList(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request",request);
+		productService.getDetailImgAll(mav);
+		return mav;
+	}
+	
+	
 }

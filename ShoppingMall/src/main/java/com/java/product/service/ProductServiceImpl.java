@@ -43,8 +43,6 @@ public class ProductServiceImpl implements ProductService{
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		List<ProductDto> mainpageItem = productDao.selectAll();
-		System.out.println(mainpageItem);
-		System.out.println(mainpageItem.size());
 		mav.addObject("mainpageItem",mainpageItem);
 		mav.setViewName("main/main");
 	}
@@ -150,8 +148,13 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	@Override
-	public ArrayList<ProductImageVO> getDetailImgAll(int p_num) {
-		return productDao.selectDetailImages(p_num);
+	public void getDetailImgAll(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		int p_num = Integer.parseInt(request.getParameter("p_num"));
+		List<ProductImageVO> imgs = productDao.selectDetailImages(p_num);
+		mav.addObject("imgs", imgs);
+		mav.setViewName("json/detailImgList_JSON");
 	}
 
 	@Override
@@ -208,7 +211,6 @@ public class ProductServiceImpl implements ProductService{
 		List<ReviewDto> reviewsAll = reviewDao.selectByP_Num(num);
 		
 		if(reviewsAll.size() != 0) {
-			System.out.println("읭 ?" + reviewsAll);
 			mav.addObject("reviewsAll", reviewsAll);
 			
 			PaginationVO pn = new PaginationVO();
@@ -248,7 +250,6 @@ public class ProductServiceImpl implements ProductService{
 		List<ReviewDto> reviews = reviewDao.selectReviewInProductByPageNum(num, page);
 		
 		product.setReviews((ArrayList<ReviewDto>) reviews);
-		System.out.println(reviews);
 		
 		mav.addObject("product", product);
 		mav.addObject("reviews", reviews);

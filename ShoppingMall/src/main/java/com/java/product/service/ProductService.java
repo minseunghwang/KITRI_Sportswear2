@@ -31,7 +31,7 @@ public interface ProductService {
 	
 	ArrayList<ProductDto> getKeywordProductsSort(String keyword, int page, String orderBy);
 	
-	ArrayList<ProductImageVO> getDetailImgAll(int p_num);
+	public void getDetailImgAll(ModelAndView mav);
 	
 	public void getProductDetail(ModelAndView mav);
 	

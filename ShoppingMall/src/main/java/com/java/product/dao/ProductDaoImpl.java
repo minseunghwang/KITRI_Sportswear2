@@ -80,8 +80,8 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public ArrayList<ProductImageVO> selectDetailImages(int p_num) {
-		return null;
+	public List<ProductImageVO> selectDetailImages(int p_num) {
+		return sqlSessionTemplate.selectList("detail_image",p_num);
 	}
 
 	@Override

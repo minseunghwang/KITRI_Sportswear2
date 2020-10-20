@@ -6,313 +6,315 @@
 
 <head>
 
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	
-	<title>Shop Item - Start Bootstrap Template</title>
-	
-	<!-- Bootstrap core CSS -->
-	<link href="<%=request.getContextPath()%>/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	
-	<!-- Custom styles for this template -->
-	<link href="<%=request.getContextPath()%>/resources/css/shop-item.css" rel="stylesheet">
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   
+   <title>Shop Item - Start Bootstrap Template</title>
+   
+   <!-- Bootstrap core CSS -->
+   <link href="<%=request.getContextPath()%>/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   
+   <!-- Custom styles for this template -->
+   <link href="<%=request.getContextPath()%>/resources/css/shop-item.css" rel="stylesheet">
 
-	<!-- Bootstrap core JavaScript -->
-	<script src="<%=request.getContextPath()%>/resources/vendor/jquery/jquery.min.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <!-- Bootstrap core JavaScript -->
+   <script src="<%=request.getContextPath()%>/resources/vendor/jquery/jquery.min.js"></script>
+   <script src="<%=request.getContextPath()%>/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
-	<style type="text/css">
-		#detail-img {
-			margin-top: 30px;
-		}
-		
-		#viewImg {
-			margin-left: 30px;
-			margin-top: 30px;
-		}
-		
-		#product-info {
-			margin-top: 30px;
-			padding-left: 200px;
-		}
+   <style type="text/css">
+      #detail-img {
+         margin-top: 30px;
+      }
+      
+      #viewImg {
+         margin-left: 30px;
+         margin-top: 30px;
+      }
+      
+      #product-info {
+         margin-top: 30px;
+         padding-left: 200px;
+      }
 
-		#btn_cart{
-			margin-top: 10px;
-		}
+      #btn_cart{
+         margin-top: 10px;
+      }
 
-		#select-quantity{
-			padding:10px;
-		}
-		#profile-img{
-			float: right;
-		}
-		#review-img{
-			margin:5px;
-		}
-		#review-id{
-			display:inline;
-		}
-		#review-date{
-			float:right;
-		}
-		<!-- 더보기 -->
-		 .showstep1{
+      #select-quantity{
+         padding:10px;
+      }
+      #profile-img{
+         float: right;
+      }
+      #review-img{
+         margin:5px;
+      }
+      #review-id{
+         display:inline;
+      }
+      #review-date{
+         float:right;
+      }
+      <!-- 더보기 -->
+       .showstep1{
         max-height: 50;
         overflow: hidden;
-	    }
-	    .showstep2{
-	        max-height: 150;
-	        overflow: hidden;
-	    }
-	    
-	    .hide{
-	        display: none;
-	    }
-	    #rate{
-			text-decoration:none; 
-	    }
-	</style>	
+       }
+       .showstep2{
+           max-height: 150;
+           overflow: hidden;
+       }
+       
+       .hide{
+           display: none;
+       }
+       #rate{
+         text-decoration:none; 
+       }
+   </style>   
 
 
 
-	<script type="text/javascript">
-		
-	
-		<!-- 장바구니 클릭 상품 번호 전달 -->
-		 function addCart(productNum) {
-			
-			if(${sessionScope.id == null }){
-				if(confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?')){
-					location.href = "<%=request.getContextPath()%>/views/member/login.jsp";
-					/* location.href= "${pageContext.request.contextPath }/LoginController"; */
-					return;
-				}else{
-					return;	
-				}
-			} else{
-				
-				var unSizeCheck = $("#selected").length ? false : true;
-				if(unSizeCheck){
-					alert('사이즈를 선택해주세요');
-					return;
-				}
-				
-				if(confirm('장바구니에 추가하시겠습니까?')){
-					
-					var size = $("#selected").text();
-					var quantity = $("#select-quantity").text();
-					var allData = {"productNum": productNum, "size": size, "quantity": quantity};
-			
-					$.ajax({
-						type: "post",
-						async: false,
-						url: "${pageContext.request.contextPath }/AddProductCartController",
-						data: allData,
-						success: function (result) {
-							/* var resultMessage = $.trim(result); */
-    							if(result == "AddCart Success"){
-								if(confirm('장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까?')){
-									<%-- location.herf = "<%=request.getContextPath()%>/OrderlistController?o_state=0"; --%>
-									location.href= "${pageContext.request.contextPath }/OrderlistController?o_state=0";
-								}
-							}else if(result == "Already Existed"){
-								if(confirm('장바구니에 이미 해당 상품이 있습니다. 장바구니로 이동하시겠습니까?')){
-									<%-- location.herf = "<%=request.getContextPath()%>/OrderlistController?o_state=0"; --%>
-									location.href= "${pageContext.request.contextPath }/OrderlistController?o_state=0";
-								}
-							}else if(result == "Sold Out"){
-								alert('재고가 부족합니다');
-							}else{
-								alert('error');
-							}
+   <script type="text/javascript">
+      
+   
+      <!-- 장바구니 클릭 상품 번호 전달 -->
+       function addCart(productNum) {
+         
+         if(${sessionScope.id == null }){
+            if(confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?')){
+               location.href = "<%=request.getContextPath()%>/views/member/login.jsp";
+               /* location.href= "${pageContext.request.contextPath }/LoginController"; */
+               return;
+            }else{
+               return;   
+            }
+         } else{
+            
+            var unSizeCheck = $("#selected").length ? false : true;
+            if(unSizeCheck){
+               alert('사이즈를 선택해주세요');
+               return;
+            }
+            
+            if(confirm('장바구니에 추가하시겠습니까?')){
+               
+               var size = $("#selected").text();
+               var quantity = $("#select-quantity").text();
+               var allData = {"productNum": productNum, "size": size, "quantity": quantity};
+         
+               $.ajax({
+                  type: "post",
+                  async: false,
+                  url: "${pageContext.request.contextPath }/AddProductCartController",
+                  data: allData,
+                  success: function (result) {
+                     /* var resultMessage = $.trim(result); */
+                         if(result == "AddCart Success"){
+                        if(confirm('장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까?')){
+                           <%-- location.herf = "<%=request.getContextPath()%>/OrderlistController?o_state=0"; --%>
+                           location.href= "${pageContext.request.contextPath }/OrderlistController?o_state=0";
+                        }
+                     }else if(result == "Already Existed"){
+                        if(confirm('장바구니에 이미 해당 상품이 있습니다. 장바구니로 이동하시겠습니까?')){
+                           <%-- location.herf = "<%=request.getContextPath()%>/OrderlistController?o_state=0"; --%>
+                           location.href= "${pageContext.request.contextPath }/OrderlistController?o_state=0";
+                        }
+                     }else if(result == "Sold Out"){
+                        alert('재고가 부족합니다');
+                     }else{
+                        alert('error');
+                     }
 
-						}
-					});
-					
-				}
-				
-			} 
+                  }
+               });
+               
+            }
+            
+         } 
 
-			
-		}
-		
-		function directOrder(productNum) {
+         
+      }
+      
+      function directOrder(productNum) {
 
-			
-			if(${sessionScope.id == null }){
-				if(confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?')){
-					location.href = "<%=request.getContextPath()%>/views/member/login.jsp";
-					/* location.href= "${pageContext.request.contextPath }/LoginController"; */
-					return;
-				}else{
-					return;	
-				}
-			} else {
-				
-				var unSizeCheck = $("#selected").length ? false : true;
-				if(unSizeCheck){
-					alert('사이즈를 선택해주세요');
-					return;
-				}
-				var size = $("#selected").text();
-				var quantity = $("#select-quantity").text();
-				var allData = {"productNum": productNum, "size": size, "quantity": quantity};
-		
-				location.href ="<%=request.getContextPath()%>/DirectOrderPageController?productNum=" +productNum +"&size=" +size+"&quantity=" + quantity;
-				
-				
-			} 
+         
+         if(${sessionScope.id == null }){
+            if(confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?')){
+               location.href = "<%=request.getContextPath()%>/views/member/login.jsp";
+               /* location.href= "${pageContext.request.contextPath }/LoginController"; */
+               return;
+            }else{
+               return;   
+            }
+         } else {
+            
+            var unSizeCheck = $("#selected").length ? false : true;
+            if(unSizeCheck){
+               alert('사이즈를 선택해주세요');
+               return;
+            }
+            var size = $("#selected").text();
+            var quantity = $("#select-quantity").text();
+            var allData = {"productNum": productNum, "size": size, "quantity": quantity};
+      
+            location.href ="<%=request.getContextPath()%>/DirectOrderPageController?productNum=" +productNum +"&size=" +size+"&quantity=" + quantity;
+            
+            
+         } 
 
-			
-		}
-			
-			
-		
-		
-		function addReview(id) {
-			alert(id);
-			if(id == null){
-				alert('로그인 후 시도해주세요');
-			}else{
-				alert('구매 후 시도해주세요');
-			}
-		}
-	
- 		function priceView(price) {
-			var commaCount = 0;
-			var priceString = price.toString();
+         
+      }
+         
+         
+      
+      
+      function addReview(id) {
+         alert(id);
+         if(id == null){
+            alert('로그인 후 시도해주세요');
+         }else{
+            alert('구매 후 시도해주세요');
+         }
+      }
+   
+       function priceView(price) {
+         var commaCount = 0;
+         var priceString = price.toString();
 
-			var priceView = "";
-			var count = 0;
-			
-			for(var i=1; i<=priceString.length; i++){
-				priceView += priceString.charAt(priceString.length-i);
-				++count;
-				if(count % 3 == 0){
-					priceView += ',';
-				} 
-			}
-			
-			priceView = priceView.split("").reverse().join("");
-			
-			if(priceView.charAt(0) == ','){
-				priceView = priceView.substr(1);
-			}
-			return priceView;
-		} 
-		
-		
-		$(document).ready(function(){
- 
-			var DefaultPrice = ${product.price };
-			
-			$.ajax({
-				url : "${pageContext.request.contextPath }/DetailImgListController",
-				type : "get",
-				data : "p_num=" + ${product.num},
-				success : function(result) {
-					arr = $.parseJSON(result);
-					var html = "<img id='smallImg' src='${product.img }' width='50' height='75'><br><br>";
-					for(i = 0; i<arr.length; i++){
-						html += "<img id='smallImg' src='" + arr[i].img + "' width='50' height='75'><br><br>";
-					}
-					$("#detail-img").html(html);
-				}
-			});
+         var priceView = "";
+         var count = 0;
+         
+         for(var i=1; i<=priceString.length; i++){
+            priceView += priceString.charAt(priceString.length-i);
+            ++count;
+            if(count % 3 == 0){
+               priceView += ',';
+            } 
+         }
+         
+         priceView = priceView.split("").reverse().join("");
+         
+         if(priceView.charAt(0) == ','){
+            priceView = priceView.substr(1);
+         }
+         return priceView;
+      } 
+      
+      
+      $(document).ready(function(){
+         var DefaultPrice = ${product.price };
+         $.ajax({
+            url : "${pageContext.request.contextPath }/product/detailImgList.do",
+            type : "get",
+            data : "p_num=" + ${product.num},
+            success : function(result) {
+               arr = $.parseJSON(result);
+               var html = "<img id='smallImg' src='${pageContext.request.contextPath }/resources/${product.img }' width='50' height='75'><br><br>";
+               for(i = 0; i<arr.length; i++){
+                  html += "<img id='smallImg' src='${pageContext.request.contextPath }/resources/" + arr[i].img + "' width='50' height='75'><br><br>";
+               }
+               $("#detail-img").html(html);
+            }
+         });
 
-			<!-- 상세 이미지에 마우스 올려놓으면 우측 확대이미지 변경 -->
-			$(document).on('mouseover', '#smallImg', function () {
-				var img = $(this).attr('src');
-				$('#viewImg').attr('src', img);
-			});
-			
-			<!-- "상품평 전체 보기" 클릭 시 하단 Product reviews로 이동 -->
-			$("#rate").click(function scroll_move() {
-				var offset = $("#product-reviews").offset();
-				$("html").animate({scrollTop:offset.top}, 400);
-			});
-			<!-- 사이즈 선택 -->
-			$("ul.size-selected li").click(function () {
-				$("ul.size-selected li").attr("class", "btn btn-outline-secondary");
-				$("ul.size-selected li").attr("id", "un-selected")
-				$(this).attr("class", "btn btn-secondary");
-				$(this).attr("id", "selected");
-			});
-			
-			<!-- 상품 수량 빼기 -->
-			$("#decQuantity").click(function countDown() { 
-				var quantity = Number($("#select-quantity").text());
-				if(quantity >= 2){
-					$("#select-quantity").html(quantity-1);	
-					$(".quantity-total-price").html('￦'+ priceView((quantity-1) * DefaultPrice));				
-				}
-				if(quantity == 2){
-					$("#countDown").attr("src", "sample_img/ico_decQ_disabled.png");
-				}
-				
-			});
-			
-			<!-- 상품 수량 증가 -->
-			$("#incQuantity").click(function countUp() {
-				var quantity = Number($("#select-quantity").text());
-				$("#select-quantity").html(quantity+1);
-				$(".quantity-total-price").html('￦'+ priceView((quantity+1) * DefaultPrice));
-				$("#countDown").attr("src", "sample_img/ico_decQ.png");
+         
+         <!-- 상세 이미지에 마우스 올려놓으면 우측 확대이미지 변경 -->
+         
+         $(document).on('mouseover', '#smallImg', function () {
+            var img = $(this).attr('src');
+            $('#viewImg').attr('src', img);
+         });
+         
+         <!-- "상품평 전체 보기" 클릭 시 하단 Product reviews로 이동 -->
+         $("#rate").click(function scroll_move() {
+            var offset = $("#product-reviews").offset();
+            $("html").animate({scrollTop:offset.top}, 400);
+         });
+         <!-- 사이즈 선택 -->
+         $("ul.size-selected li").click(function () {
+            $("ul.size-selected li").attr("class", "btn btn-outline-secondary");
+            $("ul.size-selected li").attr("id", "un-selected")
+            $(this).attr("class", "btn btn-secondary");
+            $(this).attr("id", "selected");
+         });
+         
+         <!-- 상품 수량 빼기 -->
+         $("#decQuantity").click(function countDown() { 
+            var quantity = Number($("#select-quantity").text());
+            if(quantity >= 2){
+               $("#select-quantity").html(quantity-1);   
+               $(".quantity-total-price").html('￦'+ priceView((quantity-1) * DefaultPrice));            
+            }
+            if(quantity == 2){
+               $("#countDown").attr("src", "sample_img/ico_decQ_disabled.png");
+            }
+            
+         });
+         
+         <!-- 상품 수량 증가 -->
+         $("#incQuantity").click(function countUp() {
+            var quantity = Number($("#select-quantity").text());
+            $("#select-quantity").html(quantity+1);
+            $(".quantity-total-price").html('￦'+ priceView((quantity+1) * DefaultPrice));
+            $("#countDown").attr("src", "sample_img/ico_decQ.png");
 
-			});
-			
-			
-		});
-		
-		<!-- 더보기 리스너-->
-		document.addEventListener('DOMContentLoaded', function(){ //DOM 생성 후 이벤트 리스너 등록
-		    //더보기 버튼 이벤트 리스너
-		    document.querySelector('.btn_open').addEventListener('click', function(e){
-		        
-		        let classList = document.querySelector('.detailinfo').classList; // 더보기 프레임의 클래스 정보 얻기
-		        let contentHeight = document.querySelector('.detailinfo > .content').offsetHeight; //컨텐츠 높이 얻기
+         });
+         
+         
+      });
+      
+      <!-- 더보기 리스너-->
+      document.addEventListener('DOMContentLoaded', function(){ //DOM 생성 후 이벤트 리스너 등록
+          //더보기 버튼 이벤트 리스너
+          document.querySelector('.btn_open').addEventListener('click', function(e){
+              
+              let classList = document.querySelector('.detailinfo').classList; // 더보기 프레임의 클래스 정보 얻기
+              let contentHeight = document.querySelector('.detailinfo > .content').offsetHeight; //컨텐츠 높이 얻기
 
-		        // 2단계이면 전체보기로
-		        if(classList.contains('showstep2')){
-		            classList.remove('showstep2');
-		        }
-		        // 1단계이면 2단계로
-		        if(classList.contains('showstep1')){
-		            classList.remove('showstep1');
-		            if(contentHeight > 600){
-		                classList.add('showstep2');
-		            }else{
-		                document.querySelector('.btn_open').classList.add('hide');
-		            }
-		        }
-		        //전체보기시 더보기 버튼 감추기 & 감추기 버튼 표시
-		        if(!classList.contains('showstep1') && !classList.contains('showstep2')){
-		            e.target.classList.add('hide');
-		            document.querySelector('.btn_close').classList.remove('hide');
-		            
-		        }
-		        
-		    });
-		});
-		
-		// 감추기 버튼 이벤트 리스너
-		document.querySelector('.btn_close').addEventListener('click', function(e){
-		    e.target.classList.add('hide');
-		    document.querySelector('.btn_open').classList.remove('hide'); // 더보기 버튼 감춤
-		    document.querySelector('.detailinfo').classList.add('showstep1'); // 초기 감춤 상태로 복귀
-		});
-		//컨텐츠 로딩 완료 후 높이 기준으로 클래스 재처리
-		window.addEventListener('load', function(){
-		    let contentHeight = document.querySelector('.detailinfo > .content').offsetHeight; //컨텐츠 높이 얻기
-		    if(contentHeight <= 300){
-		        document.querySelector('.detailinfo').classList.remove('showstep1'); // 초기값보다 작으면 전체 컨텐츠 표시
-		        document.querySelector('.btn_open').classList.add('hide'); // 버튼 감춤
-		    }
-		});
-	</script>
+              // 2단계이면 전체보기로
+              if(classList.contains('showstep2')){
+                  classList.remove('showstep2');
+              }
+              // 1단계이면 2단계로
+              if(classList.contains('showstep1')){
+                  classList.remove('showstep1');
+                  if(contentHeight > 600){
+                      classList.add('showstep2');
+                  }else{
+                      document.querySelector('.btn_open').classList.add('hide');
+                  }
+              }
+              //전체보기시 더보기 버튼 감추기 & 감추기 버튼 표시
+              if(!classList.contains('showstep1') && !classList.contains('showstep2')){
+                  e.target.classList.add('hide');
+                  document.querySelector('.btn_close').classList.remove('hide');
+                  
+              }
+              
+          });
+      });
+      
+      // 감추기 버튼 이벤트 리스너
+/*       document.querySelector('.btn_close').addEventListener('click', function(e){
+          e.target.classList.add('hide');
+          document.querySelector('.btn_open').classList.remove('hide'); // 더보기 버튼 감춤
+          document.querySelector('.detailinfo').classList.add('showstep1'); // 초기 감춤 상태로 복귀
+      });
+       */
+       
+      //컨텐츠 로딩 완료 후 높이 기준으로 클래스 재처리
+      window.addEventListener('load', function(){
+          let contentHeight = document.querySelector('.detailinfo > .content').offsetHeight; //컨텐츠 높이 얻기
+          if(contentHeight <= 300){
+              document.querySelector('.detailinfo').classList.remove('showstep1'); // 초기값보다 작으면 전체 컨텐츠 표시
+              document.querySelector('.btn_open').classList.add('hide'); // 버튼 감춤
+          }
+      });
+   </script>
 
 
 </head>
@@ -479,12 +481,12 @@
 						<ul class="pagination justify-content-center">
 						<c:if test="${1 != pn.page }">
 							<li class="page-item">
-								<a class="page-link" href="${pageContext.request.contextPath }/DetailController?num=${product.num }&page=1" aria-label="Previous">
+								<a class="page-link" href="${pageContext.request.contextPath }/product/detailImgList.do?num=${product.num }&page=1" aria-label="Previous">
 									<span aria-hidden="true">&laquo;</span>
 								</a>
 							</li>
 							<li class="page-item">
-								<a class="page-link" href="${pageContext.request.contextPath }/DetailController?num=${product.num }&page=${param.page-1}" aria-label="Previous">
+								<a class="page-link" href="${pageContext.request.contextPath }/product/detailImgList.do?num=${product.num }&page=${param.page-1}" aria-label="Previous">
 									<span aria-hidden="true">&lsaquo;</span>
 								</a>
 							</li>
@@ -500,7 +502,7 @@
 									<li class="page-item">
 								</c:otherwise>
 							</c:choose>
-										<a class="page-link" href="${pageContext.request.contextPath }/DetailController?num=${product.num }&page=${pageNum }">${pageNum }</a>
+										<a class="page-link" href="${pageContext.request.contextPath }/product/detailImgList.do?num=${product.num }&page=${pageNum }">${pageNum }</a>
 							<c:if test="${param.page eq pageNum}">
 											<span class="sr-only">(current)</span>
 									</li>
@@ -509,12 +511,12 @@
 		
 						<c:if test="${pn.totalPage != pn.page }">
 							<li class="page-item">
-								<a class="page-link" href="${pageContext.request.contextPath }/DetailController?num=${product.num }&page=${param.page+1}" aria-label="Next">
+								<a class="page-link" href="${pageContext.request.contextPath }/product/detailImgList.do?num=${product.num }&page=${param.page+1}" aria-label="Next">
 									<span aria-hidden="true">&rsaquo;</span>
 								</a>
 							</li>
 							<li class="page-item">
-								<a class="page-link" href="${pageContext.request.contextPath }/DetailController?num=${product.num }&page=${pn.totalPage }" aria-label="Next">
+								<a class="page-link" href="${pageContext.request.contextPath }/product/detailImgList.do?num=${product.num }&page=${pn.totalPage }" aria-label="Next">
 									<span aria-hidden="true">&raquo;</span>
 								</a>
 							</li>

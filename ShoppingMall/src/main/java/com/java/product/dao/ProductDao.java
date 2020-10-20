@@ -20,7 +20,7 @@ public interface ProductDao {
 	List<ProductDto> selectCategoryProductsSort(String category, int page, String orderBy);
 	ArrayList<ProductDto> selectKeywordProductsByPageNum(String keyword, int page);
 	ArrayList<ProductDto> selectKeywordProductsSort(String keyword, int page, String orderBy);
-	ArrayList<ProductImageVO> selectDetailImages(int p_num);
+	List<ProductImageVO> selectDetailImages(int p_num);
 	int selectProductNum();
 	int selectProductImgNum();
 	int selectProductSizeNum();
