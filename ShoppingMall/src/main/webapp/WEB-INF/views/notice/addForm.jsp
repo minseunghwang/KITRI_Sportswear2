@@ -33,7 +33,7 @@
 <h3 class="text-center my-4"align ="center"> 공지사항 작성</h3><br>
 	<div class="container" align ="center">
 		<form name="noticeadd"
-			action="${pageContext.request.contextPath }/WriteNoticeController"
+			action="${pageContext.request.contextPath }/notice/writeOk.do"
 			method="post" class="table table-sm mt-3 mb-5">
 			<div >
 			<table class="form-group " >

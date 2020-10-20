@@ -418,7 +418,7 @@
 			<c:if test="${sessionScope.memberType==null }">
 				<div id="main-gnb-login">
 					<ul>
-						<li><a href="${pageContext.request.contextPath }/ListNoticeController?page=1">공지사항</a></li>
+						<li><a href="${pageContext.request.contextPath }/notice/list.do">공지사항</a></li>
 						<li><a href="<%=request.getContextPath()%>/member/login.do">주문조회</a></li>
 						<li><a href="<%=request.getContextPath()%>/member/join.do">회원가입</a></li>
 						<li><a href="<%=request.getContextPath()%>/member/login.do">로그인</a></li>
@@ -431,7 +431,7 @@
 			<c:if test="${sessionScope.memberType == 1 }">
 				<div id="main-gnb-login">
 					<ul>
-						<li><a href="${pageContext.request.contextPath }/ListNoticeController?page=1">공지사항</a></li>
+						<li><a href="${pageContext.request.contextPath }/notice/list.do">공지사항</a></li>
 						<li><a href="${pageContext.request.contextPath }/AllOrderListController?o_state=1&page=1">주문조회</a></li>
 						<li><a href="${pageContext.request.contextPath }/member/myPage.do">마이페이지</a></li>
 						<li><a href="${pageContext.request.contextPath }/member/logout.do">로그아웃</a></li>
@@ -445,7 +445,7 @@
 
 				<div id="main-gnb-login">
 					<ul>
-						<li><a href="${pageContext.request.contextPath }/ListNoticeController?page=1">공지사항</a></li>
+						<li><a href="${pageContext.request.contextPath }/notice/list.do">공지사항</a></li>
 						<li><a href="<%=request.getContextPath()%>/ProductAllListController?page=1">관리자페이지</a></li>
 						<li><a href="<%=request.getContextPath()%>/member/logout.do">로그아웃</a></li>
 					</ul>

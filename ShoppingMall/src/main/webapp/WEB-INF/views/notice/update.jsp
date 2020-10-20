@@ -39,7 +39,9 @@ p {
 		<br>
 		<h3 class="text-center my-4" align="center">공지사항</h3>
 		<div align="center">
-			<form>
+			<form
+				action="${pageContext.request.contextPath }/notice/updateOk?num=${notice.num}"
+				method="post">
 				<%-- <table class="table table-sm mt-3 mb-5" cellspacing="0"
 					style="width: 900px; height: 300px; border: none;">
 					<tr>
@@ -92,19 +94,13 @@ p {
 				<table class="table table-sm mt-3 mb-5" cellspacing="0"
 					style="width: 900px; height: 300px; border: none;">
 					<tr style="height: 50px; border: none; font: bold;">
-						<%-- <c:if test="${sessionScope.memberType != 0 }"> --%>
-							<td><p>
-									<input type="text" id="title" value="${notice.title }"
-										size="40" readonly
-										style="background-color: white; border: none;">
-								</p></td>
-					<%-- 	</c:if>
-						<c:if test="${sessionScope.memberType == 0 }">
+						
+						
 							<td><p>
 									<input type="text" name="title" value="${notice.title }"
 										size="40" style="background-color: white; border: none;">
 								</p></td>
-						</c:if> --%>
+
 					</tr>
 					<tr>
 						<td style='word-spacing: 10px'>
@@ -122,9 +118,9 @@ p {
 					</tr>
 
 					<tr>
-							<td><input type="text" name="content" readonly size="100" align="center"
-								style="width: 900px; height: 400px; background-color: white; border: none;"
-								value="${notice.content }"></td>
+							<td><textarea class="form-control" name="content" size="100"  align="center"
+									style="width: 900px; height: 400px; background-color: white; border: none;"
+									>${notice.content }</textarea></td>
 					</tr>
 				</table>
 
@@ -138,8 +134,7 @@ p {
 					<c:if test="${sessionScope.memberType == 0 }">
 						<div style="display: inline-block;">
 							<input type="submit" class="btn btn-outline-dark  btn-block"
-								value="edit"
-								onclick="location.href = '${pageContext.request.contextPath }/notice/update.do?num='+${notice.num}">
+								value="edit">
 						</div>
 						<div style="display: inline-block;">
 							<input type="button" class="btn btn-outline-danger  btn-block"

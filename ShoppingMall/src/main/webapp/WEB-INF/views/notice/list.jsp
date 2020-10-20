@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTf-8" import="com.java.notice.dto.NoticeDto, com.java.common.PaginationVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ page import="java.util.*"%>
 <%@ page import="java.util.ArrayList"%>
@@ -55,7 +56,7 @@
 		<div class="button" align="right">
 			<c:if test="${sessionScope.memberType == 0 }">
 				<button id="addbtn" type="button" class="btn btn-dark " style="width:100px;"
-					onclick="location.href='${pageContext.request.contextPath }/views/notice/addForm.jsp'">write</button>
+					onclick="location.href='${pageContext.request.contextPath }/notice/addForm.do'">write</button>
 			</c:if>
 		</div>
 		<br>
@@ -74,64 +75,70 @@
 						<tr class="text-center d-flex">
 							<td class="text-center  col-1">${notice.num }</td>
 							<td class="text-center  col-6" id="title" name="title"><a
-								href="${pageContext.request.contextPath }/ReadNoticeController?num=${notice.num}"
+								href="${pageContext.request.contextPath }/notice/search.do?num=${notice.num}&page=${currentPage}"
 								style="color: black;"> ${notice.title }</a></td>
-							<td class="text-center  col-3">${notice.n_date }</td>
+							<td class="text-center  col-3"><fmt:formatDate value="${notice.n_date}" pattern="yyyy.MM.dd" /></td>
 							<td class="text-center  col-2" id="view_count">${notice.view_count }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-		<!-- pagination -->
-			<nav aria-label="...">
-				<ul class="pagination justify-content-center">
-				<c:if test="${1 != pn.page }">
-					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/ListNoticeController?page=1" aria-label="Previous">
-							<span aria-hidden="true">&laquo;</span>
-						</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/ListNoticeController?page=${param.page-1}" aria-label="Previous">
-							<span aria-hidden="true">&lsaquo;</span>
-						</a>
-					</li>
-				</c:if>
 
-				<c:forEach var="pageNum" begin="${pn.startPage }" end="${pn.endPage }" step="1">
-							
+		<!-- /pagination -->
+		
+		<!-- pagination -->
+		<fmt:parseNumber var="pageCount" value="${count/noticeSize + (count%noticeSize==0?0:1)}" integerOnly="true"/>
+		 <!-- 3항식으로 표현함 count=전체 게시글 개수 boardSize=내가 정한 개수에서 두개 나눴을 때 나머지 0이면0, 나머지 0아니면 +1해줌
+		  -->
+		  <!-- 여기서 ${pageCount}찍어주면 1.3처럼 나옴 처리 나중에 해주면 됨 -->
+		  <c:set var="pageBlock" value="${5}"/>		<%-- 페이징 넘버 표시할 갯수 --%>
+		  
+		  <fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock}" integerOnly="true"/>
+		  <c:set var="startPage" value="${result*pageBlock +1}"/>
+		  <c:set var="endPage" value="${startPage+pageBlock-1}"/>
+		  <%--${startPage}, ${endPage}, --%>
+		  
+	
+	<c:if test="${endPage > pageCount }">
+		<c:set var="endPage" value="${pageCount }"/>
+	</c:if>
+	<%--${startPage}, ${endPage} --%>
+		<nav aria-label="...">
+			<ul class="pagination justify-content-center">
+			
+				<c:if test="${startPage > pageBlock }">
+				<li class="page-item">
+					<a class="page-link" href="${pageContext.request.contextPath }/notice/list.do?page=${startPage-pageBlock}" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				</c:if>
+				
+				<c:forEach var="i" begin="${startPage }" end="${endPage }">
 					<c:choose>
-						<c:when test="${param.page eq pageNum}">
+						<c:when test="${currentPage eq page}">
 							<li class="page-item active" aria-current="page">
 						</c:when>
 						<c:otherwise>
 							<li class="page-item">
 						</c:otherwise>
 					</c:choose>
-								<a class="page-link" href="${pageContext.request.contextPath }/ListNoticeController?page=${pageNum }">${pageNum }</a>
-					<c:if test="${param.page eq pageNum}">
-									<span class="sr-only">(current)</span>
-							</li>
-					</c:if>
+				<li class="page-item active" aria-current="page">
+						<a class="page-link" href="${pageContext.request.contextPath }/notice/list.do?page=${i}">${i }
+						<span class="sr-only">(current)</span></a>
+				</li>
 				</c:forEach>
-
-				<c:if test="${pn.totalPage != pn.page }">
-					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/ListNoticeController?page=${param.page+1}" aria-label="Next">
-							<span aria-hidden="true">&rsaquo;</span>
-						</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/ListNoticeController?page=${pn.totalPage }" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-						</a>
-					</li>
-				</c:if>
 					
-				</ul>
-			</nav>
-		<!-- /pagination -->
+				<c:if test="${endPage < pageCount }">
+				<li class="page-item">
+					<a class="page-link" href="${pageContext.request.contextPath }/notice/list.do?page=${startPage+pageBlock}"aria-label="Next"> 
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+				</c:if>
+			</ul>
+		</nav>
 	</div>
 	<!-- footer -->
 	<%@include file="/WEB-INF/views/common/footer2.jsp"%>

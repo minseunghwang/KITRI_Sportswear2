@@ -1,6 +1,6 @@
 package com.java.notice.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class NoticeDto {
 	private int num;

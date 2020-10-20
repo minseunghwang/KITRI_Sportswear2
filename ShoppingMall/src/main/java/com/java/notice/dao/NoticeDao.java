@@ -6,22 +6,26 @@ import java.util.List;
 import com.java.notice.dto.NoticeDto;
 
 public interface NoticeDao {
-	int selectNum();
 
-	void insert(NoticeDto notice);
+	public int noticeSelectNum();
 
-	NoticeDto select(int num);
+	public int noticeInsert(NoticeDto noticeDto);
 
-	void update(NoticeDto notice);
+	public NoticeDto noticeSelect(int num);
 
-	void delete(int num);
+	public void noticeUpdate(NoticeDto noticeDto);
 
-	ArrayList<NoticeDto> selectAll();
+	public void noticeDelete(int num);
+
+	public List<NoticeDto> noticeList(int startRow, int endRow);
 	
-	void updateViewCount(NoticeDto notice);
+	public int noticeUpdateViewCount(NoticeDto noticeDto);
 
-	int countallmine();
+	public int countallmine();
 
-	ArrayList<NoticeDto> selectNoticeByPageNum(int page);
-	List<NoticeDto> selectNoticeheader();
+	public ArrayList<NoticeDto> selectNoticeByPageNum(int page);
+	public List<NoticeDto> selectNoticeheader();
+	
+	public NoticeDto noticeSelectNum(int num);
+
 }

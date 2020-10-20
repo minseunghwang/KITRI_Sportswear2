@@ -17,4 +17,57 @@
 		select * from (select * from notice order by n_date desc) where rownum <= 3 order by num desc
 		]]>
 	</select>
+	
+	<select id="notice_list" parameterType="java.util.Map" resultMap="notice_dto">
+		<![CDATA[
+		select b.*
+		from (
+			select rownum rnum, a.*
+			from (
+				select *
+				from notice
+				order by num desc
+			)a
+		)b
+		where b.rnum>=#{startRow} and b.rnum<=#{endRow}
+		]]>
+	</select>
+
+	<select id="countallmine" resultType="int">
+		select nvl(count(*),0)
+		from notice
+	</select>
+	
+	<insert id="notice_insert" parameterType="com.java.notice.dto.NoticeDto">
+		insert
+		into notice(
+			num,
+			title,
+			content,
+			n_date,
+			view_count
+		)
+		values(
+			seq_notice.nextval,
+			#{title},
+			#{content},
+			sysdate,
+			#{view_count}	
+		)
+	</insert>
+	
+	<update id="notice_view" parameterType="int">
+		<![CDATA[
+			update notice
+			set view_count=view_count+1
+			where num=#{num}
+		]]>
+	</update>
+	
+	<select id="notice_read" parameterType="int" resultMap="notice_dto">
+		select *
+		from notice
+		where num=#{num}
+	</select>
+
 </mapper> 

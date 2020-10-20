@@ -7,22 +7,42 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.java.notice.dto.NoticeDto;
 
-
 public interface NoticeService {
-	void add(NoticeDto notice);
 
-	NoticeDto  getNotice(int num);
+	public void noticeWrite(ModelAndView mav);
+	//void add(NoticeVO notice);
+	
+	public void noticeWriteOk(ModelAndView mav);
+	
+	public void noticeRead(ModelAndView mav);
+	//NoticeVO  getNotice(int num);
 
-	void editNotice(NoticeDto notice);
+	public void noticeUpdate(ModelAndView mav);
+	//void editNotice(NoticeVO notice);
 
-	void delNotice(int num);
+	public void noticeUpdateOk(ModelAndView mav);
+	
+	public void noticeDelete(ModelAndView mav);
+	//void delNotice(int num);
 
-	ArrayList<NoticeDto> getNoticeAll();
+	public void noticeDeleteOk(ModelAndView mav);
+	
+	public void noticeList(ModelAndView mav);
+	//public ArrayList<NoticeDto> getNoticeAll();
+	//ArrayList<NoticeVO> getNoticeAll();
 
-	void updateViewCount(NoticeDto notice);
+	// int makeNum();
+	
+	public void noticeUpdateViewCount(ModelAndView mav);
+	//void updateViewCount(NoticeVO notice);
 
-	int getcountMine();
-	ArrayList<NoticeDto> getNoticeByPageNum(int page);
-	List<NoticeDto> getNoticeheader(ModelAndView mav);
-
+	public int getcountMine();
+	//int getcountMine();
+	
+	public ArrayList<NoticeDto> getNoticeByPageNum(int page);
+	//ArrayList<NoticeVO> getNoticeByPageNum(int page);
+	
+	public List<NoticeDto> getNoticeheader(ModelAndView mav);
+	//ArrayList<NoticeVO> getNoticeheader();
+	
 }
