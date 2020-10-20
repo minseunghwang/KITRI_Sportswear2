@@ -55,4 +55,5 @@ public class ProductController {
 		productService.getProductDetail(mav);
 		return mav;
 	}
+	
 }

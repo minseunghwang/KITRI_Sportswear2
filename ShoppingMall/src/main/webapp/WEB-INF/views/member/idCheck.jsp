@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 <c:set var="root" value="${pageContext.request.contextPath }"/>
 	<c:if test="${check!=0 }">
 		<div align="center">
