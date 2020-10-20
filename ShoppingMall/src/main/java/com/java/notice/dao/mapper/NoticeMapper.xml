@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.notice.dao.mapper.NoticeMapper">
+	<resultMap type="com.java.notice.dto.NoticeDto" id="notice_dto">
+		<result column="num" property="num"/>	
+		<result column="title" property="title"/>	
+		<result column="content" property="content"/>	
+		<result column="n_date" property="n_date"/>
+		<result column="view_count" property="view_count"/>		
+	</resultMap>
+	
+	<select id="notice_header" resultMap="notice_dto">
+		<![CDATA[
+		select * from (select * from notice order by n_date desc) where rownum <= 3 order by num desc
+		]]>
+	</select>
+</mapper> 

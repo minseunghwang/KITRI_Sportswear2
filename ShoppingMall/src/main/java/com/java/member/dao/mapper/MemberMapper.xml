@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.java.member.dao.mapper.MemberMapper">
+ 
+ <select id="memberLogin" parameterType="java.util.Map" resultType="String">
+ 	select type
+ 	from member
+ 	where id=#{id} and pwd=#{pwd}
+ </select>
+ 
+ <select id="memberGetId" parameterType="java.util.Map" resultType="String">
+ 	select id
+ 	from member
+ 	where name=#{name} and email=#{email}
+ </select>
+ 
+ <select id="memberGetPwd" parameterType="java.util.Map" resultType="String">
+ 	select pwd
+ 	from member
+ 	where id=#{id} and email=#{email}
+ </select>
+ 
+ <select id="memberGetPoint" parameterType="java.util.Map" resultType="String">
+ 	select point
+ 	from member
+ 	where id=#{id}
+ </select>
+ 
+ <select id="memberIdCheck" parameterType="java.util.Map" resultType="String">
+ 	select id
+ 	from member
+ 	where id=#{id}
+ </select>
+ 
+  <select id="memberGetInfo" parameterType="String" resultType="com.java.member.dto.MemberDto">
+ 	select *
+ 	from member
+ 	where id=#{id}
+ </select>
+ 
+ <insert id="memberJoin" parameterType="java.util.Map">
+ 	insert into member
+ 	values(
+ 		#{id},
+ 		#{pwd},
+ 		#{name},
+ 		#{email},
+ 		#{addr},
+ 		#{type},
+ 		#{point}	
+ 	)
+ </insert>
+ 
+ <update id="memberDelete" parameterType="String">
+ 	update member
+ 	set type=NULL
+ 	where id=#{id}
+ </update>
+ 
+ <update id="memberUpdateInfo" parameterType="java.util.Map">
+ 	update member
+ 	set pwd=#{pwd},
+ 		email=#{email},
+ 		addr=#{addr}
+ 	where id=#{id}
+ </update>
+ 
+ </mapper>

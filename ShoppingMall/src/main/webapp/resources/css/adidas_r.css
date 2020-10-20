@@ -1,0 +1,243 @@
+.payment-main .prods_info{
+	width: 280px;
+	padding: 9px;
+	position: absolute;
+	top: 58px;
+	right: 0;
+	background: #ebebeb;
+}
+
+.payment-main .prods_info.fixed{
+	position: fixed;
+	top: 0;
+	left: 50%;
+	margin-left:177px;
+}
+
+.payment-main .prods_info .total_amount{
+	padding: 18px 10px;
+	font:500 15px/15px 'NotoSansKR','Nanum Gothic';
+	color: #000;
+}
+
+.payment-main .prods_info .price_box{
+	padding: 0 10px;
+	background: #fff;
+}
+
+.payment-main .prods_info .box{
+	padding: 18px 0 18px 10px;
+	border-bottom: 1px solid  #ebebeb;
+}
+
+.payment-main .prods_info .box.btn_cpn{
+	border-bottom-width: 0;
+	padding: 0;
+}
+
+.payment-main .prods_info .box.btn_cpn a{
+	position: relative;
+	display: block;
+	height:35px;
+	padding-left: 10px;
+	background: #0286cd;
+}
+
+.payment-main .prods_info .box.btn_cpn a strong{
+	font-family:'NotoSansKR';
+	font-weight: 500;
+}
+
+.payment-main .prods_info .box.btn_cpn.no_cpn a{
+	background: #ccc;
+}
+
+.payment-main .prods_info .box.btn_cpn a span{
+	color: #fff;
+	font:400 13px/35px 'NotoSansKR','Nanum Gothic';
+}
+
+.payment-main .prods_info .box.btn_cpn a span.spt_bg{
+	position: absolute;
+	top: 11px;
+	right: 15px;
+	width: 8px;
+	height: 12px;
+	background-position:-265px -140px;
+}
+
+.payment-main .prods_info .box.total_p{
+	border-bottom-width: 0;
+	padding-bottom: 60px;
+}
+
+.payment-main .prods_info .box.deliv{
+	border-bottom-width: 3px;
+}
+
+.payment-main .prods_info .box>strong{
+	position: relative;
+	float: left;
+	margin-top: 2px;
+	font:400 12px/12px 'NotoSansKR','Nanum Gothic';
+	color: #000;
+}
+
+.payment-main .prods_info .box.total_p>strong{
+	margin-top: 17px;
+}
+
+.payment-main .prods_info .box strong .deliv_tooltip{
+	position: absolute;
+	top: -3px;
+    right: -24px;
+}
+
+.payment-main .prods_info .box strong .deliv_tooltip .spt_bg{
+	width: 20px;
+	height: 20px;
+	background-position:-260px -110px;
+}
+
+.payment-main .prods_info .box strong .deliv_tooltip .tooltip-layer{
+	min-width: 220px;
+	top: -11px;
+    left: 36px;
+	z-index: 100;
+}
+
+.payment-main .prods_info .box .price-container{
+	float: right;
+}
+
+.payment-main .prods_info .box .price-container .prc{
+	font-size: 18px;
+	line-height: 18px;
+}
+
+.payment-main .prods_info .box.total_p .price-container .prc{
+	font-size: 30px;
+	line-height: 30px;
+}
+
+.payment-main .prods_info .box.total_p .price-container{
+	position: relative;
+}
+
+.payment-main .prods_info .box.total_p .price-container .point{
+	width: 140px;
+	position: absolute;
+	/*  bottom: -20px; */
+	right: 0;
+	letter-spacing: -0.25px;
+	font:400 12px/12px 'NotoSansKR','Nanum Gothic';
+	color: #999;
+	text-align: right;
+
+}
+
+.payment-main .prods_info .box.total_p .price-container .point strong{
+	margin-left: 3px;
+	font:12px/12px 'adinenuPro-regular';
+	color: #0487cd;
+}
+
+.payment-main .prods_info .prodlist{
+	padding: 0 10px;
+	background: #fff;
+	max-height: 355px;
+	overflow: auto;
+}
+
+.payment-main .prods_info .prodlist .box{
+	position: relative;
+	min-height: 60px;
+	padding: 20px 0 20px 85px;
+}
+
+.payment-main .prods_info .prodlist .box.first{
+	padding-top: 0;
+}
+
+.payment-main .prods_info .prodlist .box.last{
+	border-bottom-width: 0;
+}
+
+.payment-main .prods_info .prodlist .box .img{
+	position: absolute;
+	top: 20px;
+	left: 10px;
+}
+
+.payment-main .prods_info .prodlist .box.first .img{
+	top: 0;
+}
+
+.payment-main .prods_info .prodlist .box .info{
+	position: relative;
+}
+
+.payment-main .prods_info .prodlist .box .info .tit{
+	margin-bottom: 7px;
+	color: #000;
+}
+
+.payment-main .prods_info .prodlist .box .info .tit .ico_oneday{
+	width: 26px;
+	height: 12px;
+	margin-right:3px;
+	display: inline-block;
+	background-position: -320px -56px;
+}
+
+*:first-child+html .payment-main .prods_info .prodlist .box .info .tit .ico_oneday,
+.ie7 .payment-main .prods_info .prodlist .box .info .tit .ico_oneday{
+	display: inline;
+}
+
+.payment-main .prods_info .prodlist .box .info .tit a{
+	color: #000;
+	font:500 14px/18px 'NotoSansKR','Nanum Gothic';
+}
+
+.payment-main .prods_info .prodlist .box .info .details{
+	font:300 12px 'NotoSansKR','Nanum Gothic';
+	color: #888;
+	letter-spacing: -0.5px;
+}
+
+.payment-main .prods_info .prodlist .box .info .price-container{
+	float: none;
+}
+
+.payment-main .prods_info .prodlist .box .info .price-container .prc{
+	font-size: 16px;
+}
+
+.payment-main .prods_info .prodlist .box .info .price-container .line{
+	font-size: 14px;
+}
+
+.payment-main .prods_info .btn_coupon{
+	margin-top:10px;
+	background: #fff;
+}
+
+.payment-main .prods_info .btn_coupon a{
+	position: relative;
+	padding-left: 20px;
+	height: 60px;
+	display: block;
+	font:400 14px/58px 'NotoSansKR','Nanum Gothic';
+	color: #000;
+}
+
+.payment-main .prods_info .btn_coupon a span{
+	width: 10px;
+	height: 14px;
+	position: absolute;
+	top:50%;
+	right:20px;
+	margin-top: -7px;
+	background-position: -305px -120px;
+}

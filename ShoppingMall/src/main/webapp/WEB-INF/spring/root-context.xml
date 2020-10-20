@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- Spring DB Driver -->
+	<bean id="driverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@192.168.0.8:1521:xe"/>
+		<property name="username" value="c##kitri"/>
+		<property name="password" value="kitri"/>
+	</bean>
+	
+	<!-- Mybatis : sqlSessionFactoryBean-->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="driverManagerDataSource"/>
+		<property name="mapperLocations" value="classpath:com/java/**/*.xml">
+			<!-- 두개세개네개이상 가능~! -->
+			<!-- <list>
+				<value>classpath:com/java/member/dao/mapper/MemberMapper.xml</value>
+				<value>classpath:com/java/fileBoard/dao/mapper/FileBoardMapper.xml</value>
+			</list> -->
+		</property>
+	</bean>
+
+	<!-- Mybatis : sqlSessionTemplate -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"><!-- Template으로 던져야해서 -->
+		<constructor-arg ref="sqlSessionFactoryBean"/>
+	</bean>
+	
+	<!-- Transaction 공통클래스 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="driverManagerDataSource"></property>
+	</bean>
+	
+<!-- 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" rollback-for="Exception"/>모든 메소드가 tx를 반드시 거치게 한다.
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut expression="within(com.java..*)" id="txPublicMethod"/>
+			<aop:advisor advice-ref="txAdvice" pointcut-ref="txPublicMethod"/>
+	</aop:config> -->
+		
+</beans>

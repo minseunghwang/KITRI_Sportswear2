@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.product.dao.mapper.ProductMapper">
+	<resultMap type="com.java.product.dto.ProductDto" id="product_dto">
+		<result column="num" property="num"/>	
+		<result column="name" property="name"/>	
+		<result column="price" property="price"/>	
+		<result column="img" property="img"/>	
+		<result column="content" property="content"/>	
+		<result column="e_date" property="e_date"/>	
+		<result column="record" property="record"/>	
+		<result column="category" property="category"/>	
+	</resultMap>
+	
+	<select id="mainpage_product" parameterType="String" resultMap="product_dto">
+		select *
+		from product
+	</select>
+	
+	<select id="new_product" parameterType="int" resultMap="product_dto">
+		<![CDATA[
+		select * from (select * from product order by record desc) where rownum <= #{numberItems}
+		]]>	
+	</select>
+	
+	<select id="category_product" parameterType="String" resultMap="product_dto">
+		<![CDATA[
+		select * from product where category=#{category}
+		]]>	
+	</select>
+	
+	<select id="category_product_pageNum" parameterType="java.util.Map" resultMap="product_dto">
+		<![CDATA[
+		select *
+		from (select rownum as rnum, a.* 
+				from (select * 
+						from product where category=#{category} order by record desc, num) A where rownum <= #{num}) X where x.rnum >= #{page}
+		]]>	
+	</select>
+	
+	<select id="category_product_Sort" parameterType="java.util.Map" resultMap="product_dto">
+		<![CDATA[
+		select *
+		from (select rownum as rnum, a.* 
+				from (select * 
+						from product where category=#{category} order by record desc, num) A where rownum <= ?) X where x.rnum >= #{page}
+		]]>	
+	</select>
+	
+	<select id="detail_product" parameterType="int" resultMap="product_dto">
+		select *
+		from product
+		where num = #{num}
+	</select>
+	
+	
+</mapper> 
