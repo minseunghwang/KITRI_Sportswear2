@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.productOrder.dao.mapper.ProductOrderMapper">
+
+<select id="productOrderMyCart" parameterType="java.lang.String" resultType="com.java.productOrder.dto.ProductOrderVO">
+	<!-- product_order.num,product.name,product.img,product_order.p_size,product_order.o_quantity,product_order.total_price -->
+	select *
+	from product_order 
+    join product  
+    on product_order.p_num=product.num
+	where product_order.m_id=#{id}
+</select>
+
+<select id="productOrderInquiry" parameterType="java.lang.String" resultType="com.java.productOrder.dto.ProductOrderVO">
+	select *
+	from product_order 
+    join product  
+    on product_order.p_num=product.num
+	where product_order.m_id=#{id}
+</select>
+
+</mapper>

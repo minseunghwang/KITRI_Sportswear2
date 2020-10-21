@@ -113,11 +113,11 @@ table{
 									<td>${o.num }</td>
 									<td id="product_name">${o.prod_name }</td>
 									<td><a href="${pageContext.request.contextPath }/DetailController?num=${o.p_num }">
-										<img src="${o.prod_img }" width="100" height="100"></a>
+										<img src="${pageContext.request.contextPath }/resources/${o.prod_img }" width="100" height="100"></a>
 										</td>
 									<td>${o.p_size } </td>
 									<td>${o.o_quantity}</td>
-									<td>${o.priceView }</td>
+									<td>${o.total_price }</td>
 									<td scope="row"><input type="checkbox" name=sel value=${o.num }></td>
 									<td scope="row"><input type="button" class="btn btn-outline-secondary" value="삭제" onClick="showPopup('${o.num }')"></td>
 	
