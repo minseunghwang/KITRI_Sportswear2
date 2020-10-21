@@ -46,7 +46,7 @@
 		select *
 		from (select rownum as rnum, a.* 
 				from (select * 
-						from product where category=#{category} order by record desc, num) A where rownum <= ?) X where x.rnum >= #{page}
+						from product where category=#{category} order by ${orderBy} desc, num) A where rownum <= #{endRange}) X where x.rnum >= #{startRange}
 		]]>	
 	</select>
 	
@@ -60,5 +60,11 @@
 		select * from product_image where p_num=#{p_num}
 	</select>
 	
-	
+	<select id="search_product" parameterType="String" resultMap="product_dto">
+		<![CDATA[
+		select x.num, x.name, x.price, x.img, x.content, x.e_date, x.record, x.category from (
+    		select rownum as rnum, a.* from (
+        		select * from ratinginproduct where name LIKE '%'||#{keyword}||'%' ORDER BY ${orderBy} DESC) a where rownum <= #{endRange}) X where rnum >= #{startRange}
+        ]]>
+	</select>
 </mapper> 

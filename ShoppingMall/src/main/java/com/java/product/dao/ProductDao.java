@@ -32,4 +32,5 @@ public interface ProductDao {
 	int selectQuantity(int productNum, String size);
 	void delete(int num);
 	void recordCount(ProductDto productvo);
+	List<ProductDto> searchProduct(String keyword, int page, String orderBy);
 }

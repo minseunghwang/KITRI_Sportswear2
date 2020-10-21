@@ -11,21 +11,20 @@ public class ReviewDto {
 	private String img;
 	private Date r_date;
 	
-	public ReviewDto() {
-		
-	}
 	
+	public ReviewDto() {
+	}
+
 	public ReviewDto(int num, String m_id, int p_num, int rate, String content, String img, Date r_date) {
 		this.num = num;
 		this.m_id = m_id;
-		this.p_num=p_num;
+		this.p_num = p_num;
 		this.rate = rate;
 		this.content = content;
 		this.img = img;
 		this.r_date = r_date;
 	}
 
-	
 	public int getNum() {
 		return num;
 	}
@@ -40,6 +39,14 @@ public class ReviewDto {
 
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
+	}
+
+	public int getP_num() {
+		return p_num;
+	}
+
+	public void setP_num(int p_num) {
+		this.p_num = p_num;
 	}
 
 	public int getRate() {
@@ -72,14 +79,6 @@ public class ReviewDto {
 
 	public void setR_date(Date r_date) {
 		this.r_date = r_date;
-	}
-
-	public int getP_num() {
-		return p_num;
-	}
-
-	public void setP_num(int p_num) {
-		this.p_num = p_num;
 	}
 
 	@Override

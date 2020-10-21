@@ -140,7 +140,6 @@
       }
       
       function directOrder(productNum) {
-
          
          if(${sessionScope.id == null }){
             if(confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?')){
@@ -550,7 +549,7 @@
 		<!-- /.container -->
 	</footer>
  --%>
-			<!-- footer -->
+	<!-- footer -->
 	<%@include file="/WEB-INF/views/common/footer2.jsp"%>
 
 </body>

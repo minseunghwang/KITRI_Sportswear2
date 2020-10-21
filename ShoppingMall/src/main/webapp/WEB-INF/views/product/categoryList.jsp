@@ -89,10 +89,10 @@
 				<div>
 					<strong style="float: left;">${products.size() }</strong><span style="float: left;">&nbsp;개의 상품</span>
 					<ul class="orderby-menu">
-						<li><a href="${pageContext.request.contextPath }/CategoryController?category=${param.category}&page=1&orderBy=e_date">신상품</a></li>
-						<li><a href="${pageContext.request.contextPath }/CategoryController?category=${param.category}&page=1&orderBy=price">낮은가격</a></li>
-						<li><a href="${pageContext.request.contextPath }/CategoryController?category=${param.category}&page=1&orderBy=record">인기상품</a></li>
-						<li><a href="${pageContext.request.contextPath }/CategoryController?category=${param.category}&page=1&orderBy=rate">평점순</a></li>
+						<li><a href="${pageContext.request.contextPath }/product/category.do?category=${param.category}&page=1&orderBy=e_date">신상품</a></li>
+						<li><a href="${pageContext.request.contextPath }/product/category.do?category=${param.category}&page=1&orderBy=price">낮은가격</a></li>
+						<li><a href="${pageContext.request.contextPath }/product/category.do?category=${param.category}&page=1&orderBy=record">인기상품</a></li>
+						<li><a href="${pageContext.request.contextPath }/product/category.do?category=${param.category}&page=1&orderBy=rate">평점순</a></li>
 					</ul>
 				</div>
 				<br><br><br>
@@ -164,12 +164,12 @@
 				<ul class="pagination justify-content-center">
 				<c:if test="${1 != pn.page }">
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/CategoryController?category=${param.category}&page=1&orderBy=${param.orderBy }" aria-label="Previous">
+						<a class="page-link" href="${pageContext.request.contextPath }/product/category.do?category=${param.category}&page=1&orderBy=${param.orderBy }" aria-label="Previous">
 							<span aria-hidden="true">&laquo;</span>
 						</a>
 					</li>
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/CategoryController?category=${param.category}&page=${param.page-1}&orderBy=${param.orderBy }" aria-label="Previous">
+						<a class="page-link" href="${pageContext.request.contextPath }/product/category.do?category=${param.category}&page=${param.page-1}&orderBy=${param.orderBy }" aria-label="Previous">
 							<span aria-hidden="true">&lsaquo;</span>
 						</a>
 					</li>
@@ -185,7 +185,7 @@
 							<li class="page-item">
 						</c:otherwise>
 					</c:choose>
-								<a class="page-link" href="${pageContext.request.contextPath }/CategoryController?category=${param.category}&page=${pageNum }&orderBy=${param.orderBy }">${pageNum }</a>
+								<a class="page-link" href="${pageContext.request.contextPath }/product/category.do?category=${param.category}&page=${pageNum }&orderBy=${param.orderBy }">${pageNum }</a>
 					<c:if test="${param.page eq pageNum}">
 									<span class="sr-only">(current)</span>
 					</c:if>
@@ -193,12 +193,12 @@
 
 				<c:if test="${pn.totalPage != pn.page }">
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/CategoryController?category=${param.category}&page=${param.page+1}&orderBy=${param.orderBy }" aria-label="Next">
+						<a class="page-link" href="${pageContext.request.contextPath }/product/category.do?category=${param.category}&page=${param.page+1}&orderBy=${param.orderBy }" aria-label="Next">
 							<span aria-hidden="true">&rsaquo;</span>
 						</a>
 					</li>
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/CategoryController?category=${param.category}&page=${pn.totalPage }&orderBy=${param.orderBy }" aria-label="Next">
+						<a class="page-link" href="${pageContext.request.contextPath }/product/category.do?category=${param.category}&page=${pn.totalPage }&orderBy=${param.orderBy }" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
 						</a>
 					</li>

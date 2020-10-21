@@ -64,5 +64,16 @@ public class ProductController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/product/productsearch.do")
+	public ModelAndView productSearch(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request",request);
+		productService.getSearchProduct(mav);
+		return mav;
+	}
+	
+	// ProductAllListController는 admin에 만들어야하지않을까 ? 그러면 기존의 나머지 4개의 컨트롤러는 다 만들었음
+	
+	
 	
 }

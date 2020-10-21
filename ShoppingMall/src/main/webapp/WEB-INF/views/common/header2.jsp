@@ -284,13 +284,13 @@
 							alert(field.value);
 							var test = "${pageContext.request.contextPath }/SearchProductController?keyword=" + enc + "&page=1";
 							alert(test); */
-				location.href = "${pageContext.request.contextPath }/SearchProductController?keyword=" + field.value + "&page=1";
+				location.href = "${pageContext.request.contextPath }/product/productsearch.do?keyword=" + field.value + "&page=1";
 			}
 		}
 		
 		function onClick(field) {
 			var keyword = $('input[name=keword]').val();
-			location.href = "${pageContext.request.contextPath }/SearchProductController?keyword=" + keyword + "&page=1";
+			location.href = "${pageContext.request.contextPath }/product/productsearch.do?keyword=" + keyword + "&page=1";
 		}
 	
 		$(document).ready(function() {
