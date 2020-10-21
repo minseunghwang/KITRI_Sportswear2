@@ -110,11 +110,11 @@ table{
 								<td name="code_num" style="vertical-align: middle;">
 								 <a id="code_num_link" style="text-decoration: none;" href="${pageContext.request.contextPath }/OrderlistController2?code_num=${o.code_num }">${o.code_num }</a>
 								</td>
-								<td style="vertical-align: middle;">${o.max_o_date }</td>
+								<td style="vertical-align: middle;">${o.o_date }</td>
 								<td style="vertical-align: middle;">${o.prod_name } <span style="font-size:12px;">..포함 ${o.ctnrow} 개</span>
 								</td>
-								<td ><img src="${o.prod_img }" width="100" height="100"> </td>
-								<td style="vertical-align: middle;">${o.priceView } </td>
+								<td ><img src="${pageContext.request.contextPath }/resources/${o.prod_img }" width="100" height="100"> </td>
+								<td style="vertical-align: middle;">${o.total_price } </td>
 								<td style="vertical-align: middle;" align=center> <button type="submit" class="btn btn-outline-dark btn-block" id="btn_paymentinfo" onclick="showPopup('${o.code_num }');">View</button>  </td>
 																									
 							</tr>																

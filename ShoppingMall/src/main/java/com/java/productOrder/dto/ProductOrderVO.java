@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import com.java.common.Common;
 
-public class ProductOrderDto {
+public class ProductOrderVO {
 	private int num;
 	private int p_num;
 	private int o_quantity;
@@ -16,24 +16,24 @@ public class ProductOrderDto {
 	private int r_state;
 	private String p_size;
 	private String code_num;
-	private String prod_name;
-	private String prod_img;
+	private String name;
+	private String img;
 	
 	private int sum_total_price;
 	private Date max_o_date;
 	private int max_d_state;
 	private int max_p_num;
-	private int ctnrow; 	//«— ¡÷πÆπ¯»£ ¥Á ¡÷πÆ«— ªÛ«∞ ∞≥ºˆ
+	private int ctnrow; 	//ÔøΩÎ∏≥ ‰∫åÏá∞–¶Ë∏∞ÎçäÏÉá ÔøΩÎñ¶ ‰∫åÏá∞–¶ÔøΩÎ∏≥ ÔøΩÍ∏ΩÔøΩÎ≠π Â™õÏíñÎãî
 	
 	private String priceView;
 	
-	public ProductOrderDto() {
+	public ProductOrderVO() {
 		
 	}
 	
 	
 
-	public ProductOrderDto(int num, int p_num, int o_quantity, int total_price, String m_id, Date o_date, int o_state,
+	public ProductOrderVO(int num, int p_num, int o_quantity, int total_price, String m_id, Date o_date, int o_state,
 			int d_state, String p_size) {
 		super();
 		this.num = num;
@@ -49,7 +49,7 @@ public class ProductOrderDto {
 		this.priceView = Common.priceView(total_price);
 	}
 
-	public ProductOrderDto(int num, int p_num, int o_quantity, int total_price, String m_id, Date o_date, int o_state,
+	public ProductOrderVO(int num, int p_num, int o_quantity, int total_price, String m_id, Date o_date, int o_state,
 			int d_state, String p_size, int r_state, String code_num) {
 		super();
 		this.num = num;
@@ -67,7 +67,7 @@ public class ProductOrderDto {
 		this.priceView = Common.priceView(total_price);
 	}
 
-	public ProductOrderDto(String code_num, Date max_o_date, int sum_total_price, int max_d_state, int max_p_num, int ctnrow) {
+	public ProductOrderVO(String code_num, Date max_o_date, int sum_total_price, int max_d_state, int max_p_num, int ctnrow) {
 		super();
 		this.code_num=code_num;
 		this.max_o_date=max_o_date;
@@ -79,18 +79,25 @@ public class ProductOrderDto {
 		this.priceView = Common.priceView(sum_total_price);
 	}
 
-	public ProductOrderDto(int num, String prod_name,String prod_img, String p_size, int o_quantity, int total_price) {
+	public ProductOrderVO(int num, int p_num, int o_quantity, int total_price, String m_id, Date o_date, int o_state,
+			int d_state, String p_size, String prod_name, String prod_img) {
 		super();
 		this.num = num;
+		this.p_num = p_num;
 		this.o_quantity = o_quantity;
 		this.total_price = total_price;
+		this.m_id = m_id;
+		this.o_date = o_date;
+		this.o_state = o_state;
+		this.d_state = d_state;
 		this.p_size = p_size;
-		this.prod_name = prod_name;
-		this.prod_img = prod_img;
+		this.name = prod_name;
+		this.img = prod_img;
+		
 		this.priceView = Common.priceView(total_price);
 	}
 
-	public ProductOrderDto(int num, int p_num, int o_quantity, int total_price, String m_id, Date o_date, int o_state,
+	public ProductOrderVO(int num, int p_num, int o_quantity, int total_price, String m_id, Date o_date, int o_state,
 			int d_state, int r_state, String p_size, String prod_name, String prod_img) {
 		super();
 		this.num = num;
@@ -103,27 +110,8 @@ public class ProductOrderDto {
 		this.d_state = d_state;
 		this.r_state = r_state;
 		this.p_size = p_size;
-		this.prod_name = prod_name;
-		this.prod_img = prod_img;
-		
-		this.priceView = Common.priceView(total_price);
-	}
-	
-	public ProductOrderDto(int num, int p_num, int o_quantity, int total_price, String m_id, Date o_date, int o_state,
-		 String p_size, String prod_name, String prod_img) {
-		super();
-		this.num = num;
-		this.p_num = p_num;
-		this.o_quantity = o_quantity;
-		this.total_price = total_price;
-		this.m_id = m_id;
-		this.o_date = o_date;
-		this.o_state = o_state;
-		this.d_state = d_state;
-		this.r_state = r_state;
-		this.p_size = p_size;
-		this.prod_name = prod_name;
-		this.prod_img = prod_img;
+		this.name = prod_name;
+		this.img = prod_img;
 		
 		this.priceView = Common.priceView(total_price);
 	}
@@ -194,19 +182,19 @@ public class ProductOrderDto {
 	}
 
 	public String getProd_name() {
-		return prod_name;
+		return name;
 	}
 
 	public void setProd_name(String prod_name) {
-		this.prod_name = prod_name;
+		this.name = prod_name;
 	}
 
 	public String getProd_img() {
-		return prod_img;
+		return img;
 	}
 
 	public void setProd_img(String prod_img) {
-		this.prod_img = prod_img;
+		this.img = prod_img;
 	}
 
 	public String getP_size() {
@@ -311,15 +299,14 @@ public class ProductOrderDto {
 
 	@Override
 	public String toString() {
-		return "ProductOrderDto [num=" + num + ", p_num=" + p_num + ", o_quantity=" + o_quantity + ", total_price="
+		return "ProductOrderVO [num=" + num + ", p_num=" + p_num + ", o_quantity=" + o_quantity + ", total_price="
 				+ total_price + ", m_id=" + m_id + ", o_date=" + o_date + ", o_state=" + o_state + ", d_state="
 				+ d_state + ", r_state=" + r_state + ", p_size=" + p_size + ", code_num=" + code_num + ", prod_name="
-				+ prod_name + ", prod_img=" + prod_img + ", sum_total_price=" + sum_total_price + ", max_o_date="
+				+ name + ", prod_img=" + img + ", sum_total_price=" + sum_total_price + ", max_o_date="
 				+ max_o_date + ", max_d_state=" + max_d_state + ", max_p_num=" + max_p_num + ", ctnrow=" + ctnrow
 				+ ", priceView=" + priceView + "]";
 	}
-
-
+	
 	
 	
 }

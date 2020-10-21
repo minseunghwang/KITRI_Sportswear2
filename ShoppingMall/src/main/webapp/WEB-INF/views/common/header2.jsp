@@ -475,7 +475,7 @@
 
 			<div class="cart-img">
 				<c:if test="${sessionScope.memberType == 1 }">
-					<a href="${pageContext.request.contextPath }/OrderlistController?o_state=0">
+					<a href="${pageContext.request.contextPath }/productorder/myCart.do?o_state=0">
 				</c:if>
 				<c:if test="${sessionScope.memberType ==null}">
 					<a href="<%=request.getContextPath()%>/member/login.do">
