@@ -2,20 +2,20 @@ package com.java.notice.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.java.notice.dto.NoticeDto;
 
 public interface NoticeDao {
 
-	public int noticeSelectNum();
 
 	public int noticeInsert(NoticeDto noticeDto);
 
 	public NoticeDto noticeSelect(int num);
 
-	public void noticeUpdate(NoticeDto noticeDto);
+	public int noticeUpdate(NoticeDto noticeDto);
 
-	public void noticeDelete(int num);
+	public int noticeDelete(Map<String, Object> hmap);
 
 	public List<NoticeDto> noticeList(int startRow, int endRow);
 	

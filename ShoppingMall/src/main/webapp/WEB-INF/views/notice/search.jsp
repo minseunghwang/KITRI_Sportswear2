@@ -40,54 +40,7 @@ p {
 		<h3 class="text-center my-4" align="center">공지사항</h3>
 		<div align="center">
 			<form>
-				<%-- <table class="table table-sm mt-3 mb-5" cellspacing="0"
-					style="width: 900px; height: 300px; border: none;">
-					<tr>
-						<c:if test="${sessionScope.memberType != 0 }">
-							<td>title<input type="text" name="title"
-								value="${notice.title }" size="100" readonly
-								style="background-color: white; border: none;"></td>
-						</c:if>
-						<c:if test="${sessionScope.memberType == 0 }">
-							<td>title<input type="text" name="title"
-								value="${notice.title }" size="100"
-								style="background-color: white; border: none;"></td>
-						</c:if>
-						<td>no.<input type="text" value="${notice.num }" name="num"
-							size="20" readonly style="background-color: white; border: none;"></td>
-					</tr>
-
-					<tr>
-						
-						<td>date<input type="text" value="${notice.n_date }"
-							size="20" readonly style="background-color: white; border: none;"></td>
-						<td>view_count<input type="text"
-							value="${notice.view_count }" name="num" size="20" readonly
-							style="background-color: white; border: none;"></td>
-					</tr>
-					<tr>
-						<c:if test="${sessionScope.memberType != 0 }">
-							<td>content<input type="text" name="content" readonly
-								size="100" style="background-color: white; border: none;">${notice.content }</td>
-						</c:if>
-						<c:if test="${sessionScope.memberType == 0 }">
-							<tr>
-								<td>content<input type="text" name="content" size="100"
-									style="background-color: white; border: none;">${notice.content }</td>
-
-								<td colspan="2"><br> <br> <br> <br> <br>
-									<input class="form-control" type="submit" value="edit"
-									style="background-color: #4CAF50; color: white;"> <input
-									type="button" class="form-control" value="delete"
-									style="background-color: #4CAF50; color: white;"
-									onclick="location.href = '${pageContext.request.contextPath }/DeleteNoticeController?num='+${notice.num}">
-								</td>
-							</tr>
-						</c:if>
-
-					</tr>
-
-				</table> --%>
+				
 
 				<table class="table table-sm mt-3 mb-5" cellspacing="0"
 					style="width: 900px; height: 300px; border: none;">
@@ -137,14 +90,14 @@ p {
 				<div class="button" style="display: inline-block;">
 					<c:if test="${sessionScope.memberType == 0 }">
 						<div style="display: inline-block;">
-							<input type="submit" class="btn btn-outline-dark  btn-block"
+							<input type="button" class="btn btn-outline-dark  btn-block"
 								value="edit"
-								onclick="location.href = '${pageContext.request.contextPath }/notice/update.do?num='+${notice.num}">
+								onclick="location.href = '${pageContext.request.contextPath }/notice/update.do?num='+${notice.num}+'&page='+${page}">
 						</div>
 						<div style="display: inline-block;">
 							<input type="button" class="btn btn-outline-danger  btn-block"
 								value="delete"
-								onclick="location.href = '${pageContext.request.contextPath }/notice/deleteOk.do?num='+${notice.num}">
+								onclick="location.href = '${pageContext.request.contextPath }/notice/deleteOk.do?num='+${notice.num}+'&page='+${page}">
 						</div>
 
 					</c:if>

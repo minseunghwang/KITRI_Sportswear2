@@ -17,11 +17,10 @@ public class NoticeDaoImpl implements NoticeDao{
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	@Override
-	public int noticeSelectNum() {
-		// TODO Auto-generated method stub
-		return sqlSessionTemplate.update("notice_update_number");
-	}
+//	@Override
+//	public int noticeSelectNum() {
+//		return sqlSessionTemplate.update("notice_update_number");
+//	}
 
 	@Override
 	public int noticeInsert(NoticeDto noticeDto) {
@@ -35,15 +34,13 @@ public class NoticeDaoImpl implements NoticeDao{
 	}
 
 	@Override
-	public void noticeUpdate(NoticeDto noticeDto) {
-		// TODO Auto-generated method stub
-		
+	public int noticeUpdate(NoticeDto noticeDto) {
+		return sqlSessionTemplate.update("notice_update",noticeDto);
 	}
 
 	@Override
-	public void noticeDelete(int num) {
-		// TODO Auto-generated method stub
-		
+	public int noticeDelete(Map<String, Object> hmap) {
+		return sqlSessionTemplate.delete("notice_delete",hmap);
 	}
 
 
@@ -63,13 +60,11 @@ public class NoticeDaoImpl implements NoticeDao{
 
 	@Override
 	public int countallmine() {
-		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectOne("countallmine");
 	}
 
 	@Override
 	public ArrayList<NoticeDto> selectNoticeByPageNum(int page) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -80,7 +75,6 @@ public class NoticeDaoImpl implements NoticeDao{
 
 	@Override
 	public NoticeDto noticeSelectNum(int num) {
-		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectOne("notice_read",num);
 	}
 

@@ -69,5 +69,17 @@
 		from notice
 		where num=#{num}
 	</select>
+	
+	<update id="notice_update" parameterType="com.java.notice.dto.NoticeDto">
+		update notice
+		set title=#{title},
+			content=#{content}
+		where num=#{num}
+	</update>
+	
+	<delete id="notice_delete">
+		delete from notice
+		where num=#{num}
+	</delete>
 
 </mapper> 

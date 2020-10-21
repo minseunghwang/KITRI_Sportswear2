@@ -77,7 +77,7 @@ public class NoticeController {
 		noticeService.noticeUpdate(mav);
 		return mav;
 	}
-	@RequestMapping(value="/notice/UpdateOk.do")
+	@RequestMapping(value="/notice/updateOk.do")
 	public ModelAndView noticeUpdateOk(HttpServletRequest request, HttpServletResponse response, NoticeDto noticeDto) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request",request);
