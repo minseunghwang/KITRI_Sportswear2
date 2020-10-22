@@ -13,8 +13,8 @@ public class ProductOrderDto {
 	private Date o_date;
 	private int o_state;
 	private int d_state;
-	private int r_state;
 	private String p_size;
+	private int r_state;
 	private String code_num;
 	private String prod_name;
 	private String prod_img;
@@ -23,7 +23,7 @@ public class ProductOrderDto {
 	private Date max_o_date;
 	private int max_d_state;
 	private int max_p_num;
-	private int ctnrow; 	//ÇÑ ÁÖ¹®¹øÈ£ ´ç ÁÖ¹®ÇÑ »óÇ° °³¼ö
+	private int ctnrow; 	//ï¿½ï¿½ ï¿½Ö¹ï¿½ï¿½ï¿½È£ ï¿½ï¿½ ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
 	
 	private String priceView;
 	

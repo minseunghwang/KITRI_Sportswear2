@@ -6,4 +6,6 @@ public interface ProductOrderService {
 	
 	public void productOrderMyCart(ModelAndView mav);
 	public void productOrderInquiry(ModelAndView mav);
+	public void productOrderAddCart(ModelAndView mav);
+
 }

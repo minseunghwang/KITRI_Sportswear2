@@ -56,4 +56,5 @@ public interface ProductService {
 	void recordup(ProductDto productvo);
 	
 	void getSearchProduct(ModelAndView mav);
+	
 }

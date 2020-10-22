@@ -86,7 +86,7 @@
          
          if(${sessionScope.id == null }){
             if(confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?')){
-               location.href = "<%=request.getContextPath()%>/views/member/login.jsp";
+               location.href = "<%=request.getContextPath()%>/member/login.do";
                /* location.href= "${pageContext.request.contextPath }/LoginController"; */
                return;
             }else{
@@ -109,21 +109,23 @@
                $.ajax({
                   type: "post",
                   async: false,
-                  url: "${pageContext.request.contextPath }/AddProductCartController",
+                  url: "${pageContext.request.contextPath }/productorder/addCart.do",
                   data: allData,
                   success: function (result) {
-                     /* var resultMessage = $.trim(result); */
-                         if(result == "AddCart Success"){
+                	  alert("아오");
+                	  var item = result.ans;
+                	  alert(item);
+                	  if(result.ans == "AddCart Success"){
                         if(confirm('장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까?')){
                            <%-- location.herf = "<%=request.getContextPath()%>/OrderlistController?o_state=0"; --%>
                            location.href= "${pageContext.request.contextPath }/OrderlistController?o_state=0";
                         }
-                     }else if(result == "Already Existed"){
+                     }else if(result.ans == "Already Existed"){
                         if(confirm('장바구니에 이미 해당 상품이 있습니다. 장바구니로 이동하시겠습니까?')){
                            <%-- location.herf = "<%=request.getContextPath()%>/OrderlistController?o_state=0"; --%>
                            location.href= "${pageContext.request.contextPath }/OrderlistController?o_state=0";
                         }
-                     }else if(result == "Sold Out"){
+                     }else if(result.ans == "Sold Out"){
                         alert('재고가 부족합니다');
                      }else{
                         alert('error');
@@ -143,8 +145,7 @@
          
          if(${sessionScope.id == null }){
             if(confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?')){
-               location.href = "<%=request.getContextPath()%>/views/member/login.jsp";
-               /* location.href= "${pageContext.request.contextPath }/LoginController"; */
+               location.href = "<%=request.getContextPath()%>/member/login.do";
                return;
             }else{
                return;   
@@ -249,7 +250,7 @@
                $(".quantity-total-price").html('￦'+ priceView((quantity-1) * DefaultPrice));            
             }
             if(quantity == 2){
-               $("#countDown").attr("src", "sample_img/ico_decQ_disabled.png");
+               $("#countDown").attr("src", "${pageContext.request.contextPath }/resources/upload_img/ico_decQ_disabled.png");
             }
             
          });
@@ -259,7 +260,7 @@
             var quantity = Number($("#select-quantity").text());
             $("#select-quantity").html(quantity+1);
             $(".quantity-total-price").html('￦'+ priceView((quantity+1) * DefaultPrice));
-            $("#countDown").attr("src", "sample_img/ico_decQ.png");
+            $("#countDown").attr("src", "${pageContext.request.contextPath }/resources/upload_img/ico_decQ.png");
 
          });
          
@@ -375,11 +376,11 @@
 				<br>
 				<div class="select-amount">
 					<a href="#" id="decQuantity" onclick="countDown()">
-						<img src="${pageContext.request.contextPath }/resources/sample_img/ico_decQ_disabled.png" id="countDown">
+						<img src="${pageContext.request.contextPath }/resources/upload_img/ico_decQ_disabled.png" id="countDown">
 					</a>
 					<span id="select-quantity">1</span>
 					<a href="#" id="incQuantity" onclick="countUp()">
-						<img src="${pageContext.request.contextPath }/resources/sample_img/ico_incQ.png" id="countUp">
+						<img src="${pageContext.request.contextPath }/resources/upload_img/ico_incQ.png" id="countUp">
 					</a>
 				</div>
 				<br><br>
@@ -446,7 +447,7 @@
 							</c:if>
 						</div>
 						<div class="writer-date">
-							<!-- <img src="sample_img/user_basic.png" width="50" id="profile-img"> -->
+							<!-- <img src="upload_img/user_basic.png" width="50" id="profile-img"> -->
 							<p class="text-muted" id="review-id">작성자 &nbsp;&nbsp;<b>${review.m_id }</b></p>
 							<p class="text-muted" id="review-date">작성일 &nbsp;&nbsp;${review.r_date }</p>
 						</div>
@@ -461,7 +462,6 @@
 							<a href="#" class="btn_close hide">감추기</a> -->
 						</div>
 						
-						
 						<hr>
 						
 					</div>
@@ -471,64 +471,61 @@
 	
 				<%-- <input type="button" class="btn btn-success" value="Leave a Review" onClick="addReview(<%=(String)session.getAttribute("id")%>);" > --%> <!-- 미완성 -->
 			</div>
-			
+
 			<c:if test="${0 != reviews.size() }">
-				<div class="page" id="page" style="margin-bottom:0;">
-				<!-- pagination -->
-			
+				<div class="page" id="page" style="margin-bottom: 0;">
+					<!-- pagination -->
+
 					<nav aria-label="...">
 						<ul class="pagination justify-content-center">
-						<c:if test="${1 != pn.page }">
-							<li class="page-item">
-								<a class="page-link" href="${pageContext.request.contextPath }/product/detailImgList.do?num=${product.num }&page=1" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-								</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="${pageContext.request.contextPath }/product/detailImgList.do?num=${product.num }&page=${param.page-1}" aria-label="Previous">
-									<span aria-hidden="true">&lsaquo;</span>
-								</a>
-							</li>
-						</c:if>
-		
-						<c:forEach var="pageNum" begin="${pn.startPage }" end="${pn.endPage }" step="1">
-									
-							<c:choose>
-								<c:when test="${param.page eq pageNum}">
-									<li class="page-item active" aria-current="page">
-								</c:when>
-								<c:otherwise>
-									<li class="page-item">
-								</c:otherwise>
-							</c:choose>
-										<a class="page-link" href="${pageContext.request.contextPath }/product/detailImgList.do?num=${product.num }&page=${pageNum }">${pageNum }</a>
-							<c:if test="${param.page eq pageNum}">
-											<span class="sr-only">(current)</span>
-									</li>
+							<c:if test="${1 >= pn.page }">
+								<li class="page-item"><a class="page-link"
+									href="${pageContext.request.contextPath }/product/detailImgList.do?num=${product.num }&page=1"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+								</a></li>
+								<li class="page-item"><a class="page-link"
+									href="${pageContext.request.contextPath }/product/detailImgList.do?num=${product.num }&page=${param.page-1}"
+									aria-label="Previous"> <span aria-hidden="true">&lsaquo;</span>
+								</a></li>
 							</c:if>
-						</c:forEach>
-		
-						<c:if test="${pn.totalPage != pn.page }">
-							<li class="page-item">
-								<a class="page-link" href="${pageContext.request.contextPath }/product/detailImgList.do?num=${product.num }&page=${param.page+1}" aria-label="Next">
-									<span aria-hidden="true">&rsaquo;</span>
-								</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="${pageContext.request.contextPath }/product/detailImgList.do?num=${product.num }&page=${pn.totalPage }" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-								</a>
-							</li>
-						</c:if>
-							
+
+							<c:forEach var="pageNum" begin="${pn.startPage }"
+								end="${pn.endPage }" step="1">
+								<c:choose>
+									<c:when test="${param.page eq pageNum}">
+										<li class="page-item active" aria-current="page">
+									</c:when>
+									<c:otherwise>
+										<li class="page-item">
+									</c:otherwise>
+								</c:choose>
+								<a class="page-link"
+									href="${pageContext.request.contextPath }/product/detailImgList.do?num=${product.num }&page=${pageNum+1 }">${pageNum+1 }</a>
+								<c:if test="${param.page eq pageNum}">
+									<span class="sr-only">(current)</span>
+									</li>
+								</c:if>
+							</c:forEach>
+
+							<c:if test="${pn.totalPage != pn.page }">
+								<li class="page-item"><a class="page-link"
+									href="${pageContext.request.contextPath }/product/detailImgList.do?num=${product.num }&page=${param.page+1}"
+									aria-label="Next"> <span aria-hidden="true">&rsaquo;</span>
+								</a></li>
+								<li class="page-item"><a class="page-link"
+									href="${pageContext.request.contextPath }/product/detailImgList.do?num=${product.num }&page=${pn.totalPage }"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								</a></li>
+							</c:if>
+
 						</ul>
 					</nav>
-			
-			<!-- /pagination -->
-			</div>
+
+					<!-- /pagination -->
+				</div>
 			</c:if>
-			
-			
+
+
 		</div>
 		<!-- /.card -->
 		

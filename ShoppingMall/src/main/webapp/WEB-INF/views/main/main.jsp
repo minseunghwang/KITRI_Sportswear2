@@ -49,7 +49,7 @@
 			</ol>
 			<div class="carousel-inner">
 				<div class="carousel-item">
-					<img src="<%=request.getContextPath()%>/resources/sample_img/main_wide_pic.jpg" class="first-slide"  alt="First slide">
+					<img src="<%=request.getContextPath()%>/resources/upload_img/main_wide_pic.jpg" class="first-slide"  alt="First slide">
 					<div class="container">
 						<div class="carousel-caption text-left">
 							<h1 style="text-shadow:1px 1px 2px darkgray">Start with the gear that does it all</h1>
@@ -62,7 +62,7 @@
 					</div>
 				</div>
 				<div class="carousel-item">
-					<img src="<%=request.getContextPath()%>/resources/sample_img/main_wide_pic2.jpg" class="second-slide" alt="Second slide">
+					<img src="<%=request.getContextPath()%>/resources/upload_img/main_wide_pic2.jpg" class="second-slide" alt="Second slide">
 					<div class="container">
 						<div class="carousel-caption">
 							<h1 style="text-shadow:1px 1px 2px darkgray">Happy Untact Home Training with Us!</h1>
@@ -75,7 +75,7 @@
 					</div>
 				</div>
 				<div class="carousel-item active">
-					<img src="<%=request.getContextPath()%>/resources/sample_img/main_wide_pic3.jpg" class="third-slide" alt="Third slide">
+					<img src="<%=request.getContextPath()%>/resources/upload_img/main_wide_pic3.jpg" class="third-slide" alt="Third slide">
 					<div class="container">
 						<div class="carousel-caption text-right">
 							<h1>2020 Autumn Collection</h1>
@@ -137,7 +137,7 @@
 					<p class="lead" style="text-align:center;"> For the hardest workers in the room.</p>
 				</div>
 				<div class="col-md-5">
-					<img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" style="width: 500px; height: 500px;" src="<%=request.getContextPath()%>/resources/sample_img/main_collection7-1.jpg" data-holder-rendered="true">
+					<img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" style="width: 500px; height: 500px;" src="<%=request.getContextPath()%>/resources/upload_img/main_collection7-1.jpg" data-holder-rendered="true">
 				</div>
 			</div>
 	
@@ -152,7 +152,7 @@
 					<p class="lead" style="text-align:center;">일상 속 모든 움직임을 위한 옷</p>
 				</div>
 				<div class="col-md-5 order-md-1">
-					<img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="<%=request.getContextPath()%>/resources/sample_img/main_collection8-1.jpg" data-holder-rendered="true" style="width: 500px; height: 500px;">
+					<img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="<%=request.getContextPath()%>/resources/upload_img/main_collection8-1.jpg" data-holder-rendered="true" style="width: 500px; height: 500px;">
 				</div>
 			</div>
 	
@@ -169,7 +169,7 @@
 					</div>
 				
 				<div class="col-md-5">
-					<img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="<%=request.getContextPath()%>/resources/sample_img/main_collection2.jpg" data-holder-rendered="true" style="width: 500px; height: 500px;">
+					<img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="<%=request.getContextPath()%>/resources/upload_img/main_collection2.jpg" data-holder-rendered="true" style="width: 500px; height: 500px;">
 				</div>
 			</div>
 	

@@ -468,7 +468,7 @@
 
 			<div class="logo">
 				<a href="<%=request.getContextPath()%>/product/main.do"> <img
-					src="<%=request.getContextPath()%>/resources/sample_img/Free_Sample_By_Wix.png" />
+					src="<%=request.getContextPath()%>/resources/upload_img/Free_Sample_By_Wix.png" />
 				</a>
 			</div>
 

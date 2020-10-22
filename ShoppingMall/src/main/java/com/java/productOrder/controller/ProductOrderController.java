@@ -27,11 +27,20 @@ public class ProductOrderController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/productorder/orderInquiry.do")//ÁÖ¹®Á¶È¸
+	@RequestMapping(value="/productorder/orderInquiry.do")//ï¿½Ö¹ï¿½ï¿½ï¿½È¸
 	public ModelAndView productOrderInquiry(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav= new ModelAndView();
 		mav.addObject("request",request);
 		productOrderService.productOrderInquiry(mav);
 		return mav;
 	}
+	
+	@RequestMapping(value="/productorder/addCart.do")
+	public ModelAndView productOrderAddCart(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav= new ModelAndView("jsonView");
+		mav.addObject("request",request);
+		productOrderService.productOrderAddCart(mav);
+		return mav;
+	}
+	
 }

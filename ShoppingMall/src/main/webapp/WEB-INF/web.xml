@@ -43,4 +43,5 @@
     <servlet-name>minhoi</servlet-name>
     <url-pattern>/minhoi</url-pattern>
   </servlet-mapping>
+
 </web-app>
