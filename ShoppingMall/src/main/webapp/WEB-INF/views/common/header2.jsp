@@ -406,7 +406,7 @@
 					<ul id="ticker">
 						<c:forEach var="listnotices" items="${listnotices }">
 							<li id="ticker-li" >
-								<a href="${pageContext.request.contextPath }/notice/search.do?num=${listnotices.num}" style="color: black;">${listnotices.title}</a>
+								<a href="${pageContext.request.contextPath }/notice/search.do?num=${listnotices.num}&page=1" style="color: black;">${listnotices.title}</a>
 							</li>
 						</c:forEach>
 					</ul>

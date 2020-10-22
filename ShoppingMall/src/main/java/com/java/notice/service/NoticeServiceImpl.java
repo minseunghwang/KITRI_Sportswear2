@@ -87,12 +87,15 @@ public class NoticeServiceImpl implements NoticeService {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 
 		int num = Integer.parseInt(request.getParameter("num"));
-		//int page = Integer.parseInt(request.getParameter("page"));
+		int page = Integer.parseInt(request.getParameter("page"));
+		
+		System.out.println(num);
+		System.out.println(page);
 
 		NoticeDto noticeDto = noticeDao.noticeSelect(num);
 
-		//mav.addObject("page", page);
-		// mav.addObject("num",num);
+		mav.addObject("page", page);
+		mav.addObject("num",num);
 		mav.addObject("notice", noticeDto);
 		mav.setViewName("notice/search");
 
@@ -105,15 +108,13 @@ public class NoticeServiceImpl implements NoticeService {
 		int num = Integer.parseInt(request.getParameter("num"));
 		int page = Integer.parseInt(request.getParameter("page"));
 
-		System.out.println(num + "ㅇㅅㅇ" + page);
-
-		
 		 NoticeDto dto = noticeDao.noticeSelectNum(num);
 		  
 		 mav.addObject("notice",dto); mav.addObject("num",num);
 		 mav.addObject("page",page);
 		 
 		mav.setViewName("notice/update");
+		
 
 	}
 
@@ -178,7 +179,7 @@ public class NoticeServiceImpl implements NoticeService {
 		if (page == null) {
 			page = "1";
 		}
-
+		
 		int currentPage = Integer.parseInt(page);
 		int noticeSize = 10; // �븳�럹�씠吏��뿉 10媛�
 		int startRow = (currentPage - 1) * noticeSize + 1; // 湲��떆�옉踰덊샇
@@ -188,7 +189,14 @@ public class NoticeServiceImpl implements NoticeService {
 		List<NoticeDto> notices = null;
 
 		notices = noticeDao.noticeList(startRow, endRow);
-
+		
+//		List rnum = new ArrayList();
+//		for(int i=1; i<notices.size()+1; i++) {
+//			rnum.add(i);
+//			//rnum.get(i);
+//		}
+//		
+//		mav.addObject("rnum",rnum);
 		mav.addObject("notices", notices);
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("noticeSize", noticeSize);

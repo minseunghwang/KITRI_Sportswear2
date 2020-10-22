@@ -44,6 +44,15 @@
 
 </style>
 
+<!--     <script>
+      $( document ).ready( function() {
+        var jb = $( 'rnum' ).get();
+        for ( var i = 0; i < rnum.length; i++) {
+          $( 'div' ).append( '<p>' + rnum[i].innerHTML + '</p>' );
+        }
+      } );
+    </script> -->
+    
 </head>
 <body>
 <!-- Navigation -->
@@ -71,15 +80,17 @@
 					</tr>
 				</thead>
 				<tbody id="page_content">
+				<c:set var="num" value="${count - ((currentPage-1) * noticeSize) }"/>
 					<c:forEach var="notice" items="${notices }">
 						<tr class="text-center d-flex">
-							<td class="text-center  col-1">${notice.num }</td>
+							<td class="text-center  col-1">${num }</td>
 							<td class="text-center  col-6" id="title" name="title"><a
 								href="${pageContext.request.contextPath }/notice/search.do?num=${notice.num}&page=${currentPage}"
 								style="color: black;"> ${notice.title }</a></td>
 							<td class="text-center  col-3"><fmt:formatDate value="${notice.n_date}" pattern="yyyy.MM.dd" /></td>
 							<td class="text-center  col-2" id="view_count">${notice.view_count }</td>
 						</tr>
+						<c:set var="num" value="${num-1 }"></c:set>
 					</c:forEach>
 				</tbody>
 			</table>
@@ -117,17 +128,18 @@
 				
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
 					<c:choose>
-						<c:when test="${currentPage eq page}">
+						<c:when test="${param.page eq i}">
 							<li class="page-item active" aria-current="page">
 						</c:when>
 						<c:otherwise>
 							<li class="page-item">
 						</c:otherwise>
 					</c:choose>
-				<li class="page-item active" aria-current="page">
-						<a class="page-link" href="${pageContext.request.contextPath }/notice/list.do?page=${i}">${i }
-						<span class="sr-only">(current)</span></a>
-				</li>
+								<a class="page-link" href="${pageContext.request.contextPath }/notice/list.do?page=${i }">${i }</a>
+					<c:if test="${param.page eq i}">
+									<span class="sr-only">(current)</span>
+							</li>
+					</c:if>
 				</c:forEach>
 					
 				<c:if test="${endPage < pageCount }">
