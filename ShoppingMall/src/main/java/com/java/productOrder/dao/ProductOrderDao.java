@@ -9,4 +9,8 @@ public interface ProductOrderDao {
 	
 	public List<ProductOrderVO> productOrderMyCart(String id);
 	public List<ProductOrderVO> productOrderInquiry(String id);
+	public int findProductQuantity(int p_num, String size);
+	public int findProductInCartNum(String id, int p_num, String size);
+	public int makeProductOrderNum();
+	public void productOrderAdd(ProductOrderDto po);
 }

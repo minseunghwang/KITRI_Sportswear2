@@ -38,15 +38,8 @@
 		<property name="dataSource" ref="driverManagerDataSource"></property>
 	</bean>
 	
-<!-- 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="*" propagation="REQUIRED" rollback-for="Exception"/>모든 메소드가 tx를 반드시 거치게 한다.
-		</tx:attributes>
-	</tx:advice>
-	
-	<aop:config>
-		<aop:pointcut expression="within(com.java..*)" id="txPublicMethod"/>
-			<aop:advisor advice-ref="txAdvice" pointcut-ref="txPublicMethod"/>
-	</aop:config> -->
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+    	<property name="contentType" value="application/json;charset=UTF-8"> </property>
+	</bean>
 		
 </beans>

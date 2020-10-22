@@ -22,4 +22,22 @@
 	where product_order.m_id=#{id}
 </select>
 
+<select id="findProductQuantity" parameterType="java.lang.String" resultType="_int">
+	select quantity from product_size where p_num=#{p_num} and psize=#{size}
+</select>
+
+<select id="findProductInCartNum" parameterType="java.lang.String" resultType="Integer">
+	select num from product_order where m_id=#{id} and p_num=#{p_num} and p_size=#{size} and o_state=0
+</select>
+
+<select id="makeProductOrderNum" resultType="Integer">
+	select seq_product_order.nextval from dual
+</select>
+
+<insert id="productOrderAdd" parameterType="com.java.productOrder.dto.ProductOrderDto">
+	insert into product_order
+	values(SEQ_PRODUCT_ORDER.nextval, #{p_num}, #{o_quantity}, #{total_price}, #{m_id}, sysdate, #{o_state}, #{d_state}, #{p_size}, #{r_state}, null)
+</insert>
+
+
 </mapper>
