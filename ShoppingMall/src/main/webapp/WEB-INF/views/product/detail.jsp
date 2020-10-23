@@ -83,7 +83,6 @@
    
       <!-- 장바구니 클릭 상품 번호 전달 -->
        function addCart(productNum) {
-         
          if(${sessionScope.id == null }){
             if(confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?')){
                location.href = "<%=request.getContextPath()%>/member/login.do";
@@ -105,32 +104,37 @@
                var size = $("#selected").text();
                var quantity = $("#select-quantity").text();
                var allData = {"productNum": productNum, "size": size, "quantity": quantity};
-         
                $.ajax({
-                  type: "post",
-                  async: false,
+                  type: "POST",
                   url: "${pageContext.request.contextPath }/productorder/addCart.do",
-                  data: allData,
+                  data: {"productNum": productNum, "size": size, "quantity": quantity},
+                  async: false,
+                  dataType: "json",
                   success: function (result) {
-                	  alert("아오");
                 	  var item = result.ans;
-                	  alert(item);
+                	  console.log(result);
+                	  console.log(item);
                 	  if(result.ans == "AddCart Success"){
                         if(confirm('장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까?')){
                            <%-- location.herf = "<%=request.getContextPath()%>/OrderlistController?o_state=0"; --%>
-                           location.href= "${pageContext.request.contextPath }/OrderlistController?o_state=0";
+                           location.href= "${pageContext.request.contextPath }/productorder/orderList.do?o_state=0";
                         }
                      }else if(result.ans == "Already Existed"){
                         if(confirm('장바구니에 이미 해당 상품이 있습니다. 장바구니로 이동하시겠습니까?')){
                            <%-- location.herf = "<%=request.getContextPath()%>/OrderlistController?o_state=0"; --%>
-                           location.href= "${pageContext.request.contextPath }/OrderlistController?o_state=0";
+                           location.href= "${pageContext.request.contextPath }/productorder/orderList.do?o_state=0";
                         }
                      }else if(result.ans == "Sold Out"){
                         alert('재고가 부족합니다');
                      }else{
-                        alert('error');
+                        alert('errorr');
                      }
 
+                  }, error:function(request,status,error){
+                	  console.log(request);
+                	  console.log(status);
+                	  console.log(error);
+                	  alert("에러");
                   }
                });
                
@@ -389,6 +393,7 @@
 					<div id="btn_buy" >
 						<input class="btn btn-outline-dark btn-lg btn-block" type="button" value="결제하기" onClick="directOrder('${product.num}');">
 					</div>
+					<div id="imsi"></div>
 					<div id="btn_cart">
 						<input class="btn btn-dark btn-lg btn-block" type="button" value="장바구니" onClick="addCart('${product.num}');">
 					</div>

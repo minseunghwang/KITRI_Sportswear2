@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.java.product.dao.ProductDao;
@@ -57,14 +58,18 @@ public class ProductOrderServiceImp implements ProductOrderService {
 	}
 
 	@Override
-	public void productOrderAddCart(ModelAndView mav) {
+	public void productOrderAddCart(ModelAndView mav, HttpServletRequest request) {
 		Map<String, Object> map = mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		HttpServletResponse response = (HttpServletResponse) map.get("response");
 
+		System.out.println("6");
 		HttpSession session = request.getSession(false);
+		System.out.println("7");
 		String id = (String) session.getAttribute("id");
-
+		System.out.println("8");
+		
+		System.out.println(request);
+		
 		int p_num = Integer.parseInt(request.getParameter("productNum"));
 		String size = request.getParameter("size");
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
@@ -77,11 +82,10 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		// product_size 테이블의 재고 확인 ( return 값이 -1 이면 아직 입고하지 않은 상태 )
 		int findProductQuantity = productOrderDao.findProductQuantity(p_num, size);
 		int findCartNum = productOrderDao.findProductInCartNum(id, p_num, size);
-
+		
 		if (findProductQuantity >= quantity) { // 재고 >= 주문수량 :: 주문 가능
 
 			if (0 == findCartNum) { // 장바구니에 해당삼품이 존재하지 않음 :: 장바구니 추가
-
 				po.setNum(productOrderDao.makeProductOrderNum());
 				po.setP_num(p_num);
 				po.setO_quantity(quantity);
@@ -98,18 +102,43 @@ public class ProductOrderServiceImp implements ProductOrderService {
 				productOrderDao.productOrderAdd(po);
 				mav.addObject("ans", "AddCart Success");
 				System.out.println("담았다");
-
 			} else { // 장바구니에 해당상품 존재
 				mav.addObject("ans", "Already Existed");
 				System.out.println("이미 있다");
-
 			}
 		} else { // 재고 < 주문수량 :: 주문 불가
 			System.out.println("재고읎다");
 			mav.addObject("ans", "Sold Out");
-
 		}
-		mav.setViewName("/product/detail");
 	}
 
+	@Override
+	public void productOrderList(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		int o_state = Integer.parseInt(request.getParameter("o_state"));
+		HttpSession session = request.getSession(false);
+		String m_id = (String)session.getAttribute("id");
+		
+		List<ProductOrderVO> list = productOrderDao.orderList(m_id, o_state);
+
+		
+		for(ProductOrderVO o:list) {
+			ProductDto p = productDao.select(o.getP_num());
+			
+			o.setProd_name(p.getName());
+			o.setProd_img(p.getImg());
+		}
+		
+		String path=null;
+		if(o_state==1) {
+			path="/mypage/orderlist";
+		}else if(o_state==0){
+			path="/mypage/myCart";
+		}
+		
+		mav.addObject("list",list);
+		mav.addObject("o_state",o_state);
+		mav.setViewName(path);
+	}
 }

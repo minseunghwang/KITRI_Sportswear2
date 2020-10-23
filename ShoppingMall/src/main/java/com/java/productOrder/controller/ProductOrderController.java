@@ -4,9 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.java.productOrder.service.ProductOrderService;
@@ -27,7 +31,7 @@ public class ProductOrderController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/productorder/orderInquiry.do")//�ֹ���ȸ
+	@RequestMapping(value="/productorder/orderInquiry.do") //�ֹ���ȸ
 	public ModelAndView productOrderInquiry(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav= new ModelAndView();
 		mav.addObject("request",request);
@@ -35,12 +39,22 @@ public class ProductOrderController {
 		return mav;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/productorder/addCart.do")
 	public ModelAndView productOrderAddCart(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav= new ModelAndView("jsonView");
-		mav.addObject("request",request);
-		productOrderService.productOrderAddCart(mav);
+		productOrderService.productOrderAddCart(mav,request);
 		return mav;
 	}
+	
+	
+	@RequestMapping(value="/productorder/orderList.do") //�ֹ���ȸ
+	public ModelAndView productOrderList(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("request",request);
+		productOrderService.productOrderList(mav);
+		return mav;
+	}
+
 	
 }

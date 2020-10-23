@@ -88,9 +88,6 @@ public class NoticeServiceImpl implements NoticeService {
 
 		int num = Integer.parseInt(request.getParameter("num"));
 		int page = Integer.parseInt(request.getParameter("page"));
-		
-		System.out.println(num);
-		System.out.println(page);
 
 		NoticeDto noticeDto = noticeDao.noticeSelect(num);
 

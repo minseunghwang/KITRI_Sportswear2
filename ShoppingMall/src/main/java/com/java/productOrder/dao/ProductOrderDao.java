@@ -13,4 +13,5 @@ public interface ProductOrderDao {
 	public int findProductInCartNum(String id, int p_num, String size);
 	public int makeProductOrderNum();
 	public void productOrderAdd(ProductOrderDto po);
+	public List<ProductOrderVO> orderList(String m_id, int o_state);
 }

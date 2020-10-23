@@ -55,4 +55,12 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 	public void productOrderAdd(ProductOrderDto po) {
 		sqlSessionTemplate.insert("productOrderAdd",po);
 	}
+
+	@Override
+	public List<ProductOrderVO> orderList(String m_id, int o_state) {
+		Map<String, String> hmap = new HashMap<String, String>();
+		hmap.put("m_id", m_id);
+		hmap.put("o_state", Integer.toString(o_state));
+		return sqlSessionTemplate.selectList("orderList",hmap);
+	}
 }
