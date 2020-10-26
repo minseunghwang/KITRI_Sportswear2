@@ -10,7 +10,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-
+<!--  필요 없을수도?-->
 <title>Shop Homepage - Start Bootstrap Template</title>
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -18,22 +18,22 @@
 
 <!-- Bootstrap core CSS -->
 <link
-	href="<%=request.getContextPath()%>/resources/vendor/bootstrap/css/bootstrap.min.css"
+	href="${pageContext.request.contextPath }/resources/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="<%=request.getContextPath()%>/resources/css/shop-item.css"
+<link href="${pageContext.request.contextPath }/resources/css/shop-item.css"
 	rel="stylesheet">
 
 <link
-	href="<%=request.getContextPath()%>/resources/vendor/bootstrap/css/orderPageCss.css"
+	href="${pageContext.request.contextPath }/resources/vendor/bootstrap/css/orderPageCss.css"
 	rel="stylesheet">
 
 <!-- Bootstrap core JavaScript -->
 <script
-	src="<%=request.getContextPath()%>/resources/vendor/jquery/jquery.min.js"></script>
+	src="${pageContext.request.contextPath }/resources/vendor/jquery/jquery.min.js"></script>
 <script
-	src="<%=request.getContextPath()%>/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	src="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- iamport.payment.js -->
 <script type="text/javascript"
@@ -44,7 +44,7 @@
 		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
 		var pop = window
 				.open(
-						"${pageContext.request.contextPath }/views/common/jusoPopup.jsp",
+						"${pageContext.request.contextPath }/WEB-INF/views/common/jusoPopup.jsp",
 						"pop",
 						"width=570,height=420, scrollbars=yes, resizable=yes");
 
@@ -319,8 +319,8 @@
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/vendor/jquery/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<script>
 		$("#check_module").click(function() {

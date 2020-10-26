@@ -49,7 +49,7 @@
 		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
 		var pop = window
 				.open(
-						"${pageContext.request.contextPath }/views/common/jusoPopup.jsp",
+						"${pageContext.request.contextPath }/productorder/josuPage.do",
 						"pop",
 						"width=570,height=420, scrollbars=yes, resizable=yes");
 
@@ -201,10 +201,10 @@
 							<div class="prodlist">
 								<div class="box last container" >
 									<a
-										href="<%=request.getContextPath()%>/DetailController?num=${o.p_num}"
+										href="${pageContext.request.contextPath }/product/productDetail.do?num=${o.p_num}"
 										target="_blank">
 										<div class="img">
-											<img src="${o.prod_img }" class="prd" width="60" height="60">
+											<img src="${pageContext.request.contextPath }/resources/${o.prod_img }" class="prd" width="60" height="60">
 										</div>
 									</a>
 									
@@ -223,7 +223,7 @@
 									<div class="info">
 										<div class="tit">
 											<a
-												href="<%=request.getContextPath()%>/DetailController?num=${o.p_num}"
+												href="${pageContext.request.contextPath }/product/productDetail.do?num=${o.p_num}"
 												target="_blank" class="">${o.prod_name }</a>
 												<input type="hidden" name="productOrderNum" value="${o.num }">
 										</div>

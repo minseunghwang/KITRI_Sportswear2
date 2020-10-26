@@ -115,9 +115,9 @@ table{
 								</td>
 								<td ><img src="${pageContext.request.contextPath }/resources/${o.prod_img }" width="100" height="100"> </td>
 								<td style="vertical-align: middle;">${o.total_price } </td>
-								<td style="vertical-align: middle;" align=center> <button type="submit" class="btn btn-outline-dark btn-block" id="btn_paymentinfo" onclick="showPopup('${o.code_num }');">View</button>  </td>
-																									
-							</tr>																
+								<td style="vertical-align: middle;" align=center> <button type="submit" class="btn btn-outline-dark btn-block" id="btn_paymentinfo" onclick="showPopup('${o.code_num }');">View</button>  </td>																		
+							</tr>	
+																						
 						</c:forEach>
 					</tbody>
 					</table>

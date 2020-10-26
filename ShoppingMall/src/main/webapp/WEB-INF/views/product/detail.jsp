@@ -165,7 +165,7 @@
             var quantity = $("#select-quantity").text();
             var allData = {"productNum": productNum, "size": size, "quantity": quantity};
       
-            location.href ="<%=request.getContextPath()%>/DirectOrderPageController?productNum=" +productNum +"&size=" +size+"&quantity=" + quantity;
+            location.href ="${pageContext.request.contextPath }/productorder/paymentPage.do?productNum=" +productNum +"&size=" +size+"&quantity=" + quantity;
             
             
          } 

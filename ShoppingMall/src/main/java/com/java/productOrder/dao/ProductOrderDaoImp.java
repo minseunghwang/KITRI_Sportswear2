@@ -23,8 +23,8 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 	}
 
 	@Override
-	public List<ProductOrderVO> productOrderInquiry(String id) {
-		return sqlSessionTemplate.selectList("productOrderInquiry",id);
+	public List<ProductOrderVO> productOrderInquiry(Map<String, Object> map) {
+		return sqlSessionTemplate.selectList("productOrderInquiry",map);
 	}
 
 	@Override
@@ -67,5 +67,11 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 	@Override
 	public void delOrder(int num) {
 		sqlSessionTemplate.delete("delOrder",num);
+	}
+
+	@Override
+	public List<ProductOrderVO> productOrderGetInfo(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("productOrderGetInfo", map);
 	}
 }

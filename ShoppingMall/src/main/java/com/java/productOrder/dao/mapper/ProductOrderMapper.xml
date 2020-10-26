@@ -14,12 +14,20 @@
 	where product_order.m_id=#{id}
 </select>
 
-<select id="productOrderInquiry" parameterType="java.lang.String" resultType="com.java.productOrder.dto.ProductOrderVO">
+<select id="productOrderInquiry" parameterType="java.util.Map" resultType="com.java.productOrder.dto.ProductOrderVO">
 	select *
 	from product_order 
     join product  
     on product_order.p_num=product.num
-	where product_order.m_id=#{id}
+	where product_order.m_id=#{id} and product_order.o_state=#{o_state}
+</select>
+
+<select id="productOrderGetInfo" parameterType="java.util.Map" resultType="com.java.productOrder.dto.ProductOrderVO">
+	select *
+	from product_order 
+    join product  
+    on product_order.p_num=product.num
+	where product_order.m_id=#{id} and product_order.p_num=#{productNum}
 </select>
 
 <select id="findProductQuantity" parameterType="java.lang.String" resultType="_int">

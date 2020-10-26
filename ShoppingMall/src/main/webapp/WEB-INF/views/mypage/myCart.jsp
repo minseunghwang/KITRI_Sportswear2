@@ -133,7 +133,7 @@ table{
 								<button type="submit" class="btn btn-outline-dark">결제</button>
 							</div>
 						</div>
-						</div>
+					</div>
 					
 				</form>
 					

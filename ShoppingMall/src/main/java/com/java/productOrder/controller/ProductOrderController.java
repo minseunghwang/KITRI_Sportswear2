@@ -63,4 +63,17 @@ public class ProductOrderController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/productorder/paymentPage.do")
+	public ModelAndView productOrderPaymentPage(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("request",request);
+		productOrderService.productOrderPaymentPage(mav);
+		return mav;
+	}
+	
+	@RequestMapping(value="/productorder/josuPage.do")
+	public ModelAndView productOrderJosuPage(HttpServletRequest request, HttpServletResponse response) {
+		return new ModelAndView("common/jusoPopup");
+	}
+	
 }
