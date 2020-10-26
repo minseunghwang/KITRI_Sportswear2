@@ -15,4 +15,6 @@ public interface ProductOrderDao {
 	public int makeProductOrderNum();
 	public void productOrderAdd(ProductOrderDto po);
 	public List<ProductOrderVO> productOrderGetInfo(Map<String, Object> map);
+	public void delOrder(int num);
+	public List<ProductOrderVO> orderList(String m_id, int o_state);
 }

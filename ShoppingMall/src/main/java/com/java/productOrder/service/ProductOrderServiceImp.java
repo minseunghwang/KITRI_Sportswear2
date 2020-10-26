@@ -153,7 +153,7 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		
 		HttpSession session = request.getSession(false);
 		String id = (String) session.getAttribute("id");
-		List<ProductOrderVO> list = productOrderDao.productOrderInquiry(id);
+		List<ProductOrderVO> list = productOrderDao.productOrderMyCart(id);
 		
 		mav.addObject("o_state", 0);
 		mav.addObject("list",list);
