@@ -112,7 +112,7 @@ table{
 								<tr class="text-center">
 									<td>${o.num }</td>
 									<td id="product_name">${o.prod_name }</td>
-									<td><a href="${pageContext.request.contextPath }/DetailController?num=${o.p_num }">
+									<td><a href="${pageContext.request.contextPath }/product/productDetail.do?num=${o.p_num }">
 										<img src="${pageContext.request.contextPath }/resources/${o.prod_img }" width="100" height="100"></a>
 										</td>
 									<td>${o.p_size } </td>

@@ -3,6 +3,8 @@ package com.java.review.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import com.java.review.dto.ReviewDto;
 
 
@@ -26,4 +28,6 @@ public interface ReviewService {
 	ArrayList<ReviewDto> getMyReviewAll(String m_id, int page);
 	int getcountMine(String m_id);
 	int getcountByP_Num(int p_num);
+	
+	public void reviewMyList(ModelAndView mav);
 }

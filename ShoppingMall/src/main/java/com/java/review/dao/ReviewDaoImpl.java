@@ -92,5 +92,17 @@ public class ReviewDaoImpl implements ReviewDao{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public ArrayList<ReviewDto> getMyReviewAll(String m_id, int page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getcountMine(String m_id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }
