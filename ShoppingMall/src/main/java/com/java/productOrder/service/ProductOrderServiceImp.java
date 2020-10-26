@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.java.common.OrderInfoVO;
+import com.java.common.PaginationVO;
 import com.java.member.dao.MemberDao;
 import com.java.member.dto.MemberDto;
 import com.java.product.dao.ProductDao;
@@ -54,14 +56,54 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		int page = Integer.parseInt(request.getParameter("page"));
 		HttpSession session = request.getSession(false);
 		String id = (String) session.getAttribute("id");
 		int o_state = Integer.parseInt(request.getParameter("o_state"));
 		Map<String, Object> hmap= new HashMap<String, Object>();
-		System.out.println(id);
 		hmap.put("id", id);
 		hmap.put("o_state",o_state);
 		List<ProductOrderVO> list = productOrderDao.productOrderInquiry(hmap);
+		
+//		List<Integer> ctnlist =  productOrderDao.productOrdergetctnrow(hmap);
+		
+		System.out.println(list);
+		
+		PaginationVO pn = new PaginationVO();
+		
+		// 페이징 처리
+		pn.setPage(page);					// 현재 페이지
+		pn.setCountList(4);					// 한 화면에 보여질 상품 수
+		pn.setCountPage(3);					// 하단 보여질 페이지 수 ex) << < 1 2 3 > >>
+
+		pn.setTotalCount(productOrderDao.orderList(id, o_state).size());	// 전체 상품 수 ex) 35개
+
+		pn.setTotalPage(pn.getTotalCount() / pn.getCountList());
+		if(pn.getTotalCount() % pn.getCountList() > 0) {	// ex) 총 상품 35개, 한 페이지에 8개 표시 :: 4개의 페이지(8개 상품) + 1페이지(3개 상품)
+			pn.setTotalPage(pn.getTotalPage() + 1);
+		}
+		
+		if(pn.getTotalPage() < pn.getPage()) {
+			pn.setPage(pn.getTotalPage());
+		}
+		
+		pn.setStartPage((pn.getPage() - 1) / pn.getCountPage() * pn.getCountPage() + 1);
+		pn.setEndPage(pn.getStartPage() + pn.getCountPage() - 1);
+		
+		
+		/*
+		 *  아래 조건이 없으면 다음과 같은 대참사가 발생
+		 *  현재 4페이지에 위치하면, startPage == 4, endPage == 5 로 나와야함. << < 4 5 > >>
+		 *  아래 조건이 없을 경우, endPage = 4 + 3 - 1 >> endPage == 6..    :: << < 4 5 6 > >>  
+		 *  6페이지를 누르면 아무런 값도 나오지 않음
+		 *  아래 조건을 넣어야 if( 6 > 5 ) 조건을 만족하여 endPage는 5가 됨
+		 */
+		if(pn.getEndPage() > pn.getTotalPage()) {
+			pn.setEndPage(pn.getTotalPage());
+		}
+		
+		mav.addObject("pn",pn);
+		
 		mav.addObject("list", list);
 		mav.setViewName("/mypage/neworderlist");
 	}
@@ -209,6 +251,21 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		mav.addObject("member",memberDto);
 		mav.setViewName("/mypage/cartOrderPage");
 		
+	}
+
+	@Override
+	public void productOrderPaymentInfo(ModelAndView mav) {
+		Map<String, Object> map= mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		HttpSession session =request.getSession(false);
+		String m_id = (String)session.getAttribute("id");
+        String code_num = request.getParameter("code_num");
+        
+        OrderInfoVO orderinfo = productOrderDao.getPaymentInfo(code_num);
+        System.out.println(orderinfo);
+        
+        mav.addObject("orderinfo",orderinfo);
+        mav.setViewName("/mypage/paymentInfoForm");
 	}
 
 }

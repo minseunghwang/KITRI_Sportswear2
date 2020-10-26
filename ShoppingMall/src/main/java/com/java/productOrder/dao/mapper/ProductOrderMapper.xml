@@ -55,5 +55,13 @@
 	delete Product_order where num=#{num}
 </delete>
 
+<select id="getPaymentInfo" resultType="com.java.common.OrderInfoVO">
+	select * from orderinfo where oi_code_num=#{num}
+</select>
+
+<select id="productOrdergetctnrow" resultType="com.java.common.OrderInfoVO">
+	select * from orderinfo where oi_code_num=#{num}
+</select>
+
 
 </mapper>

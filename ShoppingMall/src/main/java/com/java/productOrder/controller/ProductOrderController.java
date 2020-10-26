@@ -76,4 +76,12 @@ public class ProductOrderController {
 		return new ModelAndView("common/jusoPopup");
 	}
 	
+	@RequestMapping(value="/productorder/paymentInfo.do")
+	public ModelAndView productOrderPaymentInfo(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("request",request);
+		productOrderService.productOrderPaymentInfo(mav);
+		return mav;
+	}
+	
 }

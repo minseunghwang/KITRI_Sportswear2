@@ -12,5 +12,6 @@ public interface ProductOrderService {
 	public void productOrderList(ModelAndView mav);
 	public void productOrderDelete(ModelAndView mav);
 	public void productOrderPaymentPage(ModelAndView mav);
+	public void productOrderPaymentInfo(ModelAndView mav);
 
 }

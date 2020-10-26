@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.java.common.OrderInfoVO;
 import com.java.productOrder.dto.ProductOrderDto;
 import com.java.productOrder.dto.ProductOrderVO;
 
@@ -73,5 +74,15 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 	public List<ProductOrderVO> productOrderGetInfo(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("productOrderGetInfo", map);
+	}
+
+	@Override
+	public OrderInfoVO getPaymentInfo(String code_num) {
+		return sqlSessionTemplate.selectOne("getPaymentInfo", code_num); 
+	}
+
+	@Override
+	public List<Integer> productOrdergetctnrow(Map<String, Object> map) {
+		return sqlSessionTemplate.selectList("productOrdergetctnrow", map);
 	}
 }

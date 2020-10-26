@@ -21,30 +21,30 @@
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/views/review/star-rating/star-rating/css/star-rating.css"
+	href="${pageContext.request.contextPath }/WEB-INF/views/review/star-rating/star-rating/css/star-rating.css"
 	media="all" type="text/css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/views/review/star-rating/star-rating/css/themes/krajee-fa/theme.css"
+	href="${pageContext.request.contextPath }/WEB-INF/views/review/star-rating/star-rating/css/themes/krajee-fa/theme.css"
 	media="all" type="text/css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/views/review/star-rating/star-rating/css/themes/krajee-svg/theme.css"
+	href="${pageContext.request.contextPath }/WEB-INF/views/review/star-rating/star-rating/css/themes/krajee-svg/theme.css"
 	media="all" type="text/css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/views/review/star-rating/star-rating/css/themes/krajee-uni/theme.css"
+	href="${pageContext.request.contextPath }/WEB-INF/views/review/star-rating/star-rating/css/themes/krajee-uni/theme.css"
 	media="all" type="text/css" />
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script
-	src="${pageContext.request.contextPath }/views/review/star-rating/star-rating/js/star-rating.js"
+	src="${pageContext.request.contextPath }/WEB-INF/views/review/star-rating/star-rating/js/star-rating.js"
 	type="text/javascript"></script>
 <script
-	src="${pageContext.request.contextPath }/views/review/star-rating/star-rating/js/themes/krajee-fa/theme.js"
+	src="${pageContext.request.contextPath }/WEB-INF/views/review/star-rating/star-rating/js/themes/krajee-fa/theme.js"
 	type="text/javascript"></script>
 <script
-	src="${pageContext.request.contextPath }/views/review/star-rating/star-rating/js/themes/krajee-svg/theme.js"
+	src="${pageContext.request.contextPath }/WEB-INF/views/review/star-rating/star-rating/js/themes/krajee-svg/theme.js"
 	type="text/javascript"></script>
 <script
-	src="${pageContext.request.contextPath }/views/review/star-rating/star-rating/js/themes/krajee-uni/theme.js"
+	src="${pageContext.request.contextPath }/WEB-INF/views/review/star-rating/star-rating/js/themes/krajee-uni/theme.js"
 	type="text/javascript"></script>
 
 <style type="text/css">
@@ -80,7 +80,7 @@
 										<th>주문자</th>
 										<td>${orderinfo.oi_name }</td>
 										<th>주문날짜</th>
-										<td>${orderinfo.orderDate }</td>
+										<td>${orderinfo.oi_orderDate }</td>
 									</tr>
 									<tr>
 										<th>배송지 주소</th>
@@ -88,11 +88,11 @@
 									</tr>	
 									<tr>
 										<th>배송메모</th>
-										<td colspan="3">${orderinfo.deliMessage }</td>
+										<td colspan="3">${orderinfo.oi_deliMessage }</td>
 									</tr>	
 									<tr>
 										<th>결제방법</th>
-										<td colspan="3">${orderinfo.howPay }</td>
+										<td colspan="3">${orderinfo.oi_howPay }</td>
 									</tr>
 									<tr>
 										<th>상품금액</th>

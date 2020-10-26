@@ -462,7 +462,6 @@
 			}, function(rsp) {
 				console.log(rsp);
 				if (rsp.success) {
-					
 					$.ajax({
 			            type : 'post',
 			            async: false,
@@ -503,7 +502,7 @@
 			            success : function(json){
 			                alert("결제가 성공적으로 완료되었습니다. 감사합니다.")
 			                
-			                location.href = "${pageContext.request.contextPath }/OrderlistController?o_state=1"; 
+			                location.href = "${pageContext.request.contextPath }/productorder/orderList.do?o_state=1"; 
 			            }
 			        });
 

@@ -3,6 +3,7 @@ package com.java.productOrder.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.java.common.OrderInfoVO;
 import com.java.productOrder.dto.ProductOrderDto;
 import com.java.productOrder.dto.ProductOrderVO;
 
@@ -17,4 +18,6 @@ public interface ProductOrderDao {
 	public List<ProductOrderVO> productOrderGetInfo(Map<String, Object> map);
 	public void delOrder(int num);
 	public List<ProductOrderVO> orderList(String m_id, int o_state);
+	public OrderInfoVO getPaymentInfo(String code_num);
+	public List<Integer> productOrdergetctnrow(Map<String, Object> map);
 }

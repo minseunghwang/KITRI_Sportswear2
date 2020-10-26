@@ -55,6 +55,7 @@ table{
 		var code_num = document.getElementById('code_num').value;
 		var param = encodeURI(code_num);
 		location.href="${pageContext.request.contextPath }/AllOrderListController2?o_state=1"; 
+		
 	}
 	
 	function showPopup(code_num) {
@@ -65,7 +66,7 @@ table{
 		
 		var frmData = document.allorderList;
 		frmData.target = pop_title;
-		frmData.action = "<%=request.getContextPath()%>/PaymentInfoController?code_num=" + code_num;
+		frmData.action = "${pageContext.request.contextPath }/productorder/paymentInfo.do?code_num=" + code_num;
 	}
 			
 		
@@ -108,7 +109,7 @@ table{
 						<c:forEach var="o" items="${list }">
 							<tr class="text-center">
 								<td name="code_num" style="vertical-align: middle;">
-								 <a id="code_num_link" style="text-decoration: none;" href="${pageContext.request.contextPath }/OrderlistController2?code_num=${o.code_num }">${o.code_num }</a>
+								<a id="code_num_link" style="text-decoration: none;" href="${pageContext.request.contextPath }/OrderlistController2?code_num=${o.code_num }">${o.code_num }</a>
 								</td>
 								<td style="vertical-align: middle;">${o.o_date }</td>
 								<td style="vertical-align: middle;">${o.prod_name } <span style="font-size:12px;">..포함 ${o.ctnrow} 개</span>
