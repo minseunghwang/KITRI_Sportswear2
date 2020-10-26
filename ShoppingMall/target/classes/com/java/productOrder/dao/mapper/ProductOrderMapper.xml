@@ -5,13 +5,13 @@
 
 <mapper namespace="com.java.productOrder.dao.mapper.ProductOrderMapper">
 
-<select id="productOrderMyCart" parameterType="java.lang.String" resultType="com.java.productOrder.dto.ProductOrderVO">
+<select id="productOrderMyCart" parameterType="java.util.Map" resultType="com.java.productOrder.dto.ProductOrderVO">
 	<!-- product_order.num,product.name,product.img,product_order.p_size,product_order.o_quantity,product_order.total_price -->
 	select *
 	from product_order 
     join product  
     on product_order.p_num=product.num
-	where product_order.m_id=#{id}
+	where product_order.m_id=#{id} and product_order.o_state=#{o_state}
 </select>
 
 <select id="productOrderInquiry" parameterType="java.util.Map" resultType="com.java.productOrder.dto.ProductOrderVO">

@@ -53,7 +53,7 @@ table{
 	 
 	 var num = currentNum;
 	 if(confirm('장바구니에서 삭제하시겠습니까?')) {
-		 location.href= "${pageContext.request.contextPath }/productorder/deleteOrder.do?num=" + num;
+		 location.href= "${pageContext.request.contextPath }/productorder/deleteOrder.do?o_state=0&num="+ num;
 		 return;
 	 } else {
 		 return;
