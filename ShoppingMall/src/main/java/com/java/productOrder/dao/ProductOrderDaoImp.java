@@ -19,8 +19,8 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	@Override
-	public List<ProductOrderVO> productOrderMyCart(String id) {
-		return sqlSessionTemplate.selectList("productOrderMyCart",id);
+	public List<ProductOrderVO> productOrderMyCart(Map<String, Object> map) {
+		return sqlSessionTemplate.selectList("productOrderMyCart",map);
 	}
 
 	@Override

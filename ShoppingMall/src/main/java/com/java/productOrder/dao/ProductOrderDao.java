@@ -9,7 +9,7 @@ import com.java.productOrder.dto.ProductOrderVO;
 
 public interface ProductOrderDao {
 	
-	public List<ProductOrderVO> productOrderMyCart(String id);
+	public List<ProductOrderVO> productOrderMyCart(Map<String, Object> map);
 	public List<ProductOrderVO> productOrderInquiry(Map<String, Object> map);
 	public int findProductQuantity(int p_num, String size);
 	public int findProductInCartNum(String id, int p_num, String size);

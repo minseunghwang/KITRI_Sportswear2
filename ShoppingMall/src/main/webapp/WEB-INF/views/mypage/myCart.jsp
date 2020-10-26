@@ -53,7 +53,7 @@ table{
 	 
 	 var num = currentNum;
 	 if(confirm('장바구니에서 삭제하시겠습니까?')) {
-		 location.href= "${pageContext.request.contextPath }/productorder/deleteOrder.do?num=" + num;
+		 location.href= "${pageContext.request.contextPath }/productorder/deleteOrder.do?o_state=0&num="+ num;
 		 return;
 	 } else {
 		 return;
@@ -109,7 +109,7 @@ table{
 								<tr class="text-center">
 									<td>${o.num }</td>
 									<td id="product_name">${o.prod_name }</td>
-									<td><a href="${pageContext.request.contextPath }/DetailController?num=${o.p_num }">
+									<td><a href="${pageContext.request.contextPath }/product/productDetail.do?num=${o.p_num }">
 										<img src="${pageContext.request.contextPath }/resources/${o.prod_img }" width="100" height="100"></a>
 										</td>
 									<td>${o.p_size } </td>

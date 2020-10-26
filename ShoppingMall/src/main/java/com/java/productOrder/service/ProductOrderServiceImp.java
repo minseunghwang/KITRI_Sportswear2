@@ -42,10 +42,14 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		int o_state = Integer.parseInt(request.getParameter("o_state"));
 		HttpSession session = request.getSession(false);
 		String id = (String) session.getAttribute("id");
-		List<ProductOrderVO> list = productOrderDao.productOrderMyCart(id);
+		int o_state = Integer.parseInt(request.getParameter("o_state"));
+		Map<String, Object> hmap= new HashMap<String, Object>();
+		System.out.println(id);
+		hmap.put("id", id);
+		hmap.put("o_state",o_state);
+		List<ProductOrderVO> list = productOrderDao.productOrderMyCart(hmap);
 		mav.addObject("o_state", o_state);
 		mav.addObject("list", list);
 		mav.setViewName("/mypage/myCart");
@@ -191,11 +195,17 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		int num = Integer.parseInt(request.getParameter("num"));
+		System.out.println(num);
 		productOrderDao.delOrder(num);
 		
 		HttpSession session = request.getSession(false);
 		String id = (String) session.getAttribute("id");
-		List<ProductOrderVO> list = productOrderDao.productOrderMyCart(id);
+		int o_state = Integer.parseInt(request.getParameter("o_state"));
+		Map<String, Object> hmap= new HashMap<String, Object>();
+		System.out.println(id);
+		hmap.put("id", id);
+		hmap.put("o_state",o_state);
+		List<ProductOrderVO> list = productOrderDao.productOrderMyCart(hmap);
 		
 		mav.addObject("o_state", 0);
 		mav.addObject("list",list);
