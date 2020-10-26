@@ -10,5 +10,6 @@ public interface ProductOrderService {
 	public void productOrderInquiry(ModelAndView mav);
 	public void productOrderAddCart(ModelAndView mav, HttpServletRequest request);
 	public void productOrderList(ModelAndView mav);
+	public void productOrderDelete(ModelAndView mav);
 
 }

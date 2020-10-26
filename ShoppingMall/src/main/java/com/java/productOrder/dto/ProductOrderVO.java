@@ -16,6 +16,7 @@ public class ProductOrderVO {
 	private String p_size;
 	private int r_state;
 	private String code_num;
+	
 	private String name;
 	private String img;
 	

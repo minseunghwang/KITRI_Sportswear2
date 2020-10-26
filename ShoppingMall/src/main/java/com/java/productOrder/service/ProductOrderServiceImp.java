@@ -37,7 +37,6 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		int o_state = Integer.parseInt(request.getParameter("o_state"));
 		HttpSession session = request.getSession(false);
 		String id = (String) session.getAttribute("id");
-		System.out.println(id);
 		List<ProductOrderVO> list = productOrderDao.productOrderMyCart(id);
 		mav.addObject("o_state", o_state);
 		mav.addObject("list", list);
@@ -51,7 +50,6 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		HttpSession session = request.getSession(false);
 		String id = (String) session.getAttribute("id");
-		System.out.println(id);
 		List<ProductOrderVO> list = productOrderDao.productOrderInquiry(id);
 		mav.addObject("list", list);
 		mav.setViewName("/mypage/neworderlist");
@@ -62,13 +60,8 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletResponse response = (HttpServletResponse) map.get("response");
 
-		System.out.println("6");
 		HttpSession session = request.getSession(false);
-		System.out.println("7");
 		String id = (String) session.getAttribute("id");
-		System.out.println("8");
-		
-		System.out.println(request);
 		
 		int p_num = Integer.parseInt(request.getParameter("productNum"));
 		String size = request.getParameter("size");
@@ -98,16 +91,12 @@ public class ProductOrderServiceImp implements ProductOrderService {
 				po.setProd_img(p.getImg());
 				po.setR_state(0); // r_state 값: 0 == 리뷰작성 전, 1 == 리뷰 작성 완료
 //	        		po.setCode_num(service.makeProductOrderCodeNum());	// TODO CodeNum 정확한 용도 확인 후 수정
-				System.out.println(po);
 				productOrderDao.productOrderAdd(po);
 				mav.addObject("ans", "AddCart Success");
-				System.out.println("담았다");
 			} else { // 장바구니에 해당상품 존재
 				mav.addObject("ans", "Already Existed");
-				System.out.println("이미 있다");
 			}
 		} else { // 재고 < 주문수량 :: 주문 불가
-			System.out.println("재고읎다");
 			mav.addObject("ans", "Sold Out");
 		}
 	}
@@ -140,5 +129,21 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		mav.addObject("list",list);
 		mav.addObject("o_state",o_state);
 		mav.setViewName(path);
+	}
+
+	@Override
+	public void productOrderDelete(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		int num = Integer.parseInt(request.getParameter("num"));
+		productOrderDao.delOrder(num);
+		
+		HttpSession session = request.getSession(false);
+		String id = (String) session.getAttribute("id");
+		List<ProductOrderVO> list = productOrderDao.productOrderInquiry(id);
+		
+		mav.addObject("o_state", 0);
+		mav.addObject("list",list);
+		mav.setViewName("/mypage/myCart");
 	}
 }

@@ -39,10 +39,13 @@
 	values(SEQ_PRODUCT_ORDER.nextval, #{p_num}, #{o_quantity}, #{total_price}, #{m_id}, sysdate, #{o_state}, #{d_state}, #{p_size}, #{r_state}, null)
 </insert>
 
-<select id="orderList" resultType="com.java.productOrder.dto.ProductOrderDto">
+<select id="orderList" resultType="com.java.productOrder.dto.ProductOrderVO">
 	select * from PRODUCT_ORDER where m_id=#{m_id} and o_state=#{o_state} order by o_date desc
 </select>
 
+<delete id="delOrder">
+	delete Product_order where num=#{num}
+</delete>
 
 
 </mapper>

@@ -42,7 +42,6 @@ public class MemberServiceImp implements MemberService {
 				
 		mav.addObject("type",value);
 		mav.addObject("id",hmap.get("id"));
-		System.out.println(value);
 		mav.setViewName("member/loginOk");
 		
 	}

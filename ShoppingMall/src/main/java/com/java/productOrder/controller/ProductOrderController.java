@@ -47,7 +47,6 @@ public class ProductOrderController {
 		return mav;
 	}
 	
-	
 	@RequestMapping(value="/productorder/orderList.do") //�ֹ���ȸ
 	public ModelAndView productOrderList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav= new ModelAndView();
@@ -56,5 +55,12 @@ public class ProductOrderController {
 		return mav;
 	}
 
+	@RequestMapping(value="/productorder/deleteOrder.do") //�ֹ���ȸ
+	public ModelAndView productOrderDelete(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("request",request);
+		productOrderService.productOrderDelete(mav);
+		return mav;
+	}
 	
 }

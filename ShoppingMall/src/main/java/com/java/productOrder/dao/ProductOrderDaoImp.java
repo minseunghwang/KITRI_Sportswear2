@@ -63,4 +63,9 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 		hmap.put("o_state", Integer.toString(o_state));
 		return sqlSessionTemplate.selectList("orderList",hmap);
 	}
+
+	@Override
+	public void delOrder(int num) {
+		sqlSessionTemplate.delete("delOrder",num);
+	}
 }
