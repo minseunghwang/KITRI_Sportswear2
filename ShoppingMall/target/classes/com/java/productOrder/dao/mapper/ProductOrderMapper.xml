@@ -15,11 +15,12 @@
 </select>
 
 <select id="productOrderInquiry" parameterType="java.util.Map" resultType="com.java.productOrder.dto.ProductOrderVO">
-	select *
-	from product_order 
-    join product  
-    on product_order.p_num=product.num
-	where product_order.m_id=#{id} and product_order.o_state=#{o_state}
+	<![CDATA[
+	select * 
+	from (select rownum as rnum, a.* 
+		from (select code_num, max(o_date) max_o_date, sum(total_price) sum_total_price, max(d_state) max_d_date, max(p_num) max_p_num, count(*) ctnrow
+			from product_order where m_id=#{id} and o_state=#{o_state} group by code_num order by max(o_date) desc) A where rownum<=#{endRange}) X where x.rnum>=#{startRange}
+	]]>
 </select>
 
 <select id="productOrderGetInfo" parameterType="java.util.Map" resultType="com.java.productOrder.dto.ProductOrderVO">

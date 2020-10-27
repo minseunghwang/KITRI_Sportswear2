@@ -108,14 +108,14 @@ table{
 					<tbody >
 						<c:forEach var="o" items="${list }">
 							<tr class="text-center">
-								<td name="code_num" style="vertical-align: middle;">
-								<a id="code_num_link" style="text-decoration: none;" href="${pageContext.request.contextPath }/OrderlistController2?code_num=${o.code_num }">${o.code_num }</a>
-								</td>
-								<td style="vertical-align: middle;">${o.o_date }</td>
-								<td style="vertical-align: middle;">${o.prod_name } <span style="font-size:12px;">..포함 ${o.ctnrow} 개</span>
-								</td>
+								<div>이거안생기누</div>
+								<div id="code_num_link" onclick="location.href='${pageContext.request.contextPath }/OrderlistController2?code_num=${o.code_num }'">
+								<td name="code_num" style="vertical-align: middle;">${o.code_num }</td>
+								<td style="vertical-align: middle;">${o.max_o_date }</td>
+								<td style="vertical-align: middle;">${o.prod_name } <span style="font-size:12px;">..포함 ${o.ctnrow} 개</span></td>
 								<td ><img src="${pageContext.request.contextPath }/resources/${o.prod_img }" width="100" height="100"> </td>
-								<td style="vertical-align: middle;">${o.total_price } </td>
+								</div>
+								<td style="vertical-align: middle;">${o.sum_total_price } </td>
 								<td style="vertical-align: middle;" align=center> <button type="submit" class="btn btn-outline-dark btn-block" id="btn_paymentinfo" onclick="showPopup('${o.code_num }');">View</button>  </td>																		
 							</tr>	
 																						

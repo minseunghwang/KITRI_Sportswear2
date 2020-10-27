@@ -27,16 +27,14 @@ public class ProductOrderVO {
 	private int ctnrow; 	//�븳 二쇰Ц踰덊샇 �떦 二쇰Ц�븳 �긽�뭹 媛쒖닔
 	
 	private String priceView;
+	private int rnum;
 	
 	public ProductOrderVO() {
 		
 	}
 	
-	
-
 	public ProductOrderVO(int num, int p_num, int o_quantity, int total_price, String m_id, Date o_date, int o_state,
 			int d_state, String p_size) {
-		super();
 		this.num = num;
 		this.p_num = p_num;
 		this.o_quantity = o_quantity;
@@ -52,7 +50,6 @@ public class ProductOrderVO {
 
 	public ProductOrderVO(int num, int p_num, int o_quantity, int total_price, String m_id, Date o_date, int o_state,
 			int d_state, String p_size, int r_state, String code_num) {
-		super();
 		this.num = num;
 		this.p_num = p_num;
 		this.o_quantity = o_quantity;
@@ -68,8 +65,9 @@ public class ProductOrderVO {
 		this.priceView = Common.priceView(total_price);
 	}
 
-	public ProductOrderVO(String code_num, Date max_o_date, int sum_total_price, int max_d_state, int max_p_num, int ctnrow) {
+	public ProductOrderVO(int rnum, String code_num, Date max_o_date, int sum_total_price, int max_d_state, int max_p_num, int ctnrow) {
 		super();
+		this.rnum = rnum;
 		this.code_num=code_num;
 		this.max_o_date=max_o_date;
 		this.max_d_state=max_d_state;
@@ -295,19 +293,25 @@ public class ProductOrderVO {
 	public void setCtnrow(int ctnrow) {
 		this.ctnrow = ctnrow;
 	}
+	
 
+	public int getRnum() {
+		return rnum;
+	}
 
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+
+	}
 
 	@Override
 	public String toString() {
 		return "ProductOrderVO [num=" + num + ", p_num=" + p_num + ", o_quantity=" + o_quantity + ", total_price="
 				+ total_price + ", m_id=" + m_id + ", o_date=" + o_date + ", o_state=" + o_state + ", d_state="
-				+ d_state + ", r_state=" + r_state + ", p_size=" + p_size + ", code_num=" + code_num + ", prod_name="
-				+ name + ", prod_img=" + img + ", sum_total_price=" + sum_total_price + ", max_o_date="
-				+ max_o_date + ", max_d_state=" + max_d_state + ", max_p_num=" + max_p_num + ", ctnrow=" + ctnrow
-				+ ", priceView=" + priceView + "]";
+				+ d_state + ", p_size=" + p_size + ", r_state=" + r_state + ", code_num=" + code_num + ", name=" + name
+				+ ", img=" + img + ", sum_total_price=" + sum_total_price + ", max_o_date=" + max_o_date
+				+ ", max_d_state=" + max_d_state + ", max_p_num=" + max_p_num + ", ctnrow=" + ctnrow + ", priceView="
+				+ priceView + ", rnum=" + rnum + "]";
 	}
-	
-	
 	
 }
