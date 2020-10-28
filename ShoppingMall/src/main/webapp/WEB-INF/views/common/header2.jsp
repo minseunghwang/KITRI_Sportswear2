@@ -446,7 +446,7 @@
 				<div id="main-gnb-login">
 					<ul>
 						<li><a href="${pageContext.request.contextPath }/notice/list.do">공지사항</a></li>
-						<li><a href="<%=request.getContextPath()%>/ProductAllListController?page=1">관리자페이지</a></li>
+						<li><a href="<%=request.getContextPath()%>/admin/product/adminProductManagement.do?page=1">관리자페이지</a></li>
 						<li><a href="<%=request.getContextPath()%>/member/logout.do">로그아웃</a></li>
 					</ul>
 				</div>

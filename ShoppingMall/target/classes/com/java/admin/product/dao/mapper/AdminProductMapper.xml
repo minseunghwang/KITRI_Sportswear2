@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.java.admin.product.dao.mapper.AdminProductMapper">
+    <resultMap type="com.java.product.dto.ProductDto" id="product_dto">
+		<result column="num" property="num"/>	
+		<result column="name" property="name"/>	
+		<result column="price" property="price"/>	
+		<result column="img" property="img"/>
+		<result column="content" property="content"/>	
+		<result column="e_date" property="e_date"/>
+		<result column="record" property="record"/>
+		<result column="category" property="category"/>
+	</resultMap>
+    
+    <select id="product_list" parameterType="java.util.Map" resultMap="product_dto">
+    	select * 
+    	from product
+	</select>
+	
+	<select id="getProductManagementByPageNum" parameterType="java.util.Map" resultMap="product_dto">
+	<![CDATA[
+		select * 
+		from (select rownum as rnum, a.* 
+			  from (select * 
+			        from product 
+			        order by num) A 
+			  where rownum <= ?) X 
+		where x.rnum >= ?
+		]]>
+	</select>
+	
+	<select id="getProductsSizeAll" parameterType="int">
+	select * 
+	from (select p.num, s.psize, s.quantity 
+	      from product p, product_size s 
+	      where p.num = s.p_num) 
+	where num=?
+	</select>
+	
+    </mapper>

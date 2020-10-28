@@ -116,12 +116,12 @@
 				<ul class="pagination justify-content-center">
 				<c:if test="${1 != pn.page }">
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/ProductAllListController?page=1" aria-label="Previous">
+						<a class="page-link" href="${pageContext.request.contextPath }/admin/product/adminProductManagement.do?page=1" aria-label="Previous">
 							<span aria-hidden="true">&laquo;</span>
 						</a>
 					</li>
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/ProductAllListController?page=${param.page-1}" aria-label="Previous">
+						<a class="page-link" href="${pageContext.request.contextPath }/admin/product/adminProductManagement.do?page=${param.page-1}" aria-label="Previous">
 							<span aria-hidden="true">&lsaquo;</span>
 						</a>
 					</li>
@@ -137,7 +137,7 @@
 							<li class="page-item">
 						</c:otherwise>
 					</c:choose>
-								<a class="page-link" href="${pageContext.request.contextPath }/ProductAllListController?page=${pageNum }">${pageNum }</a>
+								<a class="page-link" href="${pageContext.request.contextPath }/admin/product/adminProductManagement.do?page=${pageNum }">${pageNum }</a>
 					<c:if test="${param.page eq pageNum}">
 									<span class="sr-only">(current)</span>
 					</c:if>
@@ -145,12 +145,12 @@
 
 				<c:if test="${pn.totalPage != pn.page }">
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/ProductAllListController?page=${param.page+1}" aria-label="Next">
+						<a class="page-link" href="${pageContext.request.contextPath }/admin/product/adminProductManagement.do?page=${param.page+1}" aria-label="Next">
 							<span aria-hidden="true">&rsaquo;</span>
 						</a>
 					</li>
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/ProductAllListController?page=${pn.totalPage }" aria-label="Next">
+						<a class="page-link" href="${pageContext.request.contextPath }/admin/product/adminProductManagement.do?page=${pn.totalPage }" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
 						</a>
 					</li>
