@@ -85,4 +85,12 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 	public List<Integer> productOrdergetctnrow(Map<String, Object> map) {
 		return sqlSessionTemplate.selectList("productOrdergetctnrow", map);
 	}
+
+	@Override
+	public List<ProductOrderVO> orderListByCNum(String m_id, String code_num) {
+		Map<String, String> hmap = new HashMap<String, String>();
+		hmap.put("m_id", m_id);
+		hmap.put("code_num", code_num);
+		return sqlSessionTemplate.selectList("orderCode", hmap);
+	}
 }

@@ -51,6 +51,10 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		hmap.put("o_state",o_state);
 		List<ProductOrderVO> list = productOrderDao.productOrderMyCart(hmap);
 		
+		for(ProductOrderVO o:list) {
+			o.setPriceView(o.getTotal_price());
+		}
+		
 		PaginationVO pn = new PaginationVO();
 		
 		// 페이징 처리
@@ -115,7 +119,11 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		
 		for(ProductOrderVO o:list) {
 			ProductDto p = productDao.select(o.getMax_p_num());
-			
+			System.out.println("========");
+			System.out.println(p);
+			System.out.println(o);
+			System.out.println("========");
+			o.setPriceView(o.getSum_total_price());
 			o.setProd_name(p.getName());
 			o.setProd_img(p.getImg());
 		}
@@ -198,7 +206,6 @@ public class ProductOrderServiceImp implements ProductOrderService {
 				po.setProd_img(p.getImg());
 				po.setR_state(0); // r_state 값: 0 == 리뷰작성 전, 1 == 리뷰 작성 완료
 //	        		po.setCode_num(service.makeProductOrderCodeNum());	// TODO CodeNum 정확한 용도 확인 후 수정
-				System.out.println(po);
 				productOrderDao.productOrderAdd(po);
 				mav.addObject("ans", "AddCart Success");
 			} else { // 장바구니에 해당상품 존재
@@ -244,14 +251,12 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		int num = Integer.parseInt(request.getParameter("num"));
-		System.out.println(num);
 		productOrderDao.delOrder(num);
 		
 		HttpSession session = request.getSession(false);
 		String id = (String) session.getAttribute("id");
 		int o_state = Integer.parseInt(request.getParameter("o_state"));
 		Map<String, Object> hmap= new HashMap<String, Object>();
-		System.out.println(id);
 		hmap.put("id", id);
 		hmap.put("o_state",o_state);
 		List<ProductOrderVO> list = productOrderDao.productOrderMyCart(hmap);
@@ -327,4 +332,26 @@ public class ProductOrderServiceImp implements ProductOrderService {
         mav.setViewName("/mypage/paymentInfoForm");
 	}
 
+	@Override
+	public void productOrderDetail(ModelAndView mav) {
+		Map<String, Object> map= mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		
+		String code_num = request.getParameter("code_num");
+		HttpSession session = request.getSession(false);
+		String m_id = (String)session.getAttribute("id");
+		List<ProductOrderVO> list = productOrderDao.orderListByCNum(m_id, code_num);
+
+		for(ProductOrderVO o:list) {
+			ProductDto p = productDao.select(o.getP_num());
+			
+			o.setProd_name(p.getName());
+			o.setProd_img(p.getImg());
+			o.setPriceView(o.getTotal_price());
+		}
+		
+		mav.addObject("list", list);
+		mav.addObject("code_num", code_num);
+		mav.setViewName("/mypage/orderlist");
+	}
 }

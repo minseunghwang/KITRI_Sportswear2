@@ -35,7 +35,7 @@
 table{
 	table-layout:fixed;
 }
-#code_num_link{
+.code_num_link{
 	color: black; 
 	text-decoration: none;
 	cursor: pointer;
@@ -108,17 +108,13 @@ table{
 					<tbody >
 						<c:forEach var="o" items="${list }">
 							<tr class="text-center">
-								<div>이거안생기누</div>
-								<div id="code_num_link" onclick="location.href='${pageContext.request.contextPath }/OrderlistController2?code_num=${o.code_num }'">
-								<td name="code_num" style="vertical-align: middle;">${o.code_num }</td>
-								<td style="vertical-align: middle;">${o.max_o_date }</td>
-								<td style="vertical-align: middle;">${o.prod_name } <span style="font-size:12px;">..포함 ${o.ctnrow} 개</span></td>
-								<td ><img src="${pageContext.request.contextPath }/resources/${o.prod_img }" width="100" height="100"> </td>
-								</div>
-								<td style="vertical-align: middle;">${o.sum_total_price } </td>
+								<td name="code_num" style="vertical-align: middle;" onclick="location.href='${pageContext.request.contextPath }/productorder/orderDetail.do?code_num=${o.code_num }'">${o.code_num }</td>
+								<td class="code_num_link" style="vertical-align: middle;" onclick="location.href='${pageContext.request.contextPath }/productorder/orderDetail.do?code_num=${o.code_num }'">${o.max_o_date }</td>
+								<td class="code_num_link" style="vertical-align: middle;" onclick="location.href='${pageContext.request.contextPath }/productorder/orderDetail.do?code_num=${o.code_num }'">${o.prod_name } <span style="font-size:12px;">..포함 ${o.ctnrow} 개</span></td>
+								<td class="code_num_link" onclick="location.href='${pageContext.request.contextPath }/productorder/orderDetail.do?code_num=${o.code_num }'"><img src="${pageContext.request.contextPath }/resources/${o.prod_img }" width="100" height="100"></td>
+								<td class="code_num_link" style="vertical-align: middle;" onclick="location.href='${pageContext.request.contextPath }/productorder/orderDetail.do?code_num=${o.code_num }'">${o.priceView } </td>
 								<td style="vertical-align: middle;" align=center> <button type="submit" class="btn btn-outline-dark btn-block" id="btn_paymentinfo" onclick="showPopup('${o.code_num }');">View</button>  </td>																		
 							</tr>	
-																						
 						</c:forEach>
 					</tbody>
 					</table>

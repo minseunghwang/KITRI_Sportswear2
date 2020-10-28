@@ -20,4 +20,6 @@ public interface ProductOrderDao {
 	public List<ProductOrderVO> orderList(String m_id, int o_state);
 	public OrderInfoVO getPaymentInfo(String code_num);
 	public List<Integer> productOrdergetctnrow(Map<String, Object> map);
+	public List<ProductOrderVO> orderListByCNum(String m_id, String code_num);
+	
 }

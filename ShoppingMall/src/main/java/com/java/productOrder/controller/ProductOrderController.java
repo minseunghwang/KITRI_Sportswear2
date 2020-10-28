@@ -84,4 +84,12 @@ public class ProductOrderController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/productorder/orderDetail.do")
+	public ModelAndView productOrderDetail(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("request",request);
+		productOrderService.productOrderDetail(mav);
+		return mav;
+	}
+	
 }

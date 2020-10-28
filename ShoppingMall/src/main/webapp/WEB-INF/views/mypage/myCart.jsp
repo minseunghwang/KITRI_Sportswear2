@@ -114,7 +114,7 @@ table{
 										</td>
 									<td>${o.p_size } </td>
 									<td>${o.o_quantity}</td>
-									<td>${o.total_price }</td>
+									<td>${o.priceView }</td>
 									<td scope="row"><input type="checkbox" name=sel value=${o.num }></td>
 									<td scope="row"><input type="button" class="btn btn-outline-secondary" value="삭제" onClick="showPopup('${o.num }')"></td>
 	

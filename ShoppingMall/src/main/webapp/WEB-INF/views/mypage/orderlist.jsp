@@ -15,24 +15,6 @@
 
 	<!-- popup -->
 <script type="text/javascript">
-
-
-<%-- 		function showPopup(p_num,o_num) {		tsseo 주석처리 0904 15:33
-
-			var title = "상품평 작성";
-
-			var url = "<%=request.getContextPath()%>/views/review/addForm.jsp?p_num="+p_num"&o_num="+o_num";
-			var url = "<%=request.getContextPath()%>/AddReviewFormController?p_num="+num;
-			var options = 'top=50, left=400, width=800, height=700, status=no, menubar=no, toolbar=no';
-		    window.open(url, title, options);
-		} --%>
-		
-		function popUpClosed() {
-			var code_num = document.getElementById('code_num').value;
-			var param = encodeURI(code_num);
-			location.href="${pageContext.request.contextPath }/OrderlistController2?code_num="+code_num; 
-		}
-		
 		function reviewAddFormPopUp(p_num, num) {
 
  			var pop_title = "리뷰 작성";
@@ -117,7 +99,7 @@ table{
 								<td name="o_num" style="vertical-align: middle;" id="ordernumber1" >${o.num } </td>
 								<td id="product_name" name="order_product_name" style="vertical-align: middle;"> ${o.prod_name } </td>
 								<td> <a href="${pageContext.request.contextPath }/DetailController?num=${o.p_num }">
-									<img src="${o.prod_img }" width="100" height="100"> </a>
+									<img src="${pageContext.request.contextPath }/resources/${o.prod_img }" width="100" height="100"> </a>
 									</td>
 								<td style="vertical-align: middle;">${o.p_size} </td> 
 								<td style="vertical-align: middle;">${o.o_quantity} </td> 

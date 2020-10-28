@@ -64,5 +64,8 @@
 	select * from orderinfo where oi_code_num=#{num}
 </select>
 
+<select id="orderCode" resultType="com.java.productOrder.dto.ProductOrderVO">
+	select * from PRODUCT_ORDER where m_id=#{m_id} and code_num=#{code_num} order by o_date desc
+</select>
 
 </mapper>
