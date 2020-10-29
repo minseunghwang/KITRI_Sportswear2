@@ -67,4 +67,18 @@
         		select * from ratinginproduct where name LIKE '%'||#{keyword}||'%' ORDER BY ${orderBy} DESC) a where rownum <= #{endRange}) X where rnum >= #{startRange}
         ]]>
 	</select>
+		
+	<select id="checkQuantity" parameterType="String" resultType="Integer">
+		select quantity from product_size where p_num=#{num} and psize=#{size}
+	</select>
+	
+	<update id="addQuantity" parameterType="int">
+		update product_size set quantity=#{quantity} where p_num=#{p_num} and psize=#{psize}
+	</update>
+	
+	<update id="recordup" parameterType="int">
+		update product set record=#{record} where num=#{num}
+	</update>
+	
+	
 </mapper> 

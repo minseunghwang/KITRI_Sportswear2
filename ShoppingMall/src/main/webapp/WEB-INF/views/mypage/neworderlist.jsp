@@ -101,11 +101,9 @@ table{
 							<th scope="col">상품 이미지</th>
 							<th scope="col">총 결제금액</th> 
 							<th scope="col">결제정보</th> 
-							
-							
 						</tr>
 					</thead>
-					<tbody >
+					<tbody>
 						<c:forEach var="o" items="${list }">
 							<tr class="text-center">
 								<td name="code_num" style="vertical-align: middle;" onclick="location.href='${pageContext.request.contextPath }/productorder/orderDetail.do?code_num=${o.code_num }'">${o.code_num }</td>

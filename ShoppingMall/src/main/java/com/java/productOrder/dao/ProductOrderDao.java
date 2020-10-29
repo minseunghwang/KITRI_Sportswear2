@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.java.common.OrderInfoVO;
+import com.java.product.dto.ProductDto;
 import com.java.productOrder.dto.ProductOrderDto;
 import com.java.productOrder.dto.ProductOrderVO;
 
@@ -21,5 +22,9 @@ public interface ProductOrderDao {
 	public OrderInfoVO getPaymentInfo(String code_num);
 	public List<Integer> productOrdergetctnrow(Map<String, Object> map);
 	public List<ProductOrderVO> orderListByCNum(String m_id, String code_num);
+	public ProductOrderVO getOrder(int num);
+	public void updateCode_num(ProductOrderVO po);
+	public int selectOrderInfoNum();
+	public void addOrderInfo(OrderInfoVO oivo);
 	
 }

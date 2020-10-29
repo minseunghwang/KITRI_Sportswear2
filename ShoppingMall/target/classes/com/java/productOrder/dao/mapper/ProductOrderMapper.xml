@@ -68,4 +68,23 @@
 	select * from PRODUCT_ORDER where m_id=#{m_id} and code_num=#{code_num} order by o_date desc
 </select>
 
+<select id="getOrder" resultType="com.java.productOrder.dto.ProductOrderVO">
+	select * from PRODUCT_ORDER where num=#{num}
+</select>
+
+<update id="updateCode_num" parameterType="String">
+	update product_order set code_num=#{code_num}, o_state=#{o_state} where num=#{num}
+</update>
+
+<select id="selectOrderInfoNum" >
+	select seq_orderInfo.nextval from dual
+</select>
+
+<insert id="addOrderInfo">
+	insert into orderInfo(num) values(#{num})
+</insert>
+
+
+
+
 </mapper>

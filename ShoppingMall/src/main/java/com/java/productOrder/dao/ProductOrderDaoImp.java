@@ -93,4 +93,30 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 		hmap.put("code_num", code_num);
 		return sqlSessionTemplate.selectList("orderCode", hmap);
 	}
+
+	@Override
+	public ProductOrderVO getOrder(int num) {
+		return sqlSessionTemplate.selectOne("getOrder", num); 
+	}
+
+	@Override
+	public void updateCode_num(ProductOrderVO po) {
+		Map<String, String> hmap = new HashMap<String, String>();
+		hmap.put("code_num",po.getCode_num());
+		hmap.put("o_state",Integer.toString(po.getO_state()));
+		hmap.put("num",Integer.toString(po.getNum()));
+		sqlSessionTemplate.update("updateCode_num", po); 
+	}
+
+	@Override
+	public int selectOrderInfoNum() {
+		return sqlSessionTemplate.selectOne("selectOrderInfoNum");
+	}
+
+	@Override
+	public void addOrderInfo(OrderInfoVO oivo) {
+		Map<String, String> hmap = new HashMap<String, String>();
+		hmap.put("num", Integer.toString(oivo.getNum()));
+		sqlSessionTemplate.insert("addOrderInfo",hmap);
+	}
 }

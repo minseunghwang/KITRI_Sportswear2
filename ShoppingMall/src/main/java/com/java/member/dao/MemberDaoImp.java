@@ -64,7 +64,6 @@ public class MemberDaoImp implements MemberDao {
 
 	@Override
 	public MemberDto memberGetInfo(String id) {
-		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectOne("memberGetInfo",id);
 	}
 

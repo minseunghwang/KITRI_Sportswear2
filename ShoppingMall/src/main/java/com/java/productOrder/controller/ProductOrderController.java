@@ -92,4 +92,11 @@ public class ProductOrderController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/productorder/orderDataSave.do")
+	public void productOrderData(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("request",request);
+		productOrderService.productOrderDataSave(mav);
+	}
+	
 }

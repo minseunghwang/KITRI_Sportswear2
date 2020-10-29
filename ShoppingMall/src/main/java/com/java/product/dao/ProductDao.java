@@ -33,4 +33,7 @@ public interface ProductDao {
 	void delete(int num);
 	void recordCount(ProductDto productvo);
 	List<ProductDto> searchProduct(String keyword, int page, String orderBy);
+	int checkQuantity(int num, String size);
+	void addQuantity(ProductSizeVO ps);
+	void recordup(ProductDto dto);
 }

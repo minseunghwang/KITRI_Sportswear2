@@ -161,4 +161,29 @@ public class ProductDaoImpl implements ProductDao {
 		return sqlSessionTemplate.selectList("search_product", hmap);
 	}
 
+	@Override
+	public int checkQuantity(int num, String size) {
+		Map<String, String> hmap = new HashMap<String, String>();
+		hmap.put("num", Integer.toString(num));
+		hmap.put("size", size);
+		return sqlSessionTemplate.selectOne("checkQuantity", hmap);
+	}
+
+	@Override
+	public void addQuantity(ProductSizeVO ps) {
+		Map<String, Integer> hmap = new HashMap<String, Integer>();
+		hmap.put("quantity", ps.getQuantity());
+		hmap.put("p_num", ps.getNum());
+		hmap.put("psize", Integer.parseInt(ps.getPsize()));
+		sqlSessionTemplate.update("addQuantity",hmap);
+	}
+
+	@Override
+	public void recordup(ProductDto dto) {
+		Map<String, Integer> hmap = new HashMap<String, Integer>();
+		hmap.put("record",dto.getRecord());
+		hmap.put("num",dto.getNum());
+		sqlSessionTemplate.update("recordup",hmap);
+	}
+
 }

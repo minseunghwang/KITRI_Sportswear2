@@ -88,13 +88,9 @@
 
 
 			<div class="row">
-
-
 				<!-- /.col-lg-9 -->
 				<div class="col-lg-8">
-
 					<div class="enrollcomponent">
-
 						<fieldset>
 							<div>
 								<legend>배송지 정보</legend>
@@ -157,46 +153,25 @@
 								</table>
 
 							</div>
-
-							
-
-
 							<div>
 								<label>배송 요청 사항</label> <input type="text" class="form-control"
 									id="oi_deliMessage" name="oi_deliMessage"
 									value="" placeholder="배송 또는 주문시 요청 사항을 입력해주세요.">
-									
 							</div>
-							
 								<input type="hidden" id="orderName" name="orderName" value=${orderName }> 
 								<input type="hidden" id="oi_originTotalPrice" name="oi_originTotalPrice" value=${order_totalPrice }> 
 								<input type="hidden" id="oi_usePoint" name="oi_usePoint" value=${member.point }> 
-			
-
-
-
-
-
 							<br>
 							<div style="text-align: center;">
 								<button type="button" class="btn btn-primary" id="check_module">결제하기</button>
 							</div>
 						</fieldset>
-
 					</div>
-
-
 				</div>
 
 				<div class="col-lg-4">
-				
 				<div class="payment-main">
-
 					<div class="prods_info" id="test_box" style="top: 58px;">
-
-
-
-
 						<c:forEach var="o" items="${list }">
 							<div class="prodlist">
 								<div class="box last container" >
@@ -318,12 +293,7 @@
 
 	<script>
 		$("#check_module").click(function() {
-			
-			
-			
 			var IMP = window.IMP; // 생략가능
-			
-						
 					var grpl = $("input[name=productOrderNum]").length;
 					//배열 생성
 					var grparr = new Array(grpl);
@@ -465,7 +435,7 @@
 					$.ajax({
 			            type : 'post',
 			            async: false,
-			            url : '${pageContext.request.contextPath }/OrderDataSaveController',
+			            url : '${pageContext.request.contextPath }/productorder/orderDataSave.do',
 			            data : {
 			            	code_num : rsp.imp_uid,
 			                oi_howPay : rsp.pay_method,
@@ -501,7 +471,6 @@
 			            },
 			            success : function(json){
 			                alert("결제가 성공적으로 완료되었습니다. 감사합니다.")
-			                
 			                location.href = "${pageContext.request.contextPath }/productorder/orderList.do?o_state=1"; 
 			            }
 			        });
