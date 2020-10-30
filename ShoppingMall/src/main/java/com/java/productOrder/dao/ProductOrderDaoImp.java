@@ -53,7 +53,7 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 	}
 
 	@Override
-	public void productOrderAdd(ProductOrderDto po) {
+	public void productOrderAdd(ProductOrderVO po) {
 		sqlSessionTemplate.insert("productOrderAdd",po);
 	}
 
@@ -105,7 +105,7 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 		hmap.put("code_num",po.getCode_num());
 		hmap.put("o_state",Integer.toString(po.getO_state()));
 		hmap.put("num",Integer.toString(po.getNum()));
-		sqlSessionTemplate.update("updateCode_num", po); 
+		sqlSessionTemplate.update("updateCode_num", hmap); 
 	}
 
 	@Override

@@ -183,7 +183,7 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
 
 		ProductDto p = productDao.select(p_num);
-		ProductOrderDto po = new ProductOrderDto();
+		ProductOrderVO po = new ProductOrderVO();
 
 		Map resultMap = new HashMap();
 
@@ -266,23 +266,27 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		mav.addObject("list",list);
 		mav.setViewName("/mypage/myCart");
 	}
+	
 	@Override
 	public void productOrderPaymentPage(ModelAndView mav) {
 		Map<String, Object> map= mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpSession session =request.getSession(false);
-		ProductOrderVO po=new ProductOrderVO();
+		
+		
+		String id = (String)session.getAttribute("id");
+		MemberDto memberDto=memberDao.memberGetInfo(id);
+		
 		ArrayList<ProductOrderVO> list = new ArrayList<ProductOrderVO>();
 		
 		int productNum=Integer.parseInt(request.getParameter("productNum"));
 		int quantity=Integer.parseInt(request.getParameter("quantity"));
 		String size=request.getParameter("size");
-		String orderName="주문번호: "+request.getParameter("productNum");
+		String orderName="주문번호 : "+request.getParameter("productNum");
 		int order_totalQuantity = 0;
 		int order_totalPrice = 0;
 		
-		String id = (String)session.getAttribute("id");
-		MemberDto memberDto=memberDao.memberGetInfo(id);
+		ProductOrderVO po=new ProductOrderVO();
 		ProductDto productDto=productDao.select(productNum);
 		
 		po.setNum(productOrderDao.makeProductOrderNum());
@@ -300,7 +304,14 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		order_totalPrice += po.getTotal_price();
 		order_totalQuantity += po.getO_quantity();
 		
+		productOrderDao.productOrderAdd(po);
+		
 		list.add(po);
+		System.out.println(order_totalPrice);
+		System.out.println(order_totalQuantity);
+		System.out.println(orderName);
+		System.out.println(list);
+		System.out.println(memberDto);
 		
 		mav.addObject("order_totalPrice", order_totalPrice);
 		mav.addObject("order_totalQuantity", order_totalQuantity);
@@ -387,16 +398,15 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		String [] selection = request.getParameterValues("oi_productOrderNum[]");
 
 		for (String sel:selection) {
-			int num = Integer.parseInt(sel);
+			int num = Integer.parseInt(sel)+1;		// 이상하게 짜놔서 일단 물리적으로 1 더하게 해놓음
 			System.out.println("전달받은 num : " + num);
 			ProductOrderVO po = productOrderDao.getOrder(num);
 			// db product_order에 데이터가 없어서 안넘어오네 여기부터 고치자
 			
-			po.setCode_num(code_num);
-			
-			
+			po.setCode_num(code_num);		
 			po.setO_state(1);
-			productOrderDao.updateCode_num(po);
+			System.out.println("po : " + po);
+			productOrderDao.updateCode_num(po);		// 여기서 에러나는듯 -> 해결했을듯
 			
 			//재고변경
 			ProductSizeVO ps = new ProductSizeVO();

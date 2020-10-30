@@ -15,7 +15,7 @@ public interface ProductOrderDao {
 	public int findProductQuantity(int p_num, String size);
 	public int findProductInCartNum(String id, int p_num, String size);
 	public int makeProductOrderNum();
-	public void productOrderAdd(ProductOrderDto po);
+	public void productOrderAdd(ProductOrderVO po);
 	public List<ProductOrderVO> productOrderGetInfo(Map<String, Object> map);
 	public void delOrder(int num);
 	public List<ProductOrderVO> orderList(String m_id, int o_state);
