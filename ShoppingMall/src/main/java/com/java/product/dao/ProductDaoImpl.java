@@ -171,10 +171,10 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public void addQuantity(ProductSizeVO ps) {
-		Map<String, Integer> hmap = new HashMap<String, Integer>();
-		hmap.put("quantity", ps.getQuantity());
-		hmap.put("p_num", ps.getNum());
-		hmap.put("psize", Integer.parseInt(ps.getPsize()));
+		Map<String, String> hmap = new HashMap<String, String>();
+		hmap.put("quantity", Integer.toString(ps.getQuantity()));
+		hmap.put("p_num", Integer.toString(ps.getNum()));
+		hmap.put("psize", ps.getPsize());
 		sqlSessionTemplate.update("addQuantity",hmap);
 	}
 

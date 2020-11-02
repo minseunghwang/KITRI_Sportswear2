@@ -72,7 +72,7 @@
 		select quantity from product_size where p_num=#{num} and psize=#{size}
 	</select>
 	
-	<update id="addQuantity" parameterType="int">
+	<update id="addQuantity" parameterType="String">
 		update product_size set quantity=#{quantity} where p_num=#{p_num} and psize=#{psize}
 	</update>
 	

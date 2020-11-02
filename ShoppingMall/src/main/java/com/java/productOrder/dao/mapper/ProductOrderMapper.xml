@@ -76,7 +76,7 @@
 	update product_order set code_num=#{code_num}, o_state=#{o_state} where num=#{num}
 </update>
 
-<select id="selectOrderInfoNum" >
+<select id="selectOrderInfoNum" resultType="int">
 	select seq_orderInfo.nextval from dual
 </select>
 

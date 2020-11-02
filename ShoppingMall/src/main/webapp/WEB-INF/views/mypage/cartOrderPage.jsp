@@ -232,6 +232,7 @@
 							</div>
 							<div class="box clfix" style="border-bottom-width: 0;">
 								<strong>보유한 총 Point ${member.point} / Point 사용하기</strong>
+								<input type="hidden" id="u_id" value = <%= (String)session.getAttribute("id") %> >
 							</div>
 
 
@@ -327,6 +328,7 @@
 			var vadd_addr_roadAddrPart2 = document.getElementById("roadAddrPart2").value;
 			var vadd_addr_addrDetail = document.getElementById("addrDetail").value;
 			
+			var u_id = document.getElementById("u_id").value;
 			
 			//입력값 유효성 확인
 	        if (vadd_name == ""){
@@ -377,9 +379,7 @@
 	        	document.getElementById("serachAddr");
 	        	return false;
 	        }
-	        
-	        
-	        
+	    
 			IMP.init('imp51699412');
 			// 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 			// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
@@ -423,7 +423,7 @@
 				buyer_tel : '01012345678',
 				buyer_addr : '${member.addr}',
 				buyer_postcode : '123-456',
-				m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+				m_redirect_url : '${pageContext.request.contextPath }/productorder/orderList.do?o_state=1&id=${u_id}'
 			/*
 			 모바일 결제시,
 			 결제가 끝나고 랜딩되는 URL을 지정
@@ -471,21 +471,16 @@
 			            },
 			            success : function(json){
 			                alert("결제가 성공적으로 완료되었습니다. 감사합니다.")
-			                location.href = "${pageContext.request.contextPath }/productorder/orderList.do?o_state=1"; 
+			                // location.href = "${pageContext.request.contextPath }/productorder/orderList.do?o_state=1&id=${u_id}"; 
 			            }
 			        });
 
 				    } else {
 				      alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
 				    }
-				
 			});
 		});
 	</script>
-
-
-
-
 
 </body>
 </html>

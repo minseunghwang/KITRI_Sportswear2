@@ -223,10 +223,17 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		int o_state = Integer.parseInt(request.getParameter("o_state"));
 		HttpSession session = request.getSession(false);
-		String m_id = (String)session.getAttribute("id");
 		
+		String m_id = (String)session.getAttribute("id");
+		if(m_id == null || m_id.length() == 0) {
+			m_id = request.getParameter("u_id");
+		}
+		
+		// 결제하고나면 세션이 없어져서 u_id를 못받아오는 현상이 있군
+		
+		System.out.println(m_id + " @@@@ " + o_state);
 		List<ProductOrderVO> list = productOrderDao.orderList(m_id, o_state);
-
+		
 		
 		for(ProductOrderVO o:list) {
 			ProductDto p = productDao.select(o.getP_num());
@@ -399,13 +406,11 @@ public class ProductOrderServiceImp implements ProductOrderService {
 
 		for (String sel:selection) {
 			int num = Integer.parseInt(sel)+1;		// 이상하게 짜놔서 일단 물리적으로 1 더하게 해놓음
-			System.out.println("전달받은 num : " + num);
 			ProductOrderVO po = productOrderDao.getOrder(num);
 			// db product_order에 데이터가 없어서 안넘어오네 여기부터 고치자
 			
 			po.setCode_num(code_num);		
 			po.setO_state(1);
-			System.out.println("po : " + po);
 			productOrderDao.updateCode_num(po);		// 여기서 에러나는듯 -> 해결했을듯
 			
 			//재고변경
@@ -422,8 +427,6 @@ public class ProductOrderServiceImp implements ProductOrderService {
 			productvo.setRecord(currentRecord + po.getO_quantity());
 			productDao.recordup(productvo);
 		}
-		
-		System.out.println("어잇");
 		
 		//OrderInfo 테이블에 데이터 추가
 		OrderInfoVO oivo = new OrderInfoVO();
