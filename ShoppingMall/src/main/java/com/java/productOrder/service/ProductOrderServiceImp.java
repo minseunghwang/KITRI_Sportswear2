@@ -403,15 +403,16 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		String add_addr_addrDetail = request.getParameter("add_addr_addrDetail");
 		
 		String [] selection = request.getParameterValues("oi_productOrderNum[]");
-
+		
+		System.out.println(oi_name + " , " + oi_email + " , " + add_phone1);
+		
 		for (String sel:selection) {
 			int num = Integer.parseInt(sel)+1;		// 이상하게 짜놔서 일단 물리적으로 1 더하게 해놓음
 			ProductOrderVO po = productOrderDao.getOrder(num);
-			// db product_order에 데이터가 없어서 안넘어오네 여기부터 고치자
 			
 			po.setCode_num(code_num);		
 			po.setO_state(1);
-			productOrderDao.updateCode_num(po);		// 여기서 에러나는듯 -> 해결했을듯
+			productOrderDao.updateCode_num(po);
 			
 			//재고변경
 			ProductSizeVO ps = new ProductSizeVO();
@@ -457,6 +458,8 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		oivo.setAdd_addr_roadAddrPart2(add_addr_roadAddrPart2);
 		oivo.setAdd_addr_addrDetail(add_addr_addrDetail);
 		System.out.println(oivo.toString());
+		
+		// 이거보면 oi_id 즉 로그인된 id가 없음 -> 세션이 또 날라가있는상태. 결제후에 세션날라가는거 해결해야할듯
 
 		productOrderDao.addOrderInfo(oivo);
 		

@@ -1,5 +1,7 @@
 package com.java.productOrder.dao;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -119,6 +121,31 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 	public void addOrderInfo(OrderInfoVO oivo) {
 		Map<String, String> hmap = new HashMap<String, String>();
 		hmap.put("num", Integer.toString(oivo.getNum()));
+		hmap.put("oi_id",oivo.getOi_id());
+		hmap.put("oi_name",oivo.getOi_name());
+		hmap.put("oi_phone",oivo.getOi_phone());
+		hmap.put("oi_email",oivo.getOi_addr_full());
+		hmap.put("oi_addr_full",oivo.getOi_addr_full());
+		hmap.put("oi_addr_zipno",oivo.getOi_addr_zipno());
+		hmap.put("oi_addr_roadAddPart1",oivo.getOi_addr_roadAddrPart1());
+		hmap.put("oi_addr_roadAddPart2",oivo.getOi_addr_roadAddrPart2());
+		hmap.put("oi_addr_addrDetail",oivo.getOi_addr_addrDetail());
+		hmap.put("oi_deliMessage",oivo.getOi_deliMessage());
+		hmap.put("oi_howPay",oivo.getOi_howPay());
+		hmap.put("oi_usepoint", Integer.toString(oivo.getOi_usepoint()));
+		hmap.put("oi_originTotalPrice", Integer.toString(oivo.getOi_originTotalPrice()));
+		hmap.put("oi_totalPrice", Integer.toString(oivo.getOi_totalPrice()));
+		hmap.put("oi_code_num",oivo.getOi_code_num());
+		hmap.put("add_name",oivo.getAdd_name());
+		hmap.put("add_phone1",oivo.getAdd_phone1());
+		hmap.put("add_phone2",oivo.getAdd_phone2());
+		hmap.put("add_email",oivo.getAdd_email());
+		hmap.put("add_addr_full",oivo.getAdd_addr_full());
+		hmap.put("add_addr_zipNo",oivo.getAdd_addr_zipNo());
+		hmap.put("add_addr_roadAddPart1",oivo.getAdd_addr_roadAddrPart1());
+		hmap.put("add_addr_roadAddPart2",oivo.getAdd_addr_roadAddrPart2());
+		hmap.put("add_addr_addrDetail",oivo.getAdd_addr_addrDetail());
+		
 		sqlSessionTemplate.insert("addOrderInfo",hmap);
 	}
 }

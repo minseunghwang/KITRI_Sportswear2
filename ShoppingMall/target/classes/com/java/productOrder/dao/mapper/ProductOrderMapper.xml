@@ -81,7 +81,9 @@
 </select>
 
 <insert id="addOrderInfo">
-	insert into orderInfo(num) values(#{num})
+	insert into 
+	orderInfo(num, oi_id, oi_name, oi_phone, oi_email, oi_addr_full, oi_addr_zipno, oi_addr_roadAddPart1, oi_addr_roadAddPart2, oi_addr_addDetail, oi_deliMessage, oi_howPay, oi_usepoint, oi_originTotalPrice, oi_totalPrice, oi_orderDate, oi_code_num, add_name, add_phone1, add_phone2, add_email, add_addr_full, add_addr_zipNo, add_addr_roadAddPart1, add_addr_roadAddPart2, add_addr_addrDetail)
+	values(#{num}, #{oi_id}, #{oi_name}, #{oi_phone}, #{oi_email}, #{oi_addr_full}, #{oi_addr_zipno}, #{oi_addr_roadAddPart1}, #{oi_addr_roadAddPart2}, #{oi_addr_addDetail}, #{oi_deliMessage}, #{oi_howPay}, #{oi_usepoint}, #{oi_originTotalPrice}, #{oi_totalPrice}, sysdate, #{oi_code_num}, #{add_name}, #{add_phone1}, #{add_phone2}, #{add_email}, #{add_addr_full}, #{add_addr_zipNo}, #{add_addr_roadAddPart1}, #{add_addr_roadAddPart2}, #{add_addr_addrDetail})
 </insert>
 
 

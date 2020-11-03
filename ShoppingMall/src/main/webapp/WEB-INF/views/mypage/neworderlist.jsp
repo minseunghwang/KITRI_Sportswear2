@@ -126,12 +126,12 @@ table{
 				<ul class="pagination justify-content-center">
 				<c:if test="${1 != pn.page }">
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/AllOrderListController?page=1&o_state=1" aria-label="Previous">
+						<a class="page-link" href="${pageContext.request.contextPath }/productorder/orderInquiry.do?page=1&o_state=1" aria-label="Previous">
 							<span aria-hidden="true">&laquo;</span>
 						</a>
 					</li>
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/AllOrderListController?page=${param.page-1}&o_state=1" aria-label="Previous">
+						<a class="page-link" href="${pageContext.request.contextPath }/productorder/orderInquiry.do?page=${param.page-1}&o_state=1" aria-label="Previous">
 							<span aria-hidden="true">&lsaquo;</span>
 						</a>
 					</li>
@@ -147,7 +147,7 @@ table{
 							<li class="page-item">
 						</c:otherwise>
 					</c:choose>
-								<a class="page-link" href="${pageContext.request.contextPath }/AllOrderListController?page=${pageNum }&o_state=1">${pageNum }</a>
+								<a class="page-link" href="${pageContext.request.contextPath }/productorder/orderInquiry.do?page=${pageNum }&o_state=1">${pageNum }</a>
 					<c:if test="${param.page eq pageNum}">
 									<span class="sr-only">(current)</span>
 							</li>
@@ -156,12 +156,12 @@ table{
 
 				<c:if test="${pn.totalPage != pn.page }">
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/AllOrderListController?page=${param.page+1}&o_state=1" aria-label="Next">
+						<a class="page-link" href="${pageContext.request.contextPath }/productorder/orderInquiry.do?page=${param.page+1}&o_state=1" aria-label="Next">
 							<span aria-hidden="true">&rsaquo;</span>
 						</a>
 					</li>
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/AllOrderListController?page=${pn.totalPage }&o_state=1" aria-label="Next">
+						<a class="page-link" href="${pageContext.request.contextPath }/productorder/orderInquiry.do?page=${pn.totalPage }&o_state=1" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
 						</a>
 					</li>

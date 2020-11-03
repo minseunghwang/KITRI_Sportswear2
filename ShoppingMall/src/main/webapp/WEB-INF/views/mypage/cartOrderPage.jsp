@@ -432,10 +432,13 @@
 			}, function(rsp) {
 				console.log(rsp);
 				if (rsp.success) {
+					console.log(rsp.imp_uid);
+					console.log(rsp.pay_method);
+					console.log(rsp.name);
 					$.ajax({
-			            type : 'post',
-			            async: false,
+			            type : 'POST',
 			            url : '${pageContext.request.contextPath }/productorder/orderDataSave.do',
+			            // 여기 orderDatasave로 넘어갈때 아래 데이터 안넘어가는듯...?
 			            data : {
 			            	code_num : rsp.imp_uid,
 			                oi_howPay : rsp.pay_method,
@@ -464,7 +467,6 @@
 			                add_addr_roadAddrPart2 : vadd_addr_roadAddrPart2,
 			                add_addr_addrDetail : vadd_addr_addrDetail,
 			                oi_productOrderNum : grparr
-			                	
 			            },
 			            error: function(xhr, status, error){
 			                alert("실패실패" + error);
