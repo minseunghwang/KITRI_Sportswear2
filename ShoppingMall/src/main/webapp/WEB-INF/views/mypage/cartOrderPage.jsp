@@ -45,6 +45,9 @@
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <script type="text/javascript">
+// 	document.cookie = 'cookie1=value1; SameSite = Lax';
+//	document.cookie = 'cookie2=value2; SameSite = None; Secure';
+	console.log(document.cookie);
 	function goPopup() {
 		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
 		var pop = window
@@ -84,9 +87,6 @@
 			name="form" id="form" method="post">
 
 			<!-- 전송할 모든 정보 -->
-		
-
-
 			<div class="row">
 				<!-- /.col-lg-9 -->
 				<div class="col-lg-8">
@@ -119,7 +119,6 @@
 							</div>
 
 							<div>
-
 								<!-- 배송지 주소 API -->
 								<table>
 									<colgroup>
@@ -146,12 +145,10 @@
 											<td><input type="text" id="addrDetail" name="addrDetail" readonly
 												style="width: 40%" value=""> <input type="text"
 												id="roadAddrPart2" name="roadAddrPart2" readonly style="width: 40%"
-												value=""></td>
-												
+												value=""></td>		
 										</tr>
 									</tbody>
 								</table>
-
 							</div>
 							<div>
 								<label>배송 요청 사항</label> <input type="text" class="form-control"
@@ -302,7 +299,7 @@
 					for(var i=0; i<grpl; i++){                          
 						grparr[i] = $("input[name=productOrderNum]").eq(i).val();
 				    }
-			
+					
 			// 전송할 데이터
 			
 			//주문자 관련 정보
@@ -423,7 +420,7 @@
 				buyer_tel : '01012345678',
 				buyer_addr : '${member.addr}',
 				buyer_postcode : '123-456',
-				m_redirect_url : '${pageContext.request.contextPath }/productorder/orderList.do?o_state=1&id=${u_id}'
+//				m_redirect_url : '${pageContext.request.contextPath }/productorder/orderList.do?o_state=1&id=${u_id}'
 			/*
 			 모바일 결제시,
 			 결제가 끝나고 랜딩되는 URL을 지정
@@ -473,7 +470,7 @@
 			            },
 			            success : function(json){
 			                alert("결제가 성공적으로 완료되었습니다. 감사합니다.")
-			                // location.href = "${pageContext.request.contextPath }/productorder/orderList.do?o_state=1&id=${u_id}"; 
+			                location.href = "${pageContext.request.contextPath }/productorder/orderList.do?o_state=1&id=${u_id}"; 
 			            }
 			        });
 

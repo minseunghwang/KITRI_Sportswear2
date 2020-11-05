@@ -96,6 +96,9 @@ public class ProductOrderController {
 	public void productOrderData(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav= new ModelAndView();
 		mav.addObject("request",request);
+//		response.setHeader("Set-Cookie", "Test1=TestCookieValue1; Secure; SameSite=None");
+//		response.addHeader("Set-Cookie", "Test2=TestCookieValue2; Secure; SameSite=None");
+//		response.addHeader("Set_cookie", "Test3=TestCookieValue3; Secure; SameSite=None");
 		productOrderService.productOrderDataSave(mav);
 	}
 	

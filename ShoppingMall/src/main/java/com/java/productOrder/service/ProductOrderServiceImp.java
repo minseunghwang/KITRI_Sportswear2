@@ -390,6 +390,9 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		String oi_addr_roadAddrPart2 = request.getParameter("oi_addr_roadAddrPart2");
 		String oi_addr_addrDetail = request.getParameter("oi_addr_addrDetail");
 		String oi_deliMessage = request.getParameter("oi_deliMessage");
+		if (oi_deliMessage.isEmpty()) { 
+			oi_deliMessage = "없음";
+		}
 		int oi_originTotalPrice = Integer.parseInt(request.getParameter("oi_originTotalPrice"));
 		int oi_usePoint = Integer.parseInt(request.getParameter("oi_usePoint"));
 		String add_name = request.getParameter("add_name");
@@ -403,8 +406,6 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		String add_addr_addrDetail = request.getParameter("add_addr_addrDetail");
 		
 		String [] selection = request.getParameterValues("oi_productOrderNum[]");
-		
-		System.out.println(oi_name + " , " + oi_email + " , " + add_phone1);
 		
 		for (String sel:selection) {
 			int num = Integer.parseInt(sel)+1;		// 이상하게 짜놔서 일단 물리적으로 1 더하게 해놓음

@@ -61,13 +61,12 @@
 
 				<c:choose>
 					<c:when test="${param.category eq 'top' }">
-						<img id="back_img" src="${pageContext.request.contextPath }/resources/sample_img/wideimage14.jpg">
+						<img id="back_img" src="${pageContext.request.contextPath }/resources/upload_img/wideimage14.jpg">
 					</c:when>
 					<c:otherwise>
-						<img id="back_img" src="${pageContext.request.contextPath }/resources/sample_img/wideimage16.jpg">
+						<img id="back_img" src="${pageContext.request.contextPath }/resources/upload_img/wideimage16.jpg">
 					</c:otherwise>
 				</c:choose>
-
 			</div>
 		</div>
 
