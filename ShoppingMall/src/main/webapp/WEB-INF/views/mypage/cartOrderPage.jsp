@@ -278,11 +278,8 @@
 
 	<!-- Footer -->
 
-
-
-	<footer class="py-5 bg-dark">
+	<footer class="py-5 bg-dark" style="margin-top: 20px;">
 		<%@include file="/WEB-INF/views/common/footer2.jsp"%>
-
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->

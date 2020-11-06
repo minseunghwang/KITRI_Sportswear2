@@ -15,4 +15,6 @@ public interface ProductOrderService {
 	public void productOrderPaymentInfo(ModelAndView mav);
 	public void productOrderDetail(ModelAndView mav);
 	public void productOrderDataSave(ModelAndView mav);
+	public void productOrderCartPayment(ModelAndView mav);
+	public void productOrderCheckPayment(ModelAndView mav, HttpServletRequest request);
 }

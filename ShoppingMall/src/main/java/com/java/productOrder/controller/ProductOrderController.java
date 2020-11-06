@@ -102,4 +102,20 @@ public class ProductOrderController {
 		productOrderService.productOrderDataSave(mav);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/productorder/checkPayment.do")
+	public ModelAndView checkPayment(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav= new ModelAndView("jsonView");
+		productOrderService.productOrderCheckPayment(mav,request);
+		return mav;
+	}
+	
+	@RequestMapping(value="/productorder/cartOrderPayment.do")
+	public ModelAndView cartOrderPayment(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("request",request);
+		productOrderService.productOrderCartPayment(mav);
+		return mav;
+	}
+	
 }

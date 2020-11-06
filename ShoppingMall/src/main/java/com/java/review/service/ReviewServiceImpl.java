@@ -84,7 +84,6 @@ public class ReviewServiceImpl implements ReviewService{
 
 	@Override
 	public void reviewMyList(ModelAndView mav) {
-		// TODO Auto-generated method stub
 		Map<String, Object> map =mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpSession session = request.getSession(false);
@@ -130,5 +129,17 @@ public class ReviewServiceImpl implements ReviewService{
 		mav.addObject("pn",pn);
 		mav.addObject("list",list);
 		mav.setViewName("/review/myReviewList");
+	}
+
+	@Override
+	public void AddReview(ModelAndView mav) {
+		Map<String, Object> map =mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		int p_num = Integer.parseInt(request.getParameter("p_num"));
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		mav.addObject("p_num", p_num);
+		mav.addObject("num", num);
+		mav.setViewName("/review/addForm");
 	}
 }

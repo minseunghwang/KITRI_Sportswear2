@@ -112,8 +112,6 @@
                   dataType: "json",
                   success: function (result) {
                 	  var item = result.ans;
-                	  console.log(result);
-                	  console.log(item);
                 	  if(result.ans == "AddCart Success"){
                         if(confirm('장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까?')){
                            <%-- location.herf = "<%=request.getContextPath()%>/OrderlistController?o_state=0"; --%>
@@ -139,10 +137,7 @@
                });
                
             }
-            
          } 
-
-         
       }
       
       function directOrder(productNum) {
@@ -164,8 +159,25 @@
             var size = $("#selected").text();
             var quantity = $("#select-quantity").text();
             var allData = {"productNum": productNum, "size": size, "quantity": quantity};
-      
-            location.href ="${pageContext.request.contextPath }/productorder/paymentPage.do?productNum=" +productNum +"&size=" +size+"&quantity=" + quantity;
+            $.ajax({
+            	type:"POST",
+            	url: "${pageContext.request.contextPath }/productorder/checkPayment.do",
+                data: {"productNum": productNum, "size": size, "quantity": quantity},
+                async: false,
+                dataType: "json",
+                success: function (result) {
+              	  if(result.ans == "Ok"){
+                      location.href ="${pageContext.request.contextPath }/productorder/paymentPage.do?productNum=" +productNum +"&size=" +size+"&quantity=" + quantity;
+                   }else if(result.ans == "Sold Out"){
+                	   alert("재고가 없습니다");
+                   }
+                }, error:function(request,status,error){
+              	  console.log(request);
+              	  console.log(status);
+              	  console.log(error);
+              	  alert("에러");
+                }
+            });
          } 
       }
          

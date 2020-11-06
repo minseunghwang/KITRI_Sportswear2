@@ -28,4 +28,14 @@ public class ReviewController {
 		reviewService.reviewMyList(mav);
 		return  mav;
 	}
+	
+	@RequestMapping(value="/review/AddReview.do")
+	public ModelAndView AddReview(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav =new ModelAndView();
+		mav.addObject("request",request);
+		reviewService.AddReview(mav);
+		return  mav;
+	}
+	
+	
 }

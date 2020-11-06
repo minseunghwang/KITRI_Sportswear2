@@ -171,48 +171,17 @@ public class ProductOrderServiceImp implements ProductOrderService {
 	}
 
 	@Override
-	public void productOrderAddCart(ModelAndView mav, HttpServletRequest request) {
-		Map<String, Object> map = mav.getModelMap();
-		HttpServletResponse response = (HttpServletResponse) map.get("response");
-
-		HttpSession session = request.getSession(false);
-		String id = (String) session.getAttribute("id");
-		
+	public void productOrderCheckPayment(ModelAndView mav, HttpServletRequest request) {
 		int p_num = Integer.parseInt(request.getParameter("productNum"));
 		String size = request.getParameter("size");
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
 
-		ProductDto p = productDao.select(p_num);
-		ProductOrderVO po = new ProductOrderVO();
-
-		Map resultMap = new HashMap();
-
-		// product_size �뀒�씠釉붿쓽 �옱怨� �솗�씤 ( return 媛믪씠 -1 �씠硫� �븘吏� �엯怨좏븯吏� �븡�� �긽�깭 )
 		int findProductQuantity = productOrderDao.findProductQuantity(p_num, size);
-		int findCartNum = productOrderDao.findProductInCartNum(id, p_num, size);
 
 		if (findProductQuantity >= quantity) { // 재고 >= 주문수량 :: 주문 가능
-
-			if (0 == findCartNum) { // 장바구니에 해당삼품이 존재하지 않음 :: 장바구니 추가
-
-				po.setNum(productOrderDao.makeProductOrderNum());
-				po.setP_num(p_num);
-				po.setO_quantity(quantity);
-				po.setTotal_price(p.getPrice() * quantity);
-				po.setM_id(id);
-				po.setO_state(0); // o_state 媛�: 0 == �옣諛붽뎄�땲, 1 == 寃곗젣�셿猷�
-				po.setD_state(0); // d_state 媛�: 0 == 諛곗넚 �쟾, 1 == 諛곗넚 �셿猷�
-				po.setP_size(size);
-				po.setProd_name(p.getName());
-				po.setProd_img(p.getImg());
-				po.setR_state(0); // r_state 값: 0 == 리뷰작성 전, 1 == 리뷰 작성 완료
-//	        		po.setCode_num(service.makeProductOrderCodeNum());	// TODO CodeNum 정확한 용도 확인 후 수정
-				productOrderDao.productOrderAdd(po);
-				mav.addObject("ans", "AddCart Success");
-			} else { // 장바구니에 해당상품 존재
-				mav.addObject("ans", "Already Existed");
-			}
-		} else { // 재고 < 주문수량 :: 주문 불가
+			mav.addObject("ans", "Ok");
+		} else { // 재고없음
+			System.out.println("재고읎");
 			mav.addObject("ans", "Sold Out");
 		}
 	}
@@ -314,11 +283,6 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		productOrderDao.productOrderAdd(po);
 		
 		list.add(po);
-		System.out.println(order_totalPrice);
-		System.out.println(order_totalQuantity);
-		System.out.println(orderName);
-		System.out.println(list);
-		System.out.println(memberDto);
 		
 		mav.addObject("order_totalPrice", order_totalPrice);
 		mav.addObject("order_totalQuantity", order_totalQuantity);
@@ -338,7 +302,6 @@ public class ProductOrderServiceImp implements ProductOrderService {
         String code_num = request.getParameter("code_num");
         
         OrderInfoVO orderinfo = productOrderDao.getPaymentInfo(code_num);
-        System.out.println(orderinfo);
         
         mav.addObject("orderinfo",orderinfo);
         mav.setViewName("/mypage/paymentInfoForm");
@@ -407,8 +370,12 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		
 		String [] selection = request.getParameterValues("oi_productOrderNum[]");
 		
+		System.out.println(id +"," + oi_name +"," + code_num);
+		System.out.println(selection.toString());
+		
 		for (String sel:selection) {
-			int num = Integer.parseInt(sel)+1;		// 이상하게 짜놔서 일단 물리적으로 1 더하게 해놓음
+			int num = Integer.parseInt(sel);		// 이상하게 짜놔서 일단 물리적으로 1 더하게 해놓음
+			System.out.println(num);
 			ProductOrderVO po = productOrderDao.getOrder(num);
 			
 			po.setCode_num(code_num);		
@@ -464,5 +431,97 @@ public class ProductOrderServiceImp implements ProductOrderService {
 
 		productOrderDao.addOrderInfo(oivo);
 		
+	}
+
+	@Override
+	public void productOrderAddCart(ModelAndView mav, HttpServletRequest request) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletResponse response = (HttpServletResponse) map.get("response");
+
+		HttpSession session = request.getSession(false);
+		String id = (String) session.getAttribute("id");
+		
+		int p_num = Integer.parseInt(request.getParameter("productNum"));
+		String size = request.getParameter("size");
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+
+		ProductDto p = productDao.select(p_num);
+		ProductOrderVO po = new ProductOrderVO();
+
+		Map resultMap = new HashMap();
+
+		// product_size �뀒�씠釉붿쓽 �옱怨� �솗�씤 ( return 媛믪씠 -1 �씠硫� �븘吏� �엯怨좏븯吏� �븡�� �긽�깭 )
+		int findProductQuantity = productOrderDao.findProductQuantity(p_num, size);
+		int findCartNum = productOrderDao.findProductInCartNum(id, p_num, size);
+
+		if (findProductQuantity >= quantity) { // 재고 >= 주문수량 :: 주문 가능
+
+			if (0 == findCartNum) { // 장바구니에 해당삼품이 존재하지 않음 :: 장바구니 추가
+
+				po.setNum(productOrderDao.makeProductOrderNum());
+				po.setP_num(p_num);
+				po.setO_quantity(quantity);
+				po.setTotal_price(p.getPrice() * quantity);
+				po.setM_id(id);
+				po.setO_state(0); // o_state 媛�: 0 == �옣諛붽뎄�땲, 1 == 寃곗젣�셿猷�
+				po.setD_state(0); // d_state 媛�: 0 == 諛곗넚 �쟾, 1 == 諛곗넚 �셿猷�
+				po.setP_size(size);
+				po.setProd_name(p.getName());
+				po.setProd_img(p.getImg());
+				po.setR_state(0); // r_state 값: 0 == 리뷰작성 전, 1 == 리뷰 작성 완료
+//	        		po.setCode_num(service.makeProductOrderCodeNum());	// TODO CodeNum 정확한 용도 확인 후 수정
+				productOrderDao.productOrderAdd(po);
+				mav.addObject("ans", "AddCart Success");
+			} else { // 장바구니에 해당상품 존재
+				mav.addObject("ans", "Already Existed");
+			}
+		} else { // 재고 < 주문수량 :: 주문 불가
+			mav.addObject("ans", "Sold Out");
+		}
+	}
+
+	@Override
+	public void productOrderCartPayment(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		HttpSession session = request.getSession(false);
+
+		String m_id = (String)session.getAttribute("id");
+		ArrayList<ProductOrderVO> list = new ArrayList<ProductOrderVO>();
+		MemberDto member = memberDao.memberGetInfo(m_id);
+		
+		String [] selection = request.getParameterValues("sel");
+		String orderName = "주문번호 : ";
+		int order_totalQuantity = 0;
+		int order_totalPrice = 0;
+		for (String sel:selection) {
+			int o_num = Integer.parseInt(sel);
+			System.out.println("전달받은 num : " + o_num);
+			orderName += "," + sel;
+			ProductOrderVO po = productOrderDao.getOrder(o_num);
+			ProductDto p = productDao.select(po.getP_num());
+			
+			System.out.println(po.toString());
+			po.setProd_name(p.getName());
+			po.setProd_img(p.getImg());
+			
+			order_totalPrice += po.getTotal_price();
+			order_totalQuantity += po.getO_quantity();
+			System.out.println("order_totalQuantity : " + order_totalQuantity);
+			System.out.println("order_totalPrice : " + order_totalPrice);
+			
+			list.add(po);
+		}
+		
+		int preSave_point = (int) (order_totalPrice * 0.05);
+		
+//		session.setAttribute("id", m_id);
+		mav.addObject("orderName", orderName);
+		mav.addObject("list", list);
+		mav.addObject("order_totalPrice", order_totalPrice);
+		mav.addObject("order_totalQuantity", order_totalQuantity);
+		mav.addObject("member", member);
+		mav.addObject("preSave_point", preSave_point);
+		mav.setViewName("/mypage/cartOrderPage");
 	}
 }

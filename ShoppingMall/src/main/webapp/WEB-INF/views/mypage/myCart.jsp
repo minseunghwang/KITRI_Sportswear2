@@ -90,7 +90,7 @@ table{
 						<h3>장바구니 목록</h3>
 					</c:if>
 	
-				<form action="${pageContext.request.contextPath }/CartOrderController" name="f" method="post">
+				<form action="${pageContext.request.contextPath }/productorder/cartOrderPayment.do" name="f" method="post">
 					<table class="table table-hover table-sm mt-3 mb-5">
 						<thead class="thead-light1" style="background-color: white;">
 							<tr class="text-center">
@@ -158,7 +158,7 @@ table{
 	<%@include file="/WEB-INF/views/common/footer2.jsp"%>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/vendor/jquery/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

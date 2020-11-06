@@ -23,7 +23,7 @@
 			
 			var frmData = document.orderList;
 			frmData.target = pop_title;
-			frmData.action = "<%=request.getContextPath()%>/AddReviewPopupController?p_num=" + p_num + "&num=" + num;
+			frmData.action = "${pageContext.request.contextPath}/review/AddReview.do?p_num=" + p_num + "&num=" + num;
 		}
 		
 </script>
@@ -88,8 +88,6 @@ table{
 							<th scope="col">결제금액 </th> 
 							<th scope="col">주문일 </th>
 							<th scope="col">상품평</th>
-							
-							
 						</tr>
 					</thead>
 					<tbody >
@@ -98,7 +96,7 @@ table{
 								<input type="hidden" id="code_num" name="code_num" value="${o.code_num }">
 								<td name="o_num" style="vertical-align: middle;" id="ordernumber1" >${o.num } </td>
 								<td id="product_name" name="order_product_name" style="vertical-align: middle;"> ${o.prod_name } </td>
-								<td> <a href="${pageContext.request.contextPath }/DetailController?num=${o.p_num }">
+								<td> <a href="${pageContext.request.contextPath }/product/productDetail.do?num=${o.p_num }">
 									<img src="${pageContext.request.contextPath }/resources/${o.prod_img }" width="100" height="100"> </a>
 									</td>
 								<td style="vertical-align: middle;">${o.p_size} </td> 
@@ -111,8 +109,6 @@ table{
 								<c:if test="${o.r_state==1 }">
 									<td style="vertical-align: middle;">작성완료</td>
 								</c:if>
-								
-								
 							</tr>																
 						</c:forEach>
 					</tbody>

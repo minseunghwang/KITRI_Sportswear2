@@ -30,4 +30,5 @@ public interface ReviewService {
 	int getcountByP_Num(int p_num);
 	
 	public void reviewMyList(ModelAndView mav);
+	public void AddReview(ModelAndView mav);
 }
