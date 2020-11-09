@@ -26,5 +26,8 @@ public interface ProductOrderDao {
 	public void updateCode_num(ProductOrderVO po);
 	public int selectOrderInfoNum();
 	public void addOrderInfo(OrderInfoVO oivo);
+	public void editR_State(String m_id, int num);
+	public void editPoint(String m_id, int o_num);
+	
 	
 }

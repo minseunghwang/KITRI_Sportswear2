@@ -85,7 +85,11 @@
 	values(#{num}, #{oi_id}, #{oi_name}, #{oi_phone}, #{oi_email}, #{oi_addr_full}, #{oi_addr_zipno}, #{oi_addr_roadAddrPart1}, #{oi_addr_roadAddrPart2}, #{oi_addr_addrDetail}, #{oi_deliMessage}, #{oi_howPay}, #{oi_usepoint}, #{oi_originTotalPrice}, #{oi_totalPrice}, sysdate, #{oi_code_num}, #{add_name}, #{add_phone1}, #{add_phone2}, #{add_email}, #{add_addr_full}, #{add_addr_zipNo}, #{add_addr_roadAddrPart1}, #{add_addr_roadAddrPart2}, #{add_addr_addrDetail})
 </insert>
 
+<update id="updateR_state" parameterType="String">
+	update product_order set r_state=1 where m_id=#{m_id} and num=#{num}
+</update>
 
-
-
+<update id="updatePoint" parameterType="String">
+	update Member set point=(select point from member where id=#{m_id})+ (select total_price from product_order where num=#{o_num} and m_id=#{m_id})*0.02 where id=#{m_id}
+</update>
 </mapper>

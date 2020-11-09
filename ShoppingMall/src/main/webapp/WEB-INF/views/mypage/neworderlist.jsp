@@ -88,9 +88,7 @@ table{
 			<jsp:include page = "/WEB-INF/views/common/mypageCategory.jsp" />
 			<!-- /leftNavigation -->
 			<div class="allorderlistbox">
-				
 				<h3>주문배송조회</h3>
-
 				<form id="allorderList" name="allorderList" method="post">
 					<table class="table table-hover table-sm mt-3 mb-5" >
 					<thead class="thead-light1" style="background-color: white;" >
@@ -171,14 +169,7 @@ table{
 			</nav>
 			<br>
 		<!-- /pagination -->
-		
-		
-
-		
-		
-		
 		</div>
-		
 	<!-- footer -->
 	<%@include file="/WEB-INF/views/common/footer2.jsp"%>
 </body>

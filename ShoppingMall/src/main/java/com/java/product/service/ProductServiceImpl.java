@@ -21,7 +21,6 @@ import com.java.product.dao.ProductDao;
 import com.java.product.dto.ProductDto;
 import com.java.review.dao.ReviewDao;
 import com.java.review.dto.ReviewDto;
-import com.java.review.service.ReviewService;
 
 
 @Component
@@ -32,12 +31,6 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Autowired
 	private ReviewDao reviewDao;
-	
-	@Autowired
-	private ReviewService reviewService;
-	
-	@Autowired
-	private MemberService memberService;
 	
 	
 	@Override

@@ -121,4 +121,20 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 	public void addOrderInfo(OrderInfoVO oivo) {
 		sqlSessionTemplate.insert("addOrderInfo",oivo);
 	}
+
+	@Override
+	public void editR_State(String m_id, int num) {
+		Map<String, String> hmap = new HashMap<String, String>();
+		hmap.put("m_id", m_id);
+		hmap.put("num", Integer.toString(num));
+		sqlSessionTemplate.update("updateR_state", hmap);
+	}
+
+	@Override
+	public void editPoint(String m_id, int o_num) {
+		Map<String, String> hmap = new HashMap<String, String>();
+		hmap.put("m_id", m_id);
+		hmap.put("num", Integer.toString(o_num));
+		sqlSessionTemplate.update("updatePoint", hmap);
+	}
 }

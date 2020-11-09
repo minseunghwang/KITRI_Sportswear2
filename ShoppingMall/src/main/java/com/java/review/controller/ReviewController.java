@@ -37,5 +37,13 @@ public class ReviewController {
 		return  mav;
 	}
 	
+	@RequestMapping(value="/review/CreateReview.do")
+	public ModelAndView CreateReview(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav =new ModelAndView();
+		mav.addObject("request",request);
+		reviewService.CreateReview(mav);
+		return  mav;
+	}
+	
 	
 }

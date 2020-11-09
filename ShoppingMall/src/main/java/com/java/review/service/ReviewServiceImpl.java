@@ -1,6 +1,9 @@
 package com.java.review.service;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -9,9 +12,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.java.common.PaginationVO;
+import com.java.productOrder.dao.ProductOrderDao;
+import com.java.productOrder.dto.ProductOrderVO;
 import com.java.review.dao.ReviewDao;
 import com.java.review.dto.ReviewDto;
 
@@ -21,6 +28,9 @@ public class ReviewServiceImpl implements ReviewService{
 	
 	@Autowired
 	private ReviewDao reviewDao;
+	
+	@Autowired
+	private ProductOrderDao productorderDao;
 
 	@Override
 	public void add(ReviewDto review) {
@@ -122,6 +132,7 @@ public class ReviewServiceImpl implements ReviewService{
 		 *  6페이지를 누르면 아무런 값도 나오지 않음
 		 *  아래 조건을 넣어야 if( 6 > 5 ) 조건을 만족하여 endPage는 5가 됨
 		 */
+		
 		if(pn.getEndPage() > pn.getTotalPage()) {
 			pn.setEndPage(pn.getTotalPage());
 		}
@@ -141,5 +152,98 @@ public class ReviewServiceImpl implements ReviewService{
 		mav.addObject("p_num", p_num);
 		mav.addObject("num", num);
 		mav.setViewName("/review/addForm");
+	}
+
+	@Override
+	public void CreateReview(ModelAndView mav) {
+		Map<String, Object> map =mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
+		HttpSession session = request.getSession(false);
+	    String m_id = (String) session.getAttribute("id");
+	    
+	    ReviewDto review = new ReviewDto();
+	    
+	    review.setM_id(m_id);
+	    
+	    String reviewImgName = "";
+	    String inputTagName = "";
+	    
+	    int maxSize = 1024 * 1024 * 10;
+   
+	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+		MultipartFile multipartFile = null;
+		while(iterator.hasNext()){
+			multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+			if(multipartFile.isEmpty() == false){
+				System.out.println("------------- file start -------------");
+				System.out.println("name : "+multipartFile.getName());
+				System.out.println("filename : "+multipartFile.getOriginalFilename());
+				System.out.println("size : "+multipartFile.getSize());
+				System.out.println(multipartHttpServletRequest.getParameter("p_num"));
+				System.out.println(multipartHttpServletRequest.getParameter("message"));
+				System.out.println(multipartHttpServletRequest.getParameter("rate"));
+				System.out.println("-------------- file end --------------\n");
+
+				review.setP_num(Integer.parseInt(multipartHttpServletRequest.getParameter("p_num")));
+				review.setContent(multipartHttpServletRequest.getParameter("message"));
+				review.setRate(Integer.parseInt(multipartHttpServletRequest.getParameter("rate")));
+			}
+		}
+
+
+//	    
+//		MultipartRequest multi = null;
+//		
+////		String uploadPath = "C:\\Web\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\webapps\\review_img";
+//		String uploadPath = "C:\\spring2\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\webapps\\review_img";
+//		
+//
+//		try {
+//			// 객체 생성하는 부분이 실제 톰캣서버에 업로드하는 과정이였음..
+//			multi = new MultipartRequest(request, uploadPath, maxSize, "utf-8", new DefaultFileRenamePolicy());
+//
+//			review.setP_num(Integer.parseInt(multi.getParameter("p_num")));
+//			review.setContent(multi.getParameter("message"));
+//			review.setRate(Integer.parseInt(multi.getParameter("rate")));
+//			
+//			
+//			// TODO 이 부분 적립금수정에 사용
+//			System.out.println("num값: " + Integer.parseInt(multi.getParameter("num")));
+//			
+//			
+//			// 전송한 전체 파일이름들을 가져옴
+//			Enumeration files = (Enumeration) multi.getFileNames();
+//			
+//			while(files.hasMoreElements()) {
+//
+//				// form 태그에서 <input type="file" name="여기에 지정한 이름" />을 가져온다.
+//				inputTagName = (String) files.nextElement();	// 파일 input에 지정한 이름을 가져옴
+//
+//				// 그에 해당하는 실제 파일 이름을 가져옴
+//				reviewImgName = ((MultipartRequest) multi).getOriginalFileName(inputTagName);
+////				review.setImg("/upload_img/" + reviewImgName);
+//				review.setImg("/review_img/" + reviewImgName);
+//			
+//				//파일 업로드... 이건 파일 업로드가 아니였음
+//				File file1 = (File) multi.getFile(inputTagName);
+//
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	
+//		reviewDao.add(review);		
+//		
+//		productorderDao.editR_State(m_id,Integer.parseInt(multi.getParameter("num")));
+//		
+//		// 적립금
+//		int o_num = Integer.parseInt(multi.getParameter("num"));
+//		ProductOrderVO po = new ProductOrderVO();
+//				
+//		productorderDao.editPoint(m_id, o_num);
+		
 	}
 }

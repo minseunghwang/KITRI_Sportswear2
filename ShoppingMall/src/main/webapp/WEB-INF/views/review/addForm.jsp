@@ -21,30 +21,30 @@
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/views/review/star-rating/star-rating/css/star-rating.css"
+	href="${pageContext.request.contextPath }/WEB-INF/views/review/star-rating/star-rating/css/star-rating.css"
 	media="all" type="text/css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/views/review/star-rating/star-rating/css/themes/krajee-fa/theme.css"
+	href="${pageContext.request.contextPath }/WEB-INF/views/review/star-rating/star-rating/css/themes/krajee-fa/theme.css"
 	media="all" type="text/css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/views/review/star-rating/star-rating/css/themes/krajee-svg/theme.css"
+	href="${pageContext.request.contextPath }/WEB-INF/views/review/star-rating/star-rating/css/themes/krajee-svg/theme.css"
 	media="all" type="text/css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/views/review/star-rating/star-rating/css/themes/krajee-uni/theme.css"
+	href="${pageContext.request.contextPath }/WEB-INF/views/review/star-rating/star-rating/css/themes/krajee-uni/theme.css"
 	media="all" type="text/css" />
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script
-	src="${pageContext.request.contextPath }/views/review/star-rating/star-rating/js/star-rating.js"
+	src="${pageContext.request.contextPath }/WEB-INF/views/review/star-rating/star-rating/js/star-rating.js"
 	type="text/javascript"></script>
 <script
-	src="${pageContext.request.contextPath }/views/review/star-rating/star-rating/js/themes/krajee-fa/theme.js"
+	src="${pageContext.request.contextPath }/WEB-INF/views/review/star-rating/star-rating/js/themes/krajee-fa/theme.js"
 	type="text/javascript"></script>
 <script
-	src="${pageContext.request.contextPath }/views/review/star-rating/star-rating/js/themes/krajee-svg/theme.js"
+	src="${pageContext.request.contextPath }/WEB-INF/views/review/star-rating/star-rating/js/themes/krajee-svg/theme.js"
 	type="text/javascript"></script>
 <script
-	src="${pageContext.request.contextPath }/views/review/star-rating/star-rating/js/themes/krajee-uni/theme.js"
+	src="${pageContext.request.contextPath }/WEB-INF/views/review/star-rating/star-rating/js/themes/krajee-uni/theme.js"
 	type="text/javascript"></script>
 
 <!-- 업로드 사진 미리보기 -->
@@ -70,7 +70,7 @@
 
 		
 		/* document.reviewform.action = '${pageContext.request.contextPath}/AddReviewController?p_num=' + p_num + 'rate' + rate + 'message' + message+ 'img' + img; */
-		window.opener.location.href = '${pageContext.request.contextPath}/AddReviewController?p_num=' + p_num + 'rate' + rate + 'message' + message+ 'img' + img;			
+		window.opener.location.href = '${pageContext.request.contextPath}/review/CreateReview.do?p_num=' + p_num + 'rate' + rate + 'message' + message+ 'img' + img;			
 		self.close();
 		/* document.reviewform.action = '${pageContext.request.contextPath }/AddReviewController?p_num='+p_num;
 		opener.parent.location.reload(); */
@@ -123,9 +123,8 @@
  		formData.append('p_num', $('#hidden').val());
  		formData.append('num', $('#hidden2').val());
 
-
 		$.ajax({
-			url: "${pageContext.request.contextPath }/AddReviewController2",
+			url: "${pageContext.request.contextPath }/review/CreateReview.do",
 			data: formData,
 			async: false,	// ajax 동기처리로 바꿈
 			processData: false,
@@ -135,11 +134,7 @@
 				ParentRedirect();
 			}
 		});
-		
 	});
-	
-
-
 </script>
 <style type="text/css">
 .uploadhidden {
@@ -185,87 +180,80 @@
 </style>
 </head>
 <body>
-
 	<!------ Include the above in your HEAD tag ---------->
-
-<div class="container">
-
-
-	<div class="row">
-		<h2 style="text-align: center">상품평 작성</h2>
-	<br>
-	<table width="100%" border="0">
-		<div class="col-md-9 col-md-offset-0">
-			<tr>
-			<td width="77%">
-			<div class="">
-				<%-- <form class="form-horizontal" action="${pageContext.request.contextPath }/AddReviewController?p_num=<%=request.getParameter("p_num") %>&o_num=<%=request.getParameter("o_num") %>"	태수   
+	<div class="container">
+		<div class="row">
+			<h2 style="text-align: center">상품평 작성</h2>
+			<br>
+			<table width="100%" border="0">
+				<div class="col-md-9 col-md-offset-0">
+					<tr>
+						<td width="77%">
+							<div class="">
+								<%-- <form class="form-horizontal" action="${pageContext.request.contextPath }/AddReviewController?p_num=<%=request.getParameter("p_num") %>&o_num=<%=request.getParameter("o_num") %>"	태수   
 				name="reviewform" enctype="multipart/form-data" method="post" > --%>
-				<form class="form-horizontal" id="fileUploadForm" name="reviewform" enctype="multipart/form-data" method="post" >
-				<fieldset>
-
-
-				<!-- Rating -->
-				<div class="form-group">
-					<label class="col-md-3 control-label" for="rating">Your rating</label>
-					<input type="text" name="rate" class="rating rating-loading" data-size="md" title=""  id="rate"> <br>
+								<form class="form-horizontal" id="fileUploadForm"
+									name="reviewform" enctype="multipart/form-data" method="post">
+									<fieldset>
+										<!-- Rating -->
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="rating">Your
+												rating</label> <input type="text" name="rate"
+												class="rating rating-loading" data-size="md" title=""
+												id="rate"> <br>
+										</div>
+										<!-- Message body -->
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="message">Your
+												message</label>
+											<div class="col-md-9">
+												<textarea class="form-control" id="message" name="message"
+													placeholder="Please enter your feedback here..." rows="5"></textarea>
+											</div>
+										</div>
+										<!-- image input -->
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="image">사진첨부</label>
+											<div class="col-md-9">
+												<!-- <label for="cma_file">사진첨부</label> -->
+												<!-- <form id="form1" runat="server">  태수 -->
+												<input type="file" name="r_img" onchange="readURL(this);"
+													id="r_img"> <img
+													style="height: 75px; border: 1px solid #000; margin: 5px"
+													id="blah" src="#" alt="" />
+												<!-- </form> -->
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 control-label"></label>
+											<div class="col-md-9">
+												<span style="font-size: 12px; color: #778899;"> ※ 상품평
+													작성 시 결제금액의 2%를 적립해 드립니다. </span> <input type="hidden"
+													value="${o.num }" name="num">
+											</div>
+										</div>
+										<br>
+										<div class="form-group">
+											<div class="col-md-12 text-center">
+												<input type="button" class="btn btn-primary btn-md"
+													value="작성" id="file_send">
+												<button type="reset" class="btn btn-default btn-md">Clear</button>
+												<%-- <input type="hidden" id="hidden" value="<%=request.getParameter("num")%>"> <!-- tsseo 이거 필요함 --> --%>
+												<input type="hidden" id="hidden"
+													value="<%=request.getAttribute("p_num")%>"> <input
+													type="hidden" id="hidden2"
+													value="<%=request.getAttribute("num")%>">
+											</div>
+										</div>
+									</fieldset>
+								</form>
+							</div>
+						</td>
+					</tr>
 				</div>
-
-
-				<!-- Message body -->
-				<div class="form-group">
-					<label class="col-md-3 control-label" for="message">Your message</label>
-					<div class="col-md-9">
-						<textarea class="form-control" id="message" name="message"
-							placeholder="Please enter your feedback here..." rows="5" ></textarea>
-					</div>
-				</div>
-
-				<!-- image input -->
-				<div class="form-group">
-					<label class="col-md-3 control-label" for="image">사진첨부</label>
-					<div class="col-md-9">
-						<!-- <label for="cma_file">사진첨부</label> -->
-						<!-- <form id="form1" runat="server">  태수 --> 
-							<input type="file" name="r_img" onchange="readURL(this);" id="r_img">
-							<img
-								style="height: 75px; border: 1px solid #000; margin: 5px"
-								id="blah" src="#" alt="" />
-						<!-- </form> -->
-
-					</div>
-				</div>
-				<div class="form-group">
-				<label class="col-md-3 control-label"></label>
-					<div class="col-md-9">
-						<span style="font-size:12px; color:#778899;"> ※ 상품평 작성 시 결제금액의 2%를 적립해 드립니다. </span>
-						<input type="hidden" value="${o.num }" name="num">
-					</div>
-				</div>
-				 <br>
-				<div class="form-group">
-					<div class="col-md-12 text-center">
-						<input type="button" class="btn btn-primary btn-md" value="작성" id="file_send" >
-						<button type="reset" class="btn btn-default btn-md">Clear</button>
-						<%-- <input type="hidden" id="hidden" value="<%=request.getParameter("num")%>"> <!-- tsseo 이거 필요함 --> --%>
-						<input type="hidden" id="hidden" value="<%=request.getAttribute("p_num")%>">
-						<input type="hidden" id="hidden2" value="<%=request.getAttribute("num")%>">
-						
-						
-					</div>
-				</div>
-				</fieldset>
-				</form>
-				
-			</div>
-				</td>
-
-			</tr>
-			</div>
-	</table>
+			</table>
+		</div>
 	</div>
-
-</div>
 </body>
 <script>
     $(document).on('ready', function () {

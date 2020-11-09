@@ -25,4 +25,17 @@
 					(select * from review where p_num=#{p_num} order by r_date desc) A where ROWNUM <= #{end}) X where x.rnum >= #{start}
 		]]>	
 	</select>
+	<insert id="addReview" parameterType="com.java.review.dto.ReviewDto">
+		insert into review
+		values(
+		seq_review.nextval,
+		#{m_id},
+		#{p_num},
+		#{rate},
+		#{content},
+		#{img},
+		sysdate
+		)
+	</insert>
+	
 </mapper>
