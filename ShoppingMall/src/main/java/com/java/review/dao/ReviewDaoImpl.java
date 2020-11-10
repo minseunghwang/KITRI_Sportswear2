@@ -101,7 +101,6 @@ public class ReviewDaoImpl implements ReviewDao{
 
 	@Override
 	public int getcountMine(String m_id) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

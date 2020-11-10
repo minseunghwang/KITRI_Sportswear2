@@ -3,6 +3,8 @@ package com.java.review.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.java.review.dto.ReviewDto;
@@ -31,5 +33,5 @@ public interface ReviewService {
 	
 	public void reviewMyList(ModelAndView mav);
 	public void AddReview(ModelAndView mav);
-	public void CreateReview(ModelAndView mav);
+	public void CreateReview(ModelAndView mav,HttpServletRequest request);
 }

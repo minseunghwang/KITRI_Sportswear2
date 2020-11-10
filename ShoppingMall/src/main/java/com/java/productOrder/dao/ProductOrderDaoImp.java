@@ -64,8 +64,6 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 		Map<String, String> hmap = new HashMap<String, String>();
 		hmap.put("m_id", m_id);
 		hmap.put("o_state", Integer.toString(o_state));
-		System.out.println("mId : " + m_id);
-		System.out.println("o_state : " + o_state);
 		return sqlSessionTemplate.selectList("orderList",hmap);
 	}
 
@@ -134,7 +132,7 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 	public void editPoint(String m_id, int o_num) {
 		Map<String, String> hmap = new HashMap<String, String>();
 		hmap.put("m_id", m_id);
-		hmap.put("num", Integer.toString(o_num));
+		hmap.put("o_num", Integer.toString(o_num));
 		sqlSessionTemplate.update("updatePoint", hmap);
 	}
 }

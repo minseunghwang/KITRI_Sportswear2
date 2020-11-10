@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -26,7 +27,7 @@ public class ReviewController {
 		ModelAndView mav =new ModelAndView();
 		mav.addObject("request",request);
 		reviewService.reviewMyList(mav);
-		return  mav;
+		return mav;
 	}
 	
 	@RequestMapping(value="/review/AddReview.do")
@@ -34,16 +35,14 @@ public class ReviewController {
 		ModelAndView mav =new ModelAndView();
 		mav.addObject("request",request);
 		reviewService.AddReview(mav);
-		return  mav;
+		return mav;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/review/CreateReview.do")
 	public ModelAndView CreateReview(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav =new ModelAndView();
-		mav.addObject("request",request);
-		reviewService.CreateReview(mav);
-		return  mav;
+		ModelAndView mav =new ModelAndView("jsonView");
+		reviewService.CreateReview(mav,request);
+		return mav;
 	}
-	
-	
 }

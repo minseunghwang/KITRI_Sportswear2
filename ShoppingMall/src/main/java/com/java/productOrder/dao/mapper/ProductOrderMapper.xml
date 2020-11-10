@@ -90,6 +90,9 @@
 </update>
 
 <update id="updatePoint" parameterType="String">
-	update Member set point=(select point from member where id=#{m_id})+ (select total_price from product_order where num=#{o_num} and m_id=#{m_id})*0.02 where id=#{m_id}
+	update member
+	set point=((select point from member where id=#{m_id})+(select total_price from product_order where num=#{o_num} and m_id=#{m_id})*0.02)
+	where id=#{m_id}
 </update>
+
 </mapper>
