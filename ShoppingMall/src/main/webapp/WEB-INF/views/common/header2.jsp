@@ -296,23 +296,25 @@
 		$(document).ready(function() {
 	
 			var sessionId = "${sessionScope.id}";
-	
+			console.log(sessionId);
 			// 사용자별 장바구니에 있는 상품개수 표시
 			$.ajax({
-				url : "${pageContext.request.contextPath }/AllCartListCountController",
-				type : "GET",
+				type : "POST",
+				url : "${pageContext.request.contextPath }/productorder/CartItemCount.do",
 				async : false,
 				data : "m_id=" + sessionId,
 				success : function(result) {
-	
-					if (result != "0") {
+					if (result.cnt != "0") {
 						var cartTopOffset = $('.cart-img').offset().top;
 						var cartLeftOffset = $('.cart-img').offset().left;
 						$('#numProdInTheCart').css('top', cartTopOffset);
 						$('#numProdInTheCart').css('left', cartLeftOffset);
-						$('#numProdInTheCart').html(result);
+						$('#numProdInTheCart').html(result.cnt);
 					}
-	
+				}, error:function(request,status,error){
+					console.log("code = " + request.status + " message = " + request.responseText + " error = " + error );
+				},
+				complete : function(data){
 				}
 			});
 	
@@ -415,6 +417,7 @@
 
 
 			<!-- 비로그인 상태 -->
+			<!-- 결제 후 세션 날아가는거 땜에 productorderServiceImpl의 productOrderDataSave 여기에서 세션 제정의하는거 있음 세션에 뭐 추가할거면 여기도 해줘야함 -->
 			<c:if test="${sessionScope.memberType==null }">
 				<div id="main-gnb-login">
 					<ul>
@@ -450,10 +453,7 @@
 						<li><a href="<%=request.getContextPath()%>/member/logout.do">로그아웃</a></li>
 					</ul>
 				</div>
-
 			</c:if>
-
-
 		</div>
 		<!-- /.main-header -->
 

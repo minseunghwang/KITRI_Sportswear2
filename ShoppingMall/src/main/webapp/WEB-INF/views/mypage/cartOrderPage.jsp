@@ -17,8 +17,7 @@
 %>
 
 <!-- Bootstrap core CSS -->
-<link
-	href="<%=request.getContextPath()%>/resources/css/adidas_r.css"
+<link href="<%=request.getContextPath()%>/resources/css/adidas_r.css"
 	rel="stylesheet">
 
 
@@ -31,7 +30,7 @@
 	rel="stylesheet">
 
 <link
-	href="<%=request.getContextPath()%>/resources/vendor/bootstrap/css/orderPageCss.css"
+	href="${pageContext.request.contextPath }/resources/vendor/bootstrap/css/orderPageCss.css"
 	rel="stylesheet">
 
 <!-- Bootstrap core JavaScript -->
@@ -45,16 +44,14 @@
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <script type="text/javascript">
-// 	document.cookie = 'cookie1=value1; SameSite = Lax';
-//	document.cookie = 'cookie2=value2; SameSite = None; Secure';
+	// 	document.cookie = 'cookie1=value1; SameSite = Lax';
+	//	document.cookie = 'cookie2=value2; SameSite = None; Secure';
 	console.log(document.cookie);
 	function goPopup() {
 		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
-		var pop = window
-				.open(
-						"${pageContext.request.contextPath }/productorder/josuPage.do",
-						"pop",
-						"width=570,height=420, scrollbars=yes, resizable=yes");
+		var pop = window.open(
+				"${pageContext.request.contextPath }/productorder/josuPage.do",
+				"pop", "width=570,height=420, scrollbars=yes, resizable=yes");
 
 		// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
 		//var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
@@ -70,7 +67,6 @@
 		document.form.addrDetail.value = addrDetail;
 		document.form.zipNo.value = zipNo;
 		document.form.add_addr_full.value = roadFullAddr;
-		console.log(document.form.add_addr_full.value);
 	}
 </script>
 </head>
@@ -103,19 +99,19 @@
 
 							<div class="form-group">
 								<label for="InputPwd">휴대전화1</label> <input type="text"
-									class="form-control" id="add_phone1" name="add_phone1" placeholder="예>01012345678"
-									value="">
+									class="form-control" id="add_phone1" name="add_phone1"
+									placeholder="예>01012345678" value="">
 							</div>
 							<div class="form-group">
 								<label for="InputPwd">휴대전화2</label> <input type="text"
-									class="form-control" id="add_phone2" name="add_phone2" placeholder="비상시 전화번호를 입력해주세요."
-									value="">
+									class="form-control" id="add_phone2" name="add_phone2"
+									placeholder="비상시 전화번호를 입력해주세요." value="">
 							</div>
 
 							<div class="form-group">
 								<label for="InputName">이메일 주소</label> <input type="email"
-									class="form-control" id="add_email" name="add_email" placeholder="Enter email"
-									value=${member.email}>
+									class="form-control" id="add_email" name="add_email"
+									placeholder="Enter email" value=${member.email}>
 							</div>
 
 							<div>
@@ -130,34 +126,36 @@
 											<th>우편번호</th>
 											<td><input type="hidden" id="confmKey" name="confmKey"
 												value=""> <input type="text" id="zipNo" name="zipNo"
-												readonly style="width: 100px"> <input type="button" id="serachAddr"
-												value="주소검색" onclick="goPopup();"></td>
+												readonly style="width: 100px"> <input type="button"
+												id="serachAddr" value="주소검색" onclick="goPopup();"></td>
 										</tr>
 										<tr>
 											<th>도로명주소</th>
 											<td><input type="text" id="roadAddrPart1"
-												name="roadAddrPart1" readonly style="width: 85%">
-												<input type="hidden" name="add_addr_full"  id="add_addr_full" value="">
-												</td>
+												name="roadAddrPart1" readonly style="width: 85%"> <input
+												type="hidden" name="add_addr_full" id="add_addr_full"
+												value=""></td>
 										</tr>
 										<tr>
 											<th>상세주소</th>
-											<td><input type="text" id="addrDetail" name="addrDetail" readonly
-												style="width: 40%" value=""> <input type="text"
-												id="roadAddrPart2" name="roadAddrPart2" readonly style="width: 40%"
-												value=""></td>		
+											<td><input type="text" id="addrDetail" name="addrDetail"
+												readonly style="width: 40%" value=""> <input
+												type="text" id="roadAddrPart2" name="roadAddrPart2" readonly
+												style="width: 40%" value=""></td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
 							<div>
 								<label>배송 요청 사항</label> <input type="text" class="form-control"
-									id="oi_deliMessage" name="oi_deliMessage"
-									value="" placeholder="배송 또는 주문시 요청 사항을 입력해주세요.">
+									id="oi_deliMessage" name="oi_deliMessage" value=""
+									placeholder="배송 또는 주문시 요청 사항을 입력해주세요.">
 							</div>
-								<input type="hidden" id="orderName" name="orderName" value=${orderName }> 
-								<input type="hidden" id="oi_originTotalPrice" name="oi_originTotalPrice" value=${order_totalPrice }> 
-								<input type="hidden" id="oi_usePoint" name="oi_usePoint" value=${member.point }> 
+							<input type="hidden" id="orderName" name="orderName"
+								value=${orderName }> <input type="hidden"
+								id="oi_originTotalPrice" name="oi_originTotalPrice"
+								value=${order_totalPrice }> <input type="hidden"
+								id="oi_usePoint" name="oi_usePoint" value=${member.point }>
 							<br>
 							<div style="text-align: center;">
 								<button type="button" class="btn btn-primary" id="check_module">결제하기</button>
@@ -167,104 +165,108 @@
 				</div>
 
 				<div class="col-lg-4">
-				<div class="payment-main">
-					<div class="prods_info" id="test_box" style="top: 58px;">
-						<c:forEach var="o" items="${list }">
-							<div class="prodlist">
-								<div class="box last container" >
-									<a
-										href="${pageContext.request.contextPath }/product/productDetail.do?num=${o.p_num}"
-										target="_blank">
-										<div class="img">
-											<img src="${pageContext.request.contextPath }/resources/${o.prod_img }" class="prd" width="60" height="60">
-										</div>
-									</a>
-									
-									
-								<%-- 	<a
+					<div class="payment-main">
+						<div class="prods_info" id="test_box" style="top: 58px;">
+							<c:forEach var="o" items="${list }">
+								<div class="prodlist">
+									<div class="box last container">
+										<a
+											href="${pageContext.request.contextPath }/product/productDetail.do?num=${o.p_num}"
+											target="_blank">
+											<div class="img">
+												<img
+													src="${pageContext.request.contextPath }/resources/${o.prod_img }"
+													class="prd" width="60" height="60">
+											</div>
+										</a>
+
+
+										<%-- 	<a
 										href="<%=request.getContextPath()%>/DetailController?num=${o.p_num}&page=1"
 										target="_blank">
 										<div class="img">
 											<img src="${o.prod_img }" class="prd" width="60" height="60">
 										</div>
 									</a> --%>
-									
-									
-									
-									<!-- 부가상품 -->
-									<div class="info">
-										<div class="tit">
-											<a
-												href="${pageContext.request.contextPath }/product/productDetail.do?num=${o.p_num}"
-												target="_blank" class="">${o.prod_name }</a>
-												<input type="hidden" name="productOrderNum" value="${o.num }">
-										</div>
 
-										<div class="details">사이즈: ${o.p_size } / 수량 :
-											${o.o_quantity }</div>
-										<div class="price-container">
-											<span class="prc">${o.total_price }<span class="won">원</span></span>
+
+
+										<!-- 부가상품 -->
+										<div class="info">
+											<div class="tit">
+												<a
+													href="${pageContext.request.contextPath }/product/productDetail.do?num=${o.p_num}"
+													target="_blank" class="">${o.prod_name }</a> <input
+													type="hidden" name="productOrderNum" value="${o.num }">
+											</div>
+
+											<div class="details">사이즈: ${o.p_size } / 수량 :
+												${o.o_quantity }</div>
+											<div class="price-container">
+												<span class="prc">${o.total_price }<span class="won">원</span></span>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
 
-						</c:forEach>
+							</c:forEach>
 
 
-						<!-- //prodlist -->
-						<div class="total_amount">총 주문 상품 : ${order_totalQuantity}개</div>
-						<div class="price_box">
-							<div class="box clfix">
-								<strong>총 주문 가격</strong>
-								<div class="price-container">
-									<span class="prc"><span class="won">${order_totalPrice }원</span></span>
+							<!-- //prodlist -->
+							<div class="total_amount">총 주문 상품 : ${order_totalQuantity}개</div>
+							<div class="price_box">
+								<div class="box clfix">
+									<strong>총 주문 가격</strong>
+									<div class="price-container">
+										<span class="prc"><span class="won">${order_totalPrice }원</span></span>
+									</div>
 								</div>
-							</div>
-							<div class="box clfix">
-								<strong>적립금 사용</strong>
-								<div class="price-container">
-									<span class="prc sale">point</span>
+								<div class="box clfix">
+									<strong>적립금 사용</strong>
+									<div class="price-container">
+										<span class="prc sale">point</span>
+									</div>
 								</div>
-							</div>
-							<div class="box clfix" style="border-bottom-width: 0;">
-								<strong>보유한 총 Point ${member.point} / Point 사용하기</strong>
-								<input type="hidden" id="u_id" value = <%= (String)session.getAttribute("id") %> >
-							</div>
+								<div class="box clfix" style="border-bottom-width: 0;">
+									<strong>보유한 총 Point ${member.point} / Point 사용하기</strong> <input
+										type="hidden" id="u_id"
+										value=<%=(String) session.getAttribute("id")%>>
+								</div>
 
 
 
-							<div class="box deliv clfix">
-								<strong>배송비 <span class="deliv_tooltip"> <span
-										class="spt_bg"></span> <span class="tooltip-layer">
-											<div class="arrow spt_bg"></div> <span id="chgContents">
+								<div class="box deliv clfix">
+									<strong>배송비 <span class="deliv_tooltip"> <span
+											class="spt_bg"></span> <span class="tooltip-layer">
+												<div class="arrow spt_bg"></div> <span id="chgContents">
+											</span>
 										</span>
 									</span>
-								</span>
-								</strong>
-								<div class="price-container">
-									<span class="prc" id="viewDlvFee"> <span class="won">0 원</span></span>
+									</strong>
+									<div class="price-container">
+										<span class="prc" id="viewDlvFee"> <span class="won">0
+												원</span></span>
+									</div>
+								</div>
+
+								<!-- 무료배송비 -->
+								<div class="box total_p clfix">
+									<strong>총 결제금액</strong>
+									<div class="price-container">
+										<span class="prc" id="TOTAL_PAY_AMT_STR">${order_totalPrice }<span
+											class="won">원</span></span>
+
+
+										<p class="point">
+											예상 적립 포인트 <strong><span id="preSaveRate">${preSave_point }</span>point
+												(5%)</strong>
+										</p>
+									</div>
 								</div>
 							</div>
-
-							<!-- 무료배송비 -->
-							<div class="box total_p clfix">
-								<strong>총 결제금액</strong>
-								<div class="price-container">
-									<span class="prc" id="TOTAL_PAY_AMT_STR">${order_totalPrice }<span
-										class="won">원</span></span>
-
-
-									<p class="point">
-										예상 적립 포인트 <strong><span id="preSaveRate">${preSave_point }</span>point
-											(5%)</strong>
-									</p>
-								</div>
-							</div>
+							<!-- //price_box -->
 						</div>
-						<!-- //price_box -->
 					</div>
-</div>
 				</div>
 
 
@@ -283,199 +285,215 @@
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/resources/vendor/jquery/jquery.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<script>
 		$("#check_module").click(function() {
-			var IMP = window.IMP; // 생략가능
-					var grpl = $("input[name=productOrderNum]").length;
-					//배열 생성
-					var grparr = new Array(grpl);
-					//배열에 값 주입
-					for(var i=0; i<grpl; i++){                          
-						grparr[i] = $("input[name=productOrderNum]").eq(i).val();
-				    }
-					
-			// 전송할 데이터
-			
-			//주문자 관련 정보
-			
-			
-			var productOrderNum = document.getElementsByName("productOrderNum").value;
-			console.log("배열로보낸것:" +productOrderNum);
-			console.log("배열배열 : " + grparr);
-			var voi_deliMessage = document.getElementById("oi_deliMessage").value;
-			var voi_originTotalPrice = document.getElementById("oi_originTotalPrice").value;
-			var voi_usePoint = document.getElementById("oi_usePoint").value;
-			var voi_addr_roadAddrPart1 = document.getElementById("roadAddrPart1").value;
-			var voi_addr_roadAddrPart2 = document.getElementById("roadAddrPart2").value;
-			var voi_addr_addrDetail = document.getElementById("addrDetail").value;
-			//배송지 관련 정보 
-			var vadd_name = document.getElementById("add_name").value;
-			var vadd_phone1 = document.getElementById("add_phone1").value;
-			var vadd_phone2 = document.getElementById("add_phone2").value;
-			var vadd_email = document.getElementById("add_email").value;
-			var vadd_addr_full = document.getElementById("add_addr_full").value;
-			var vadd_addr_zipNo = document.getElementById("zipNo").value;
-			var vadd_addr_roadAddrPart1 = document.getElementById("roadAddrPart1").value;
-			var vadd_addr_roadAddrPart2 = document.getElementById("roadAddrPart2").value;
-			var vadd_addr_addrDetail = document.getElementById("addrDetail").value;
-			
-			var u_id = document.getElementById("u_id").value;
-			
-			//입력값 유효성 확인
-	        if (vadd_name == ""){
-	            alert("아이디를 입력하지 않았습니다.");
-	            document.getElementById("add_name").focus();
-	            return false;
-	        }
-			
-	        if (vadd_phone1 == ""){
-	            alert("휴대전화1를 입력하지 않았습니다.");
-	            document.getElementById("add_phone1").focus();
-	            return false;
-	        }
-	        
-	        if (vadd_phone2 == ""){
-	            alert("휴대전화2를 입력하지 않았습니다.");
-	            document.getElementById("add_phone2").focus();
-	            return false;
-	        }
-	        
-	        if (vadd_email=="") {
-	            alert("이메일을 입력해 주세요");
-	            document.getElementById("add_email").focus();
-	            return false;
-	        }
-	        
-	        if (vadd_addr_zipNo =="") {
-	        	alert("주소를 입력해 주세요");
-	        	document.getElementById("serachAddr");
-	        	return false;
-	        }
-	        
-	        
-	        if (vadd_addr_roadAddrPart1 =="") {
-	        	alert("주소를 입력해 주세요");
-	        	document.getElementById("serachAddr");
-	        	return false;
-	        }
-	        
-	        if (vadd_addr_roadAddrPart2 =="") {
-	        	alert("주소를 입력해 주세요");
-	        	document.getElementById("serachAddr");
-	        	return false;
-	        }
-	        
-	        if (vadd_addr_addrDetail =="") {
-	        	alert("주소를 입력해 주세요");
-	        	document.getElementById("serachAddr");
-	        	return false;
-	        }
-	    
-			IMP.init('imp51699412');
-			// 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-			// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
-			IMP.request_pay({
-				pg : 'inicis', // version 1.1.0부터 지원.
-				/*
-				 'kakao':카카오페이,
-				 html5_inicis':이니시스(웹표준결제)
-				 'nice':나이스페이
-				 'jtnet':제이티넷
-				 'uplus':LG유플러스
-				 'danal':다날
-				 'payco':페이코
-				 'syrup':시럽페이
-				 'paypal':페이팔
-				 */
+							var IMP = window.IMP; // 생략가능
+							var grpl = $("input[name='productOrderNum']").length;
+							//배열 생성
+							var grparr = new Array(grpl);
+							//배열에 값 주입
+							for (var i = 0; i < grpl; i++) {
+								grparr[i] = $("input[name='productOrderNum']").eq(i).val();
+							}
+							var sessionId = "${sessionScope.id}";
+							// 전송할 데이터
 
-				pay_method : 'card',
-				/*
-				 'samsung':삼성페이,
-				 'card':신용카드,
-				 'trans':실시간계좌이체,
-				 'vbank':가상계좌,
-				 'phone':휴대폰소액결제
-				 */
-				merchant_uid : 'merchant_' + new Date().getTime(),
-				/*
-				 merchant_uid에 경우
-				 https://docs.iamport.kr/implementation/payment
-				 위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
-				 참고하세요.
-				 나중에 포스팅 해볼게요.
-				 */
-				name : '${orderName}',
-				//결제창에서 보여질 이름
-//				amount : '${order_totalPrice }',
-				amount : '101',
-				//가격
-				buyer_email : '${member.email}',
-				buyer_name : '${member.name}',
-				buyer_tel : '01012345678',
-				buyer_addr : '${member.addr}',
-				buyer_postcode : '123-456',
-//				m_redirect_url : '${pageContext.request.contextPath }/productorder/orderList.do?o_state=1&id=${u_id}'
-			/*
-			 모바일 결제시,
-			 결제가 끝나고 랜딩되는 URL을 지정
-			 (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
-			 */
-			}, function(rsp) {
-				console.log(rsp);
-				if (rsp.success) {
-					console.log(rsp.imp_uid);
-					console.log(rsp.pay_method);
-					console.log(rsp.name);
-					$.ajax({
-			            type : 'POST',
-			            url : '${pageContext.request.contextPath }/productorder/orderDataSave.do',
-			            // 여기 orderDatasave로 넘어갈때 아래 데이터 안넘어가는듯...?
-			            data : {
-			            	code_num : rsp.imp_uid,
-			                oi_howPay : rsp.pay_method,
-			                oi_totalPrice : rsp.paid_amount,
-			                oi_status : rsp.status,
-			                order_name : rsp.name,
-			                oi_name : rsp.buyer_name,
-			                oi_email : rsp.buyer_email,
-			                oi_phone : rsp.buyer_tel,
-			                oi_addr_full : rsp.buyer_addr,
-			                oi_addr_zipNo : rsp.buyer_postcode,
-			                oi_addr_roadAddrPart1 : voi_addr_roadAddrPart1,
-			                oi_addr_roadAddrPart2 : voi_addr_roadAddrPart2,
-			                oi_addr_addrDetail : voi_addr_addrDetail,
-			                oi_orderDate : rsp.paid_at,
-			                oi_deliMessage : voi_deliMessage,
-			                oi_originTotalPrice : voi_originTotalPrice,
-			                oi_usePoint : voi_usePoint,
-			                add_name : vadd_name,
-			                add_phone1 : vadd_phone1,	
-			                add_phone2 : vadd_phone2,
-			                add_email : vadd_email,
-			                add_addr_full : vadd_addr_full,
-			                add_addr_zipNo : vadd_addr_zipNo,
-			                add_addr_roadAddrPart1 : vadd_addr_roadAddrPart1,
-			                add_addr_roadAddrPart2 : vadd_addr_roadAddrPart2,
-			                add_addr_addrDetail : vadd_addr_addrDetail,
-			                oi_productOrderNum : grparr
-			            },
-			            error: function(xhr, status, error){
-			                alert("실패실패" + error);
-			            },
-			            success : function(json){
-			                alert("결제가 성공적으로 완료되었습니다. 감사합니다.")
-			                location.href = "${pageContext.request.contextPath }/productorder/orderList.do?o_state=1&id=${u_id}"; 
-			            }
-			        });
+							//주문자 관련 정보
 
-				    } else {
-				      alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
-				    }
-			});
-		});
+							var productOrderNum = document.getElementsByName("productOrderNum").value;
+							console.log("배열로보낸것:" + productOrderNum);
+							var voi_deliMessage = document
+									.getElementById("oi_deliMessage").value;
+							var voi_originTotalPrice = document
+									.getElementById("oi_originTotalPrice").value;
+							var voi_usePoint = document
+									.getElementById("oi_usePoint").value;
+							var voi_addr_roadAddrPart1 = document
+									.getElementById("roadAddrPart1").value;
+							var voi_addr_roadAddrPart2 = document
+									.getElementById("roadAddrPart2").value;
+							var voi_addr_addrDetail = document
+									.getElementById("addrDetail").value;
+							//배송지 관련 정보 
+							var vadd_name = document.getElementById("add_name").value;
+							var vadd_phone1 = document
+									.getElementById("add_phone1").value;
+							var vadd_phone2 = document
+									.getElementById("add_phone2").value;
+							var vadd_email = document
+									.getElementById("add_email").value;
+							var vadd_addr_full = document
+									.getElementById("add_addr_full").value;
+							var vadd_addr_zipNo = document
+									.getElementById("zipNo").value;
+							var vadd_addr_roadAddrPart1 = document
+									.getElementById("roadAddrPart1").value;
+							var vadd_addr_roadAddrPart2 = document
+									.getElementById("roadAddrPart2").value;
+							var vadd_addr_addrDetail = document
+									.getElementById("addrDetail").value;
+
+							var u_id = document.getElementById("u_id").value;
+
+							//입력값 유효성 확인
+							if (vadd_name == "") {
+								alert("이름을 입력하지 않았습니다.");
+								document.getElementById("add_name").focus();
+								return false;
+							}
+
+							if (vadd_phone1 == "") {
+								alert("휴대전화1를 입력하지 않았습니다.");
+								document.getElementById("add_phone1").focus();
+								return false;
+							}
+
+							if (vadd_phone2 == "") {
+								alert("휴대전화2를 입력하지 않았습니다.");
+								document.getElementById("add_phone2").focus();
+								return false;
+							}
+
+							if (vadd_email == "") {
+								alert("이메일을 입력해 주세요");
+								document.getElementById("add_email").focus();
+								return false;
+							}
+
+							if (vadd_addr_zipNo == "") {
+								alert("주소를 입력해 주세요");
+								document.getElementById("serachAddr");
+								return false;
+							}
+
+							if (vadd_addr_roadAddrPart1 == "") {
+								alert("주소를 입력해 주세요");
+								document.getElementById("serachAddr");
+								return false;
+							}
+
+							if (vadd_addr_roadAddrPart2 == "") {
+								alert("주소를 입력해 주세요");
+								document.getElementById("serachAddr");
+								return false;
+							}
+
+							if (vadd_addr_addrDetail == "") {
+								alert("주소를 입력해 주세요");
+								document.getElementById("serachAddr");
+								return false;
+							}
+
+							IMP.init('imp51699412');
+							// 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+							// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
+							IMP.request_pay({pg : 'inicis', // version 1.1.0부터 지원.
+												/*
+												 'kakao':카카오페이,
+												 html5_inicis':이니시스(웹표준결제)
+												 'nice':나이스페이
+												 'jtnet':제이티넷
+												 'uplus':LG유플러스
+												 'danal':다날
+												 'payco':페이코
+												 'syrup':시럽페이
+												 'paypal':페이팔
+												 */
+
+												pay_method : 'card',
+												/*
+												 'samsung':삼성페이,
+												 'card':신용카드,
+												 'trans':실시간계좌이체,
+												 'vbank':가상계좌,
+												 'phone':휴대폰소액결제
+												 */
+												merchant_uid : 'merchant_'
+														+ new Date().getTime(),
+												/*
+												 merchant_uid에 경우
+												 https://docs.iamport.kr/implementation/payment
+												 위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
+												 참고하세요.
+												 나중에 포스팅 해볼게요.
+												 */
+												name : '${orderName}',
+												//결제창에서 보여질 이름
+												//				amount : '${order_totalPrice }',
+												amount : '101',
+												//가격
+												buyer_email : '${member.email}',
+												buyer_name : '${member.name}',
+												buyer_tel : '01012345678',
+												buyer_addr : '${member.addr}',
+												buyer_postcode : '123-456',
+											//				m_redirect_url : '${pageContext.request.contextPath }/productorder/orderList.do?o_state=1&id=${u_id}'
+											/*
+											 모바일 결제시,
+											 결제가 끝나고 랜딩되는 URL을 지정
+											 (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
+											 */
+											},
+											function(rsp) {
+												console.log("function" + rsp);
+												if (rsp.success) {
+													console.log(rsp.imp_uid);
+													console.log("pay_method" + rsp.pay_method);
+													console.log("name" + rsp.name);
+													console.log("sessionId" + sessionId);
+													$.ajax({
+																type : 'POST',
+																url : '${pageContext.request.contextPath }/productorder/orderDataSave.do',
+																// 여기 orderDatasave로 넘어갈때 아래 데이터 안넘어가는듯...?
+																data : {
+																	code_num : rsp.imp_uid,
+																	oi_howPay : rsp.pay_method,
+																	oi_totalPrice : rsp.paid_amount,
+																	oi_status : rsp.status,
+																	order_name : rsp.name,
+																	oi_name : rsp.buyer_name,
+																	oi_email : rsp.buyer_email,
+																	oi_phone : rsp.buyer_tel,
+																	oi_addr_full : rsp.buyer_addr,
+																	oi_addr_zipNo : rsp.buyer_postcode,
+																	oi_addr_roadAddrPart1 : voi_addr_roadAddrPart1,
+																	oi_addr_roadAddrPart2 : voi_addr_roadAddrPart2,
+																	oi_addr_addrDetail : voi_addr_addrDetail,
+																	oi_orderDate : rsp.paid_at,
+																	oi_deliMessage : voi_deliMessage,
+																	oi_originTotalPrice : voi_originTotalPrice,
+																	oi_usePoint : voi_usePoint,
+																	add_name : vadd_name,
+																	add_phone1 : vadd_phone1,
+																	add_phone2 : vadd_phone2,
+																	add_email : vadd_email,
+																	add_addr_full : vadd_addr_full,
+																	add_addr_zipNo : vadd_addr_zipNo,
+																	add_addr_roadAddrPart1 : vadd_addr_roadAddrPart1,
+																	add_addr_roadAddrPart2 : vadd_addr_roadAddrPart2,
+																	add_addr_addrDetail : vadd_addr_addrDetail,
+																	oi_productOrderNum : grparr,
+																	sessionId : sessionId
+																},
+																error : function(xhr, status, error) {
+																	console.log("실패 : "+ oi_productOrderNum);
+																	alert("실패"+ error);
+																},
+																success : function(json) {
+																	alert("결제가 성공적으로 완료되었습니다. 감사합니다.")
+																	location.href = "${pageContext.request.contextPath }/productorder/orderInquiry.do?o_state=1&page=1";
+																}
+															});
+												} else {
+													alert("결제에 실패하였습니다. 에러 내용: "+ rsp.error_msg);
+												}
+											});
+						});
 	</script>
 
 </body>

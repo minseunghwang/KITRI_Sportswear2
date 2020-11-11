@@ -118,4 +118,14 @@ public class ProductOrderController {
 		return mav;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/productorder/CartItemCount.do")
+	public ModelAndView CartItemCount(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav= new ModelAndView("jsonView");
+		int count = productOrderService.productOrderCartItemCount(request);
+		mav.addObject("cnt", count);
+		return mav;
+	}
+	
+	
 }

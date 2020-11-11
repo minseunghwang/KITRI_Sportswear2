@@ -120,10 +120,6 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		
 		for(ProductOrderVO o:list) {
 			ProductDto p = productDao.select(o.getMax_p_num());
-			System.out.println("========");
-			System.out.println(p);
-			System.out.println(o);
-			System.out.println("========");
 			o.setPriceView(o.getSum_total_price());
 			o.setProd_name(p.getName());
 			o.setProd_img(p.getImg());
@@ -165,7 +161,6 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		}
 		
 		mav.addObject("pn",pn);
-		
 		mav.addObject("list", list);
 		mav.setViewName("/mypage/neworderlist");
 	}
@@ -181,7 +176,6 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		if (findProductQuantity >= quantity) { // 재고 >= 주문수량 :: 주문 가능
 			mav.addObject("ans", "Ok");
 		} else { // 재고없음
-			System.out.println("재고읎");
 			mav.addObject("ans", "Sold Out");
 		}
 	}
@@ -200,9 +194,7 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		
 		// 결제하고나면 세션이 없어져서 u_id를 못받아오는 현상이 있군
 		
-		System.out.println(m_id + " @@@@ " + o_state);
 		List<ProductOrderVO> list = productOrderDao.orderList(m_id, o_state);
-		
 		
 		for(ProductOrderVO o:list) {
 			ProductDto p = productDao.select(o.getP_num());
@@ -336,7 +328,11 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpSession session = request.getSession(false);
 		String id = (String) session.getAttribute("id");
-		
+		if (id == null) {
+			id = request.getParameter("sessionId");
+			session.setAttribute("id", id);
+			session.setAttribute("memberType", 1);
+		}
 		String oi_name = request.getParameter("oi_name");
 		String oi_phone = request.getParameter("oi_phone");
 
@@ -370,12 +366,9 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		
 		String [] selection = request.getParameterValues("oi_productOrderNum[]");
 		
-		System.out.println(id +"," + oi_name +"," + code_num);
-		System.out.println(selection.toString());
 		
 		for (String sel:selection) {
-			int num = Integer.parseInt(sel);		// 이상하게 짜놔서 일단 물리적으로 1 더하게 해놓음
-			System.out.println(num);
+			int num = Integer.parseInt(sel);		// 이상하게 짜놔서 일단 물리적으로 1 더하게 해놓음 // 해결
 			ProductOrderVO po = productOrderDao.getOrder(num);
 			
 			po.setCode_num(code_num);		
@@ -425,7 +418,6 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		oivo.setAdd_addr_roadAddrPart1(add_addr_roadAddrPart1);
 		oivo.setAdd_addr_roadAddrPart2(add_addr_roadAddrPart2);
 		oivo.setAdd_addr_addrDetail(add_addr_addrDetail);
-		System.out.println(oivo.toString());
 		
 		// 이거보면 oi_id 즉 로그인된 id가 없음 -> 세션이 또 날라가있는상태. 결제후에 세션날라가는거 해결해야할듯
 
@@ -496,19 +488,15 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		int order_totalPrice = 0;
 		for (String sel:selection) {
 			int o_num = Integer.parseInt(sel);
-			System.out.println("전달받은 num : " + o_num);
 			orderName += "," + sel;
 			ProductOrderVO po = productOrderDao.getOrder(o_num);
 			ProductDto p = productDao.select(po.getP_num());
 			
-			System.out.println(po.toString());
 			po.setProd_name(p.getName());
 			po.setProd_img(p.getImg());
 			
 			order_totalPrice += po.getTotal_price();
 			order_totalQuantity += po.getO_quantity();
-			System.out.println("order_totalQuantity : " + order_totalQuantity);
-			System.out.println("order_totalPrice : " + order_totalPrice);
 			
 			list.add(po);
 		}
@@ -523,5 +511,13 @@ public class ProductOrderServiceImp implements ProductOrderService {
 		mav.addObject("member", member);
 		mav.addObject("preSave_point", preSave_point);
 		mav.setViewName("/mypage/cartOrderPage");
+	}
+
+	@Override
+	public int productOrderCartItemCount(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		String m_id = request.getParameter("m_id");
+		int cntInCart = productOrderDao.getCartItemCount(m_id);
+		return cntInCart;
 	}
 }

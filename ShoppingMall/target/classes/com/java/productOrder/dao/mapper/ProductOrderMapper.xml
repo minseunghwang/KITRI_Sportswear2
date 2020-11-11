@@ -45,7 +45,7 @@
 
 <insert id="productOrderAdd" parameterType="com.java.productOrder.dto.ProductOrderDto">
 	insert into product_order
-	values(SEQ_PRODUCT_ORDER.nextval, #{p_num}, #{o_quantity}, #{total_price}, #{m_id}, sysdate, #{o_state}, #{d_state}, #{p_size}, #{r_state}, null)
+	values(#{num}, #{p_num}, #{o_quantity}, #{total_price}, #{m_id}, sysdate, #{o_state}, #{d_state}, #{p_size}, #{r_state}, null)
 </insert>
 
 <select id="orderList" resultType="com.java.productOrder.dto.ProductOrderVO">
@@ -94,5 +94,11 @@
 	set point=((select point from member where id=#{m_id})+(select total_price from product_order where num=#{o_num} and m_id=#{m_id})*0.02)
 	where id=#{m_id}
 </update>
+
+<select id="getCartItemCnt" resultType="int" parameterType="String">
+	select count(*) from product_order where m_id=#{m_id} and o_state=0
+</select>
+
+
 
 </mapper>
