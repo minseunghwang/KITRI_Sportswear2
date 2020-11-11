@@ -79,11 +79,11 @@
 
 
    <script type="text/javascript">
-      
+   var unSizeCheck
    
       <!-- 장바구니 클릭 상품 번호 전달 -->
        function addCart(productNum) {
-         if(${sessionScope.id == null }){
+         if(${empty sessionScope.id}){
             if(confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?')){
                location.href = "<%=request.getContextPath()%>/member/login.do";
                /* location.href= "${pageContext.request.contextPath }/LoginController"; */
@@ -93,12 +93,11 @@
             }
          } else{
             
-            var unSizeCheck = $("#selected").length ? false : true;
+        	unSizeCheck = $("#selected").length ? false : true;
             if(unSizeCheck){
                alert('사이즈를 선택해주세요');
                return;
             }
-            
             if(confirm('장바구니에 추가하시겠습니까?')){
                
                var size = $("#selected").text();
@@ -142,7 +141,7 @@
       
       function directOrder(productNum) {
          
-         if(${sessionScope.id == null }){
+         if(${empty sessionScope.id}){
             if(confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?')){
                location.href = "<%=request.getContextPath()%>/member/login.do";
                return;
@@ -150,8 +149,6 @@
                return;   
             }
          } else {
-            
-            var unSizeCheck = $("#selected").length ? false : true;
             if(unSizeCheck){
                alert('사이즈를 선택해주세요');
                return;

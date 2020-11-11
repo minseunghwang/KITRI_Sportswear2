@@ -56,6 +56,7 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 
 	@Override
 	public void productOrderAdd(ProductOrderVO po) {
+		System.out.println("이거지?" + po.toString());
 		sqlSessionTemplate.insert("productOrderAdd",po);
 	}
 
@@ -134,5 +135,10 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 		hmap.put("m_id", m_id);
 		hmap.put("o_num", Integer.toString(o_num));
 		sqlSessionTemplate.update("updatePoint", hmap);
+	}
+
+	@Override
+	public int getCartItemCount(String m_id) {
+		return sqlSessionTemplate.selectOne("getCartItemCnt", m_id);
 	}
 }
