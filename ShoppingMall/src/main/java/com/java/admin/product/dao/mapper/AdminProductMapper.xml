@@ -19,24 +19,74 @@
     	from product
 	</select>
 	
-	<select id="getProductManagementByPageNum" parameterType="java.util.Map" resultMap="product_dto">
+	<select id="getProductManagementByPageNum" parameterType="int" resultMap="product_dto">
 	<![CDATA[
 		select * 
 		from (select rownum as rnum, a.* 
 			  from (select * 
 			        from product 
 			        order by num) A 
-			  where rownum <= ?) X 
-		where x.rnum >= ?
+			  where rownum <= #{endPage}) X 
+		where x.rnum >= #{startPage}
 		]]>
 	</select>
 	
-	<select id="getProductsSizeAll" parameterType="int">
-	select * 
+	<select id="getProductsSizeAll" parameterType="int" resultType="com.java.common.ProductSizeVO">
+	select num as p_num, psize, quantity
 	from (select p.num, s.psize, s.quantity 
 	      from product p, product_size s 
 	      where p.num = s.p_num) 
-	where num=?
+	where num=#{p_num}
 	</select>
+	
+	<insert id="product_insert" parameterType="com.java.product.dto.ProductDto">
+		insert
+		into product(
+			num,
+			name,
+			price,
+			img,
+			content,
+			e_date,
+			record,
+			category
+			)
+		values(
+			<!-- seq_shop_product.nextval, -->
+			#{num},
+			#{name},
+			#{price},
+			#{img},
+			#{content},
+			sysdate,
+			#{record},
+			#{category}
+		)
+		
+	</insert>
+	
+	<insert id="product_insert_Img" parameterType="com.java.common.ProductImageVO">
+		insert
+		into product_image(
+			num,
+			p_num,
+			img
+		)
+		values(
+			#{num},
+			#{p_num},
+			#{img}
+		)
+	</insert>
+	
+<select id="selectProductNum" resultType="int">
+		select seq_shop_product.nextval 
+		from dual
+	</select>
+	
+	<select id="selectProductImgNum" resultType="int">
+		select seq_product_image.nextval 
+		from dual
+	</select> 
 	
     </mapper>

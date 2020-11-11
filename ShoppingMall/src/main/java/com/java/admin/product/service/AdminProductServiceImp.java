@@ -1,21 +1,31 @@
 package com.java.admin.product.service;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
+//import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.java.admin.product.dao.AdminProductDao;
 import com.java.common.PaginationVO;
+import com.java.common.ProductImageVO;
 import com.java.common.ProductSizeVO;
 import com.java.product.dto.ProductDto;
-import com.java.productSize.dto.ProductSizeDto;
 
+
+@Configuration
 @Component
 public class AdminProductServiceImp implements AdminProductService{
 
@@ -27,21 +37,19 @@ public class AdminProductServiceImp implements AdminProductService{
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 
-		int page = Integer.parseInt(request.getParameter("page"));
+		int page = Integer.parseInt(request.getParameter("page"));	
+		int startRange = (page - 1) * 8 + 1;
+		int endRange = page * 8;
 		
-		//ArrayList<ProductDto> allProducts = service.getProductAll();
-		//ArrayList<ProductDto> products = service.getProductManagementByPageNum(page);
-		
-		ArrayList<ProductDto>products = adminProductDao.getProductManagementByPageNum(page);
+		List<ProductDto> products = adminProductDao.getProductManagementByPageNum(startRange,endRange);
+
 		List<Object> allProducts = null;
 		allProducts = adminProductDao.getProductAll();
 		
 		for (ProductDto product : products) {
-			ArrayList<ProductSizeVO> productsSize = adminProductDao.getProductsSizeAll(product.getNum());
+			List<ProductSizeVO> productsSize = adminProductDao.getProductsSizeAll(product.getNum());
 			product.setSizes(productsSize);
 		}
-		
-		request.setAttribute("products", products);		
 		
 		PaginationVO pn = new PaginationVO();
 		
@@ -68,39 +76,121 @@ public class AdminProductServiceImp implements AdminProductService{
 			pn.setEndPage(pn.getTotalPage());
 		}
 		
-//		String page = request.getParameter("page");
-//
-//		if (page == null) {
-//			page = "1";
-//		}
-//		
-//		int currentPage = Integer.parseInt(page);
-//		int noticeSize = 10; // �븳�럹�씠吏��뿉 10媛�
-//		int startRow = (currentPage - 1) * noticeSize + 1; // 湲��떆�옉踰덊샇
-//		int endRow = currentPage * noticeSize; // �걹踰덊샇
-//		int count = noticeDao.countallmine();
-//
-//		List<NoticeDto> notices = null;
-//
-//		notices = noticeDao.noticeList(startRow, endRow);
-//		
-//		mav.addObject("notices", notices);
-//		mav.addObject("currentPage", currentPage);
-//		mav.addObject("noticeSize", noticeSize);
-//		mav.addObject("count", count);
-//		mav.setViewName("notice/list");
+		mav.addObject("products", products);
+		mav.addObject("pn", pn);
+		mav.setViewName("/admin/product/adminProductManagement");
 	}
 
 	@Override
 	public void productWrite(ModelAndView mav) {
-		// TODO Auto-generated method stub
-		
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		mav.setViewName("admin/product/adminProductAddForm");
 	}
 
 	@Override
 	public void productWriteOk(ModelAndView mav) {
-		// TODO Auto-generated method stub
+		Map<String, Object>map= mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
 		
-	}
+		ProductDto productDto = (ProductDto) map.get("productDto");
+		ProductImageVO productImageVO = (ProductImageVO) map.get("productImageVO");
+		
+		int seqProductNum = adminProductDao.makeProductNum();
+		System.out.println("손목아퍼" + seqProductNum);
+		productDto.setNum(seqProductNum);
+		productImageVO.setP_num(seqProductNum);
+//				
+		String thumbnailImgName = "";
+		String detailImgName = "";
+		String inputTagName = "";
+		
+		int maxSize = 1024 * 1024 * 10;
+		
+		String uploadPath = "C:\\spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\webapps\\upload_img";
+//		String uploadPath = "C:\\Users\\kit\\git\\KITRI_Sportswear3\\ShoppingMall\\src\\main\\webapp\\resources\\upload_img";
+		
+		
+		try {
+//			multi = new MultipartRequest(request, uploadPath, maxSize, "utf-8", new DefaultFileRenamePolicy());
+			
+			productDto.setName(multipartHttpServletRequest.getParameter("name"));
+			
+			String[] categorys = multipartHttpServletRequest.getParameterValues("category");
+			for (String category : categorys) {
+				productDto.setCategory(category);
+			}
 
+			System.out.println(productDto.toString());
+			productDto.setPrice(Integer.parseInt(multipartHttpServletRequest.getParameter("price")));
+			productDto.setContent(multipartHttpServletRequest.getParameter("content"));
+
+		    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+			MultipartFile multipartFile = multipartHttpServletRequest.getFile("file");
+			System.out.println("미춰버리겟네 진실 : " + multipartFile.getOriginalFilename());
+			MultipartFile multipartFile2 = multipartHttpServletRequest.getFile("file1");
+			System.out.println("미춰버리겟네 진실2 : " + multipartFile2.getOriginalFilename());
+			
+//			MultipartFile ms = null;
+//			while(iterator.hasNext()) {
+//				ms = multipartHttpServletRequest.getFile(iterator.next());
+//				System.out.println("메롱" + ms.getOriginalFilename());
+//			}
+
+			while(iterator.hasNext()){
+				multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+				//thumbnailImgName = multipartFile.getOriginalFileName("file"); //진실
+				if(multipartFile.isEmpty() == false){
+					productDto.setImg("/upload_img/" + multipartFile.getOriginalFilename());
+					break;
+				}
+			}
+			
+			// 대표이미지 업로드
+			System.out.println(productDto.toString());
+			adminProductDao.productInsert(productDto);
+			
+//			파일 업로드
+	//		File file = (File) multipartFile;
+			File file = (File) multipartHttpServletRequest.getFile("file"); //진실
+	//		multipartFile = multipartHttpServletRequest.getFile("file"); //진실
+
+			
+			// 전송한 전체 파일이름들을 가져옴
+			Iterator<String> files = multipartHttpServletRequest.getFileNames();
+			multipartFile = null;
+			// 상세이미지 업로드
+						while(files.hasNext()) {
+							// form 태그에서 <input type="file" name="여기에 지정한 이름" />을 가져온다.
+//							inputTagName = (String) files.nextElement();	// 파일 input에 지정한 이름을 가져옴
+
+							if(!inputTagName.equals("file")) {
+								// 그에 해당하는 실제 파일 이름을 가져옴
+								multipartFile = multipartHttpServletRequest.getFile(files.next());
+								if(multipartFile.isEmpty() == false) {
+									//StringUtils.isNotBlank(detailImgName)
+									productImageVO.setNum(adminProductDao.makeProductImgNum());
+									productImageVO.setImg("/upload_img/" + multipartFile.getOriginalFilename());
+									System.out.println(productImageVO.toString());
+
+									adminProductDao.productImgInsert(productImageVO);
+									//파일 업로드
+									File file1 = (File) multipartHttpServletRequest.getFile(inputTagName);
+								}
+							}
+						}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//int check =adminProductDao.productWriteOk(productDto, productImageVO);
+		int check = 1;
+//		int check2 = adminProductDao.productImgInsert(productImageVO);
+
+		// mav.addObject("check",check);
+		mav.addObject("check", check);
+//		mav.addObject("check2", check2);
+		mav.setViewName("admin/product/adminProductAddFormOk");
+	}
 }

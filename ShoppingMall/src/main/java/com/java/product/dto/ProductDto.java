@@ -3,6 +3,7 @@ package com.java.product.dto;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.java.common.ProductSizeVO;
 import com.java.review.dto.ReviewDto;
@@ -19,14 +20,14 @@ public class ProductDto {
 	private int record;
 	private String category;
 	private ArrayList<ReviewDto> reviews;
-	private ArrayList<ProductSizeVO> sizes;
+	private List<ProductSizeVO> sizes;
 	
-	public ArrayList<ProductSizeVO> getSizes() {
+	public List<ProductSizeVO> getSizes() {
 		return sizes;
 	}
 
-	public void setSizes(ArrayList<ProductSizeVO> sizes) {
-		this.sizes = sizes;
+	public void setSizes(List<ProductSizeVO> productsSize) {
+		this.sizes = productsSize;
 	}
 
 	private String priceView;

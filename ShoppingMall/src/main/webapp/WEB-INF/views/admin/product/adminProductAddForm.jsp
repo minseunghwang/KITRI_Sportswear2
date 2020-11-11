@@ -16,7 +16,7 @@
 	
 	</style>
 	
-	<script src="<%=request.getContextPath()%>/resource/vendor/jquery/jquery.min.js" type="text/javascript"></script>
+	<script src="<%=request.getContextPath()%>/resources/vendor/jquery/jquery.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 
 		$(document).ready(function() {
@@ -67,7 +67,7 @@
 
 			<div class="col-lg-10">
 
-				<form action="${pageContext.request.contextPath }/ProductAddController" method="post" enctype="multipart/form-data" onsubmit="return check()">
+				<form action="${pageContext.request.contextPath }/admin/product/adminProductAddFormOk.do" method="post" enctype="multipart/form-data" onsubmit="return check()">
 					<table class="table table-bordered">
 						<thead class="thead-dark">
 							<tr style="text-align: center;">
@@ -124,7 +124,7 @@
 							</tr>
 							<tr>
 								<td>
-									<input class="btn btn-success" type="submit" value="Prod Add">
+									<input class="btn btn-success" type="submit" value="Upload">
 									<input class="btn btn-primary" type="reset" value="Reset">
 								</td>
 							</tr>

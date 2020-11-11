@@ -82,7 +82,7 @@
 							<tr id="tbody_tr" style="text-align: center;">
 								<td scope="row"><input type="checkbox"></td>
 								<td>${p.num }</td>
-								<td><img src="${p.img}" width="50" height="75"></td>
+								<td><img src="/product/resources/${p.img}" width="50" height="75"></td>
 								<td  style="text-align:justify;">${p.name }</td>
 								<td>
 									<c:if test="${empty p.sizes }">

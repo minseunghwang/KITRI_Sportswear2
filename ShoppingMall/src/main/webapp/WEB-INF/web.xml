@@ -14,12 +14,17 @@
       <param-name>contextConfigLocation</param-name>
       <param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
     </init-param>
+   	<init-param>
+		<param-name>multipartResolverBeanName</param-name>
+		<param-value>multipartResolver</param-value>
+	</init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>appServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter
@@ -29,10 +34,12 @@
       <param-value>UTF-8</param-value>
     </init-param>
   </filter>
+  
   <filter-mapping>
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
   <servlet>
     <description></description>
     <display-name>minhoi</display-name>
@@ -43,4 +50,31 @@
     <servlet-name>minhoi</servlet-name>
     <url-pattern>/minhoi</url-pattern>
   </servlet-mapping>
+
+	<filter>
+		<filter-name>multipart</filter-name>
+		<filter-class>org.springframework.web.multipart.support.MultipartFilter
+		</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>multipart</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping> 
+	<!-- <filter>
+		<display-name>springMultipartFilter</display-name>
+		<filter-name>springMultipartFilter</filter-name>
+		<filter-class>org.springframework.web.multipart.support.MultipartFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springMultipartFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
+
+<!-- 	<init-param>
+		<param-name>multipartResolverBeanName</param-name>
+		<param-value>multipartResolver</param-value>
+	</init-param> -->
+	
 </web-app>

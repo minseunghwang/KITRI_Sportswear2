@@ -9,5 +9,5 @@ public interface AdminProductService {
 	public void productWrite(ModelAndView mav);
 
 	public void productWriteOk(ModelAndView mav);
-
+	
 }
