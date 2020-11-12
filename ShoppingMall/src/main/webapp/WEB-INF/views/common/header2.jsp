@@ -294,7 +294,6 @@
 		}
 	
 		$(document).ready(function() {
-	
 			var sessionId = "${sessionScope.id}";
 			console.log(sessionId);
 			// 사용자별 장바구니에 있는 상품개수 표시
