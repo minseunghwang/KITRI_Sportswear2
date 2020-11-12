@@ -80,7 +80,6 @@
 
    <script type="text/javascript">
    var unSizeCheck
-   
       <!-- 장바구니 클릭 상품 번호 전달 -->
        function addCart(productNum) {
          if(${empty sessionScope.id}){
@@ -140,7 +139,6 @@
       }
       
       function directOrder(productNum) {
-         
          if(${empty sessionScope.id}){
             if(confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?')){
                location.href = "<%=request.getContextPath()%>/member/login.do";

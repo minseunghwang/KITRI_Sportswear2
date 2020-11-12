@@ -50,6 +50,8 @@
 <style type="text/css">
 
 </style>
+
+<%@include file="/WEB-INF/views/common/sessionCheck.jsp"%>
 </head>
 <body>
 
