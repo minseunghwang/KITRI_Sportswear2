@@ -18,6 +18,45 @@
 	
 	<script src="<%=request.getContextPath()%>/resources/vendor/jquery/jquery.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
+		function fileSizeCheck(file){
+			
+			var maxSize  = 2097151;
+			var filesize = 0;
+			
+			filesize = document.fileForm.file.files[0].size;
+			
+			checkValue1 = document.getElementById("file1").value;
+			
+			if(checkValue1){
+				filesize += document.fileForm.file1.files[0].size;
+			}
+			
+			checkValue2 = document.getElementById("file2").value;
+			if(checkValue2){
+				filesize += document.fileForm.file2.files[0].size;
+			}
+			
+			checkValue3 = document.getElementById("file3").value;
+			if(checkValue3){
+				filesize += document.fileForm.file3.files[0].size;
+			}
+			
+			checkValue4 = document.getElementById("file4").value;
+			if(checkValue4){
+				filesize += document.fileForm.file4.files[0].size;
+			}
+			
+			console.log(filesize);
+			
+
+			if(filesize > maxSize)
+	        {
+	            alert("첨부파일 사이즈는 2MB 이내로 등록 가능합니다.");
+	            return false;
+	        }
+			
+			return true;
+		}
 
 		$(document).ready(function() {
 	
@@ -43,7 +82,6 @@
 					$("#detail_img1").hide();
 				}
 			});
-	
 		});
 		
 	</script>
@@ -67,7 +105,7 @@
 
 			<div class="col-lg-10">
 
-				<form action="${pageContext.request.contextPath }/admin/product/adminProductAddFormOk.do" method="post" enctype="multipart/form-data" onsubmit="return check()">
+				<form action="${pageContext.request.contextPath }/admin/product/adminProductAddFormOk.do" method="post" enctype="multipart/form-data" onsubmit="return check()" name="fileForm">
 					<table class="table table-bordered">
 						<thead class="thead-dark">
 							<tr style="text-align: center;">
@@ -96,27 +134,27 @@
 							</tr>
 							<tr>
 								<th scope="col">대표 이미지</th>
-								<td><input type="file" name="file"></td>
+								<td><input type="file" name="file" id="file"></td>
 							</tr>
 							<tr>
 								<th scope="col">상세 이미지1</th>
 								<td>
-									<input type="file" name="file1">
+									<input type="file" name="file1" id="file1">
 									<input class="btn btn-outline-success" type="button" id="addbtn" value="Img Add">
 									<input class="btn btn-outline-danger" type="button" id="delbtn" value="Img Del">
 								</td>
 							</tr>
 							<tr id="detail_img1">
 								<th scope="col">상세 이미지2</th>
-								<td><input type="file" name="file2"></td>
+								<td><input type="file" name="file2" id="file2"></td>
 							</tr>
 							<tr id="detail_img2">
 								<th scope="col">상세 이미지3</th>
-								<td><input type="file" name="file3"></td>
+								<td><input type="file" name="file3" id="file3"></td>
 							</tr>
 							<tr id="detail_img3">
 								<th scope="col">상세 이미지4</th>
-								<td><input type="file" name="file4"></td>
+								<td><input type="file" name="file4" id="file4"></td>
 							</tr>
 							<tr>
 								<th rowspan="2">상세설명</th>
@@ -124,7 +162,7 @@
 							</tr>
 							<tr>
 								<td>
-									<input class="btn btn-success" type="submit" value="Upload">
+									<input class="btn btn-success" type="submit" value="Upload" onclick="return fileSizeCheck(file)">
 									<input class="btn btn-primary" type="reset" value="Reset">
 								</td>
 							</tr>
