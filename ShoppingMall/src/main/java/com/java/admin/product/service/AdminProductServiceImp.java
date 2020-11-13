@@ -113,7 +113,6 @@ public class AdminProductServiceImp implements AdminProductService{
 		
 		
 		try {
-//			multi = new MultipartRequest(request, uploadPath, maxSize, "utf-8", new DefaultFileRenamePolicy());
 			
 			productDto.setName(multipartHttpServletRequest.getParameter("name"));
 			
@@ -128,15 +127,7 @@ public class AdminProductServiceImp implements AdminProductService{
 
 		    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
 			MultipartFile multipartFile = multipartHttpServletRequest.getFile("file");
-			System.out.println("미춰버리겟네 진실 : " + multipartFile.getOriginalFilename());
-			MultipartFile multipartFile2 = multipartHttpServletRequest.getFile("file1");
-			System.out.println("미춰버리겟네 진실2 : " + multipartFile2.getOriginalFilename());
-			
-//			MultipartFile ms = null;
-//			while(iterator.hasNext()) {
-//				ms = multipartHttpServletRequest.getFile(iterator.next());
-//				System.out.println("메롱" + ms.getOriginalFilename());
-//			}
+			//MultipartFile multipartFile2 = multipartHttpServletRequest.getFile("file1");
 
 			while(iterator.hasNext()){
 				multipartFile = multipartHttpServletRequest.getFile(iterator.next());
@@ -149,8 +140,6 @@ public class AdminProductServiceImp implements AdminProductService{
 			// 대표이미지 업로드
 			System.out.println(productDto.toString());
 			adminProductDao.productInsert(productDto);
-//			파일 업로드
-			//File file = (File) multipartHttpServletRequest.getFile("file"); //진실
 
 			// 전송한 전체 파일이름들을 가져옴
 			Iterator<String> files = multipartHttpServletRequest.getFileNames();
@@ -164,33 +153,11 @@ public class AdminProductServiceImp implements AdminProductService{
 						productImageVO.setNum(adminProductDao.makeProductImgNum());
 						productImageVO.setImg("/upload_img/" + multipartFile.getOriginalFilename());
 						System.out.println(productImageVO.toString());
-
 						adminProductDao.productImgInsert(productImageVO);
-
-						//File file1 = (File) multipartHttpServletRequest.getFile(inputTagName);
 					}
 				}
 			}
-//						while(files.hasNext()) {
-//							// form 태그에서 <input type="file" name="여기에 지정한 이름" />을 가져온다.
-////							inputTagName = (String) files.nextElement();	// 파일 input에 지정한 이름을 가져옴
-//
-//							if(!inputTagName.equals("file")) {
-//								// 그에 해당하는 실제 파일 이름을 가져옴
-//								multipartFile = multipartHttpServletRequest.getFile(files.next());
-//								if(multipartFile.isEmpty() == false) {
-//									//StringUtils.isNotBlank(detailImgName)
-//									productImageVO.setNum(adminProductDao.makeProductImgNum());
-//									productImageVO.setImg("/upload_img/" + multipartFile.getOriginalFilename());
-//									System.out.println(productImageVO.toString());
-//
-//									adminProductDao.productImgInsert(productImageVO);
-//									//파일 업로드
-//									File file1 = (File) multipartHttpServletRequest.getFile(inputTagName);
-//								}
-//							}
-//						}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
