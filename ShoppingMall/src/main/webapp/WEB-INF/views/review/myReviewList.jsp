@@ -89,8 +89,6 @@ table{
 			<div class="reviewlistbox">
 				
 				<h3>내가 쓴 리뷰 목록</h3>
-	     	
-	
 		<form id="myreviewList" name="myreviewList" method="post">
 				<table class="table table-hover table-sm mt-3 mb-5">
 				<thead class="thead-light1" style="background-color: white;">
@@ -101,8 +99,6 @@ table{
 						<th scope="col">이미지 </th> 
 						<th scope="col">리뷰 쓴 날짜 </th> 
 						<th scope="col">상품평 수정</th> 
-		
-						
 					</tr>
 				</thead>
 				<tbody >
@@ -116,7 +112,6 @@ table{
 							<%-- <td><a href="${pageContext.request.contextPath }/EachReviewController?r_num=${r.num }">수정하기</a> </td>
 							<td><button type="button" class="btn btn-link" onclick="showUpdatePopup('${r.num }');">팝업 수정</button> </td> --%>
 							<td style="vertical-align: middle;"><button type="submit" class="btn btn-outline-secondary" onclick="reviewUpdatePopup('${r.num }');">수정하기</button> </td>
-		
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -175,11 +170,7 @@ table{
 			</nav>
 			<br>
 		<!-- /pagination -->
-	
-	
-	
 	</div>
-	
 	  			<!-- footer -->
 	<%@include file="/WEB-INF/views/common/footer2.jsp"%>
 	    

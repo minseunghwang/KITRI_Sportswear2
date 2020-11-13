@@ -100,8 +100,9 @@ public class ReviewServiceImpl implements ReviewService{
 		String m_id = (String)session.getAttribute("id");
 		
 		int page = Integer.parseInt(request.getParameter("page"));
-		ArrayList<ReviewDto> list = reviewDao.getMyReviewAll(m_id, page);
+		List<ReviewDto> list = reviewDao.getMyReviewAll(m_id, page);
 		
+		System.out.println(list);
 		
 		PaginationVO pn = new PaginationVO();
 		

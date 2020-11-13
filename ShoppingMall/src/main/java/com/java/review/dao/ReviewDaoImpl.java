@@ -94,9 +94,14 @@ public class ReviewDaoImpl implements ReviewDao{
 	}
 
 	@Override
-	public ArrayList<ReviewDto> getMyReviewAll(String m_id, int page) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ReviewDto> getMyReviewAll(String m_id, int page) {
+		Map<String, String> hmap = new HashMap<String, String>();
+		hmap.put("m_id", m_id);
+		int start = (page-1) * 3 +1;
+		int end = page * 3;
+		hmap.put("start", Integer.toString(start));
+		hmap.put("end", Integer.toString(end));
+		return sqlSessionTemplate.selectList("getMyReviewAll",hmap);
 	}
 
 	@Override
@@ -110,3 +115,4 @@ public class ReviewDaoImpl implements ReviewDao{
 	}
 	
 }
+

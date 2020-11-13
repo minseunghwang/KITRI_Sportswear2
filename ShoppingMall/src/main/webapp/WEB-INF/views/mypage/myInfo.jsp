@@ -70,24 +70,17 @@ body{
 	<!-- Page Container -->
 	<div class="container">
 	<c:if test="${not empty sessionScope.id }">
-	
-	
 		<h1 class="my-4">MY PAGE</h1>
-		
 		<div class="row">
-			
 			<!-- leftNavigation -->
 			<jsp:include page = "/WEB-INF/views/common/mypageCategory.jsp" />
 			<!-- /leftNavigation -->
-
-
 			<div class = "membershowbox">
 				<div class="hellouser">
 					<img src="${pageContext.request.contextPath }/resources/sample_img/user_basic.png" alt="" width="75" height="75"> 
 					<h4 style="font-size:1.5em; "> &nbsp; ${sessionScope.id } 고객님, 안녕하세요!</h4>
 				</div>
 					<br>
-
 					<div class="pointbox" >
 						<h6> POINTS : &nbsp; ${point} 점 </h6>
 						<!--  <a href="#" id="mypointmore" > more>> </a> -->		
@@ -96,12 +89,10 @@ body{
 				<div class="orderedlist">
 					<%@include file ="/WEB-INF/views/mypage/recentOrderlist.jsp" %>
 				</div> 
-				
 			</div>	
 		</div>
 	</c:if>
  	</div>
-
 <%-- 
 	<!-- Footer -->
 		<%@include file ="/views/common/footer.jsp" %>

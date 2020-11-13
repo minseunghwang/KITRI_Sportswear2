@@ -38,4 +38,10 @@
 		)
 	</insert>
 	
+	<select id="getMyReviewAll" parameterType="String" resultMap="review_dto">
+		<![CDATA[
+		select num, m_id, p_num, rate, content, img, r_date
+		from (select rownum as rnum, a.* from (select * from review where m_id=#{m_id} order by num desc) A where rownum<=#{end}) X where x.rnum>=#{start}
+		]]>
+	</select>
 </mapper>

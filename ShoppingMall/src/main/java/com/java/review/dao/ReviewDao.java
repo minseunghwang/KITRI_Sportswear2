@@ -27,7 +27,7 @@ public interface ReviewDao {
 	public ArrayList<ReviewDto> myselectAll(String m_id, int page);
 	int countallmine(String m_id);
 	int countreviewByP_Num(int p_num);
-	public ArrayList<ReviewDto> getMyReviewAll(String m_id, int page);
+	public List<ReviewDto> getMyReviewAll(String m_id, int page);
 	public int getcountMine(String m_id);
 	void add(ReviewDto reviewdto);
 	
