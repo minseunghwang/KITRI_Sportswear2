@@ -111,6 +111,18 @@ public class ProductOrderVO {
 		
 		this.priceView = Common.priceView(total_price);
 	}
+	
+	public ProductOrderVO(String code_num, Date max_o_date, int sum_total_price, int max_d_state, int max_p_num, int ctnrow) {
+		super();
+		this.code_num=code_num;
+		this.max_o_date=max_o_date;
+		this.max_d_state=max_d_state;
+		this.sum_total_price=sum_total_price;
+		this.max_p_num=max_p_num;
+		this.ctnrow=ctnrow;
+		
+		this.priceView = Common.priceView(sum_total_price);
+	}
 
 
 	public int getNum() {

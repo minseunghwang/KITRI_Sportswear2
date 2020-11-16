@@ -29,4 +29,5 @@ public interface ProductOrderDao {
 	public void editR_State(String m_id, int num);
 	public void editPoint(String m_id, int o_num);
 	public int getCartItemCount(String m_id);
+	public List<ProductOrderVO> getRecentOrderList(String id);
 }

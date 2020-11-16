@@ -34,4 +34,5 @@ public interface ReviewService {
 	public void reviewMyList(ModelAndView mav);
 	public void AddReview(ModelAndView mav);
 	public void CreateReview(ModelAndView mav,HttpServletRequest request);
+	public void UpdateReview(ModelAndView mav);
 }

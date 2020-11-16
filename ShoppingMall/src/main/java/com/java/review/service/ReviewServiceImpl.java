@@ -193,4 +193,19 @@ public class ReviewServiceImpl implements ReviewService{
 		productorderDao.editPoint(m_id, o_num);
 		
 	}
+
+	@Override
+	public void UpdateReview(ModelAndView mav) {
+		Map<String, Object> map =mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		HttpSession session = request.getSession(false);
+		String m_id = (String)session.getAttribute("id");
+		int num = Integer.parseInt(request.getParameter("num")); 	//리뷰pk
+		
+		ReviewDto r = reviewDao.select(num);
+		
+		mav.addObject("r", r);
+		mav.addObject("num", num);
+		mav.setViewName("/review/updateForm");
+	}
 }

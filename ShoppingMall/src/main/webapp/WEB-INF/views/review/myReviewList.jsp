@@ -29,7 +29,7 @@
 			
 			var frmData = document.myreviewList;
 			frmData.target = pop_title;
-			frmData.action = "<%=request.getContextPath()%>/EachReviewPopupController?num="+num;
+			frmData.action = "${pageContext.request.contextPath }/review/EachReviewPopup.do?num="+num;
 		}
 		
 

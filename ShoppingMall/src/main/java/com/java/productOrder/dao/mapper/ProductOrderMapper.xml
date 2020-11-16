@@ -100,5 +100,13 @@
 </select>
 
 
+<select id="getRecentOrderList" resultType="com.java.productOrder.dto.ProductOrderVO" parameterType="String">
+	<![CDATA[
+	select code_num, max(o_date) max_o_date, max(d_state) max_d_state, sum(total_price) sum_total_price,  max(p_num) max_p_num, count(*) ctnrow
+	from product_order where m_id=#{id} and o_state=1 and rownum<=5 group by code_num order by max(o_date) desc
+	]]>
+</select>
+
+
 
 </mapper>

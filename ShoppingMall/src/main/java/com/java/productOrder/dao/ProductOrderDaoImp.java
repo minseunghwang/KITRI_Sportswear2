@@ -141,4 +141,9 @@ public class ProductOrderDaoImp  implements ProductOrderDao{
 	public int getCartItemCount(String m_id) {
 		return sqlSessionTemplate.selectOne("getCartItemCnt", m_id);
 	}
+
+	@Override
+	public List<ProductOrderVO> getRecentOrderList(String id) {
+		return sqlSessionTemplate.selectList("getRecentOrderList", id);
+	}
 }

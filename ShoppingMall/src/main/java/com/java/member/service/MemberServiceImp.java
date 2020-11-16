@@ -1,6 +1,7 @@
 package com.java.member.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.java.member.dao.MemberDao;
 import com.java.member.dto.MemberDto;
+import com.java.product.dao.ProductDao;
+import com.java.product.dto.ProductDto;
+import com.java.productOrder.dao.ProductOrderDao;
+import com.java.productOrder.dto.ProductOrderVO;
 
 
 @Component
@@ -20,6 +25,12 @@ public class MemberServiceImp implements MemberService {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private ProductOrderDao productorderDao;
+	
+	@Autowired
+	private ProductDao productDao;
 
 	@Override
 	public void memberLoginOk(ModelAndView mav) {
@@ -167,7 +178,6 @@ public class MemberServiceImp implements MemberService {
 	
 	@Override
 	public void memberMyPage(ModelAndView mav) {
-		// TODO Auto-generated method stub
 		Map<String, Object> map =mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		Map<String, String> hmap=new HashMap<String, String>();
@@ -177,6 +187,17 @@ public class MemberServiceImp implements MemberService {
 		hmap.put("id", id);
 		String point=memberDao.memberGetPoint(hmap);
 		
+		List<ProductOrderVO> recentList = productorderDao.getRecentOrderList(id);
+		
+		for(ProductOrderVO o:recentList) {
+			System.out.println(o.toString());
+			ProductDto p = productDao.select(o.getMax_p_num());
+			o.setProd_name(p.getName());
+			o.setProd_img(p.getImg());
+			o.setPriceView(o.getSum_total_price());
+		}
+		
+		mav.addObject("list", recentList);
 		mav.addObject("point",point);
 		mav.setViewName("/mypage/myInfo");
 		
