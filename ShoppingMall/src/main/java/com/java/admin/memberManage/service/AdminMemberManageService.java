@@ -4,4 +4,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface AdminMemberManageService {
 
+	public void memberList(ModelAndView mav);
+
 }

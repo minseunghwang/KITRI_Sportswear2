@@ -89,4 +89,49 @@
 		from dual
 	</select> 
 	
+		<select id="product_read" parameterType="int" resultMap="product_dto">
+		select *
+		from product
+		where num=#{num}
+	</select>
+	
+	<delete id="product_delete">
+		delete from product
+		where num=#{num}
+	</delete>
+	
+	<select id="selectQuantity" parameterType="String" resultType="int">
+		select quantity 
+		from product_size 
+		where p_num=#{productNum} and psize=#{size}
+	</select>
+	
+	<select id="selectProductSizeNum" resultType="int">
+		select seq_product_size.nextval 
+		from dual
+	</select>
+	
+	<insert id="productSize_insert" parameterType="com.java.common.ProductSizeVO">
+		insert into product_size (
+			num,
+			p_num,
+			psize,
+			quantity
+		)
+		values(
+			#{num},
+			#{p_num},
+			#{psize},
+			#{quantity}
+		)
+	</insert>
+	
+	<update id="productSize_update" parameterType="String">
+	<![CDATA[
+		update product_size 
+		set quantity=#{quantity} 
+		where p_num=#{productNum} and psize=#{size}
+	]]>
+	</update>
+	
     </mapper>

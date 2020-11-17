@@ -2,6 +2,7 @@ package com.java.admin.product.service;
 
 import java.io.File;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +77,7 @@ public class AdminProductServiceImp implements AdminProductService{
 			pn.setEndPage(pn.getTotalPage());
 		}
 		
+		mav.addObject("page", page);
 		mav.addObject("products", products);
 		mav.addObject("pn", pn);
 		mav.setViewName("/admin/product/adminProductManagement");
@@ -98,7 +100,6 @@ public class AdminProductServiceImp implements AdminProductService{
 		ProductImageVO productImageVO = (ProductImageVO) map.get("productImageVO");
 		
 		int seqProductNum = adminProductDao.makeProductNum();
-		System.out.println("손목아퍼" + seqProductNum);
 		productDto.setNum(seqProductNum);
 		productImageVO.setP_num(seqProductNum);
 //				
@@ -108,7 +109,7 @@ public class AdminProductServiceImp implements AdminProductService{
 		
 		int maxSize = 1024 * 1024 * 10;
 		
-		String uploadPath = "C:\\spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\webapps\\upload_img";
+		String uploadPath = "C:\\spring3\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\webapps\\upload_img";
 //		String uploadPath = "C:\\Users\\kit\\git\\KITRI_Sportswear3\\ShoppingMall\\src\\main\\webapp\\resources\\upload_img";
 		
 		
@@ -169,5 +170,116 @@ public class AdminProductServiceImp implements AdminProductService{
 		mav.addObject("check", check);
 //		mav.addObject("check2", check2);
 		mav.setViewName("admin/product/adminProductAddFormOk");
+	}
+
+	@Override
+	public void adminProductDeleteOk(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+
+		int num = Integer.parseInt(request.getParameter("num"));
+		int page = Integer.parseInt(request.getParameter("page"));
+
+		Map<String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("num", request.getParameter("num"));
+		hmap.put("page", request.getParameter("page"));
+		
+		adminProductDao.productDelete(hmap);
+		
+		mav.addObject("num", num);
+		mav.addObject("page", page);
+		mav.setViewName("admin/product/adminProductDeleteOk");
+	}
+
+	@Override
+	public void adminProductManagementPopup(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+
+		int num = Integer.parseInt(request.getParameter("num"));
+		int page = Integer.parseInt(request.getParameter("page"));
+
+		ProductDto product = adminProductDao.productSelect(num);
+		  
+		mav.addObject("product",product); 
+		mav.addObject("num",num);
+		mav.addObject("page",page);
+		mav.setViewName("admin/product/adminProductManagementPopup");
+	}
+
+	@Override
+	public void adminProductSizeAdd(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		
+		int productNum = Integer.parseInt(request.getParameter("productNum"));
+		
+		String size = request.getParameter("size");
+		
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		//System.out.println(quantity);
+		
+		ProductSizeVO ps = new ProductSizeVO();
+		
+		// 남은 재고의 수량
+		int remainingQuantity = adminProductDao.checkQuantity(productNum, size);
+		int page = Integer.parseInt(request.getParameter("page"));
+		
+		if(-1 == remainingQuantity) {	// 입고된 기록이 없음, insert
+			ps.setNum(adminProductDao.makeProductSizeNum());
+			System.out.println(ps.getNum());
+			ps.setP_num(productNum);
+			ps.setPsize(size);
+			ps.setQuantity(quantity);
+			adminProductDao.add(ps);
+		}else {							// 재고가 남아있음, update
+			ps.setP_num(productNum);
+			ps.setPsize(size);
+			ps.setQuantity(remainingQuantity + quantity);
+			adminProductDao.addQuantity(ps);
+		}
+		int startRange = (page - 1) * 8 + 1;
+		int endRange = page * 8;
+		
+		List<ProductDto> products = adminProductDao.getProductManagementByPageNum(startRange,endRange);
+
+		List<Object> allProducts = null;
+		allProducts = adminProductDao.getProductAll();
+		
+		for (ProductDto product : products) {
+			List<ProductSizeVO> productsSize = adminProductDao.getProductsSizeAll(product.getNum());
+			product.setSizes(productsSize);
+		}
+		
+		PaginationVO pn = new PaginationVO();
+		
+		// 페이징 처리
+		pn.setPage(page);					// 현재 페이지
+		pn.setCountList(8);					// 한 화면에 보여질 상품 수
+		pn.setCountPage(3);					// 하단 보여질 페이지 수 ex) << < 1 2 3 > >>
+		
+		pn.setTotalCount(allProducts.size());	// 전체 상품 수 ex) 35개
+		
+		pn.setTotalPage(pn.getTotalCount() / pn.getCountList());
+		if(pn.getTotalCount() % pn.getCountList() > 0) {	// ex) 총 상품 35개, 한 페이지에 8개 표시 :: 4개의 페이지(8개 상품) + 1페이지(3개 상품)
+			pn.setTotalPage(pn.getTotalPage() + 1);
+		}
+		
+		if(pn.getTotalPage() < pn.getPage()) {
+			pn.setPage(pn.getTotalPage());
+		}
+		
+		pn.setStartPage((pn.getPage() - 1) / pn.getCountPage() * pn.getCountPage() + 1);
+		pn.setEndPage(pn.getStartPage() + pn.getCountPage() - 1);
+
+		if(pn.getEndPage() > pn.getTotalPage()) {
+			pn.setEndPage(pn.getTotalPage());
+		}
+
+		mav.addObject("page", page);
+		mav.addObject("products", products);
+		mav.addObject("pn", pn);
+		mav.setViewName("/admin/product/adminProductManagement");
+		
 	}
 }

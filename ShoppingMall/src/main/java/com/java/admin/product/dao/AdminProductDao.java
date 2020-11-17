@@ -2,6 +2,7 @@ package com.java.admin.product.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -29,4 +30,16 @@ public interface AdminProductDao {
 	public int productImgInsert(ProductImageVO productImageVO);
 
 	public int makeProductImgNum();
+	
+	public int productDelete(Map<String, Object> hmap);
+
+	public ProductDto productSelect(int num);
+
+	public int checkQuantity(int productNum, String size);
+
+	public int makeProductSizeNum();
+
+	public void add(ProductSizeVO ps);
+
+	public void addQuantity(ProductSizeVO ps);
 }

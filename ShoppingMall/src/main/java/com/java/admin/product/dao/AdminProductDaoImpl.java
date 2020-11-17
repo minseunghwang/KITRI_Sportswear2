@@ -66,4 +66,46 @@ public class AdminProductDaoImpl implements AdminProductDao{
 	public int makeProductImgNum() {
 		return sqlSessionTemplate.selectOne("selectProductImgNum");
 	}
+
+	@Override
+	public int productDelete(Map<String, Object> hmap) {
+		return sqlSessionTemplate.delete("product_delete",hmap);
+	}
+
+	@Override
+	public ProductDto productSelect(int num) {
+		return sqlSessionTemplate.selectOne("product_read",num);
+	}
+
+	@Override
+	public int checkQuantity(int productNum, String size) {
+		Map<String, String> hMap = new HashMap<String, String>();
+		hMap.put("productNum", Integer.toString(productNum));
+		hMap.put("size", size);
+		Integer check = sqlSessionTemplate.selectOne("selectQuantity", hMap);
+		if (check == null) {
+			check = -1;
+		}
+		return check;
+	}
+	
+
+	@Override
+	public int makeProductSizeNum() {
+		return sqlSessionTemplate.selectOne("selectProductSizeNum");
+	}
+
+	@Override
+	public void add(ProductSizeVO ps) {
+		sqlSessionTemplate.insert("productSize_insert",ps);
+	}
+
+	@Override
+	public void addQuantity(ProductSizeVO ps) {
+		Map<String, String> hMap = new HashMap<String, String>();
+		hMap.put("productNum", Integer.toString(ps.getP_num()));
+		hMap.put("size", ps.getPsize());
+		hMap.put("quantity", Integer.toString(ps.getQuantity()));
+		sqlSessionTemplate.update("productSize_update",hMap);
+	}
 }

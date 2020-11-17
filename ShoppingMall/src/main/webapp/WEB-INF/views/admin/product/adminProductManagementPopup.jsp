@@ -14,15 +14,14 @@
 	</style>
 	
 	<script type="text/javascript">
-		function quantityInsert(productNum) {
+		function quantityInsert(productNum, page) {
 			
 			var sel = document.getElementById("size");
 			var size = sel.options[sel.selectedIndex].value;
 			
 			var quantity = document.getElementById("quantity").value;
-
-			opener.location.href = '${pageContext.request.contextPath}/ProductSizeAddController?productNum=' + productNum + '&size=' + size + '&quantity=' + quantity;
-
+			
+			opener.location.href = '${pageContext.request.contextPath}/admin/product/adminProductSizeAdd.do?productNum=' + productNum + '&size=' + size + '&quantity=' + quantity + '&page='+ page;
 			self.close();
 		}
 	
@@ -66,7 +65,7 @@
 				
 			</table>
 		
-			<input type="button" value="입고" onclick="quantityInsert('${product.num}');"> 
+			<input type="button" value="입고" onclick="quantityInsert('${product.num}','${page}');"> 
 			<input type="button" value="닫기" onclick="self.close();"> 
 			
 		</fieldset>

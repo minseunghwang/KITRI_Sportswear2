@@ -9,5 +9,11 @@ public interface AdminProductService {
 	public void productWrite(ModelAndView mav);
 
 	public void productWriteOk(ModelAndView mav);
+
+	public void adminProductDeleteOk(ModelAndView mav);
+	
+	public void adminProductManagementPopup(ModelAndView mav);
+
+	public void adminProductSizeAdd(ModelAndView mav);
 	
 }

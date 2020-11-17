@@ -3,4 +3,21 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.java.admin.memberMagage.dao.mapper.AdminMemberManageMapper"></mapper>
+<mapper namespace="com.java.admin.memberMagage.dao.mapper.AdminMemberManageMapper">
+<resultMap type="com.java.member.dto.MemberDto" id="member_dto">
+		<result column="id" property="id"/>	
+		<result column="pwd" property="pwd"/>	
+		<result column="name" property="name"/>	
+		<result column="email" property="email"/>
+		<result column="addr" property="addr"/>	
+		<result column="type" property="type"/>
+		<result column="point" property="point"/>
+	</resultMap>
+   
+	
+	<select id="memberList" parameterType="int" resultMap="member_dto">
+		select * 
+		from member
+	</select>
+
+</mapper>

@@ -45,4 +45,25 @@ public class AdminProductController {
 		adminProductService.productWriteOk(mav);
 		return mav;
 	}
+	@RequestMapping(value="/admin/product/adminProductDeleteOk.do")
+	public ModelAndView productDeleteOk(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request",request);
+		adminProductService.adminProductDeleteOk(mav);
+		return mav;
+	}
+	@RequestMapping(value="/admin/product/adminProductManagementPopup.do")
+	public ModelAndView adminProductManagementPopup(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request",request);
+		adminProductService.adminProductManagementPopup(mav);
+		return mav;
+	}
+	@RequestMapping(value="/admin/product/adminProductSizeAdd.do")
+	public ModelAndView adminProductSizeAdd(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request",request);
+		adminProductService.adminProductSizeAdd(mav);
+		return mav;
+	}
 }

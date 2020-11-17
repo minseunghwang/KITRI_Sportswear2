@@ -13,7 +13,7 @@
 	
 	<!-- Bootstrap core JavaScript -->
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script src="<%=request.getContextPath()%>/resource/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<style type="text/css">
 		#tbody_tr > td{
@@ -23,21 +23,21 @@
 	
 	<script type="text/javascript">
 	
-		function productDel(num) {
+		function productDel(num,page) {
 			var confirm_value = confirm('정말 삭제하시겠습니까?');
 			if(confirm_value){
-				location.href = "<%=request.getContextPath()%>/ProductDelController?num=" + num;
-			}
+				location.href = "${pageContext.request.contextPath }/admin/product/adminProductDeleteOk.do?num="+num+"&page="+page;
+			}//'${pageContext.request.contextPath }/notice/deleteOk.do?num='+${notice.num}+'&page='+${page}
 		}
 
-		function showPopup(num) {
+		function showPopup(num, page) {
 			var pop_title = "재고 현황";
 
-			window.open("", pop_title, "width=300, height=400, left=200, top=200");
+			window.open("", pop_title, "width=400, height=500, left=200, top=200");
 			
 			var frmData = document.productList;
 			frmData.target = pop_title;
-			frmData.action = "<%=request.getContextPath()%>/ProductManagementPopupController?num=" + num;
+			frmData.action = "${pageContext.request.contextPath }/admin/product/adminProductManagementPopup.do?num=" + num+"&page="+page;
 		} 
 		
 	</script>
@@ -95,8 +95,8 @@
 								<td>${p.priceView }</td>
 								<td>${p.e_date }</td>
 								<td>${p.record }</td>
-								<td><input type="button" class="btn btn-outline-danger" value="Del" onClick="productDel('${p.num}')"></td>
-								<td><input type="submit" class="btn btn-outline-info" name="productListNum" value="info" onClick="showPopup('${p.num}')"></td>
+								<td><input type="button" class="btn btn-outline-danger" value="Del" onClick="productDel('${p.num}','${page }')"></td>
+								<td><input type="submit" class="btn btn-outline-info" name="productListNum" value="info" onClick="showPopup('${p.num}','${page }')"></td>
 							</tr>
 						</tbody>
 						</c:forEach>
