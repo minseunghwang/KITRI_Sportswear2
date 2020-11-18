@@ -9,6 +9,6 @@ import com.java.member.dto.MemberDto;
 @Component
 public interface AdminMemberManageDao {
 
-	public List<MemberDto> memberList(int startRange, int endRange);
+	public List<MemberDto> memberList();
 
 }

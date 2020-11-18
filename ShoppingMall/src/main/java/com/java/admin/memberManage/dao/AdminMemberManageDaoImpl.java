@@ -17,11 +17,8 @@ public class AdminMemberManageDaoImpl implements AdminMemberManageDao{
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	@Override
-	public List<MemberDto> memberList(int startRange, int endRange) {
-		Map<String, Integer> hMap = new HashMap<String, Integer>();
-		hMap.put("startPage", startRange);
-		hMap.put("endPage", endRange);
-		return sqlSessionTemplate.selectList("memberList", hMap);
+	public List<MemberDto> memberList() {
+		return sqlSessionTemplate.selectList("memberList");
 	}
 
 }

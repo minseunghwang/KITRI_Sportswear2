@@ -18,6 +18,7 @@
 	<select id="memberList" parameterType="int" resultMap="member_dto">
 		select * 
 		from member
+		where id != 'admin'
 	</select>
 
 </mapper>
