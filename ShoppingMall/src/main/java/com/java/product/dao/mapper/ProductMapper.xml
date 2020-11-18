@@ -80,5 +80,4 @@
 		update product set record=#{record} where num=#{num}
 	</update>
 	
-	
 </mapper> 

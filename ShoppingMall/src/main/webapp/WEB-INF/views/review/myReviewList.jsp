@@ -18,18 +18,16 @@
 <script type="text/javascript">
 
 		function popUpClosed() {
-			location.href="${pageContext.request.contextPath }/ListReviewController?page=1";
+			location.href="${pageContext.request.contextPath }/review/myReviewList.do?page=1";
 		} 
 		
-		function reviewUpdatePopup(num) {
+		function reviewUpdatePopup(num,page) {
 
  			var pop_title = "리뷰 수정";
-			
 			window.open("", pop_title, "width=800, height=650, left=400, top=100");
-			
 			var frmData = document.myreviewList;
 			frmData.target = pop_title;
-			frmData.action = "${pageContext.request.contextPath }/review/EachReviewPopup.do?num="+num;
+			frmData.action = "${pageContext.request.contextPath }/review/EachReviewPopup.do?num="+num + "&page="+page;
 		}
 		
 
@@ -107,11 +105,11 @@ table{
 							<td name="num" style="vertical-align: middle;">${r.num } </td>
 							<td style="vertical-align: middle;"> ${r.rate } </td>
 							<td style="vertical-align: middle;"> ${r.content } </td>
-							<td style="vertical-align: middle;"> <img src="${r.img }" width="100" height="100"> </td>
+							<td style="vertical-align: middle;"> <img src="${pageContext.request.contextPath }/resources${r.img }" width="100" height="100"> </td>
 							<td style="vertical-align: middle;">${r.r_date } </td>
 							<%-- <td><a href="${pageContext.request.contextPath }/EachReviewController?r_num=${r.num }">수정하기</a> </td>
 							<td><button type="button" class="btn btn-link" onclick="showUpdatePopup('${r.num }');">팝업 수정</button> </td> --%>
-							<td style="vertical-align: middle;"><button type="submit" class="btn btn-outline-secondary" onclick="reviewUpdatePopup('${r.num }');">수정하기</button> </td>
+							<td style="vertical-align: middle;"><button type="submit" class="btn btn-outline-secondary" onclick="reviewUpdatePopup('${r.num }','${page }');">수정하기</button> </td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -119,25 +117,23 @@ table{
 			</form>
 		</div>
 	</div>
-						<!-- pagination -->
-			
+			<!-- pagination -->
 			<nav aria-label="...">
 				<ul class="pagination justify-content-center">
 				<c:if test="${1 != pn.page }">
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/ListReviewController?page=1" aria-label="Previous">
+						<a class="page-link" href="${pageContext.request.contextPath }/review/myReviewList.do?page=1" aria-label="Previous">
 							<span aria-hidden="true">&laquo;</span>
 						</a>
 					</li>
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/ListReviewController?page=${param.page-1}" aria-label="Previous">
+						<a class="page-link" href="${pageContext.request.contextPath }/review/myReviewList.do?page=${param.page-1}" aria-label="Previous">
 							<span aria-hidden="true">&lsaquo;</span>
 						</a>
 					</li>
 				</c:if>
 
 				<c:forEach var="pageNum" begin="${pn.startPage }" end="${pn.endPage }" step="1">
-							
 					<c:choose>
 						<c:when test="${param.page eq pageNum}">
 							<li class="page-item active" aria-current="page">
@@ -146,21 +142,22 @@ table{
 							<li class="page-item">
 						</c:otherwise>
 					</c:choose>
-								<a class="page-link" href="${pageContext.request.contextPath }/ListReviewController?page=${pageNum }">${pageNum }</a>
+					<a class="page-link"
+						href="${pageContext.request.contextPath }/review/myReviewList.do?page=${pageNum }">${pageNum }</a>
 					<c:if test="${param.page eq pageNum}">
-									<span class="sr-only">(current)</span>
-							</li>
+						<span class="sr-only">(current)</span>
+						</li>
 					</c:if>
 				</c:forEach>
 
-				<c:if test="${pn.totalPage != pn.page }">
+				<c:if test="${pn.totalPage != pn.page }"> 
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/ListReviewController?page=${param.page+1}" aria-label="Next">
+						<a class="page-link" href="${pageContext.request.contextPath }/review/myReviewList.do?page=${param.page+1}" aria-label="Next">
 							<span aria-hidden="true">&rsaquo;</span>
 						</a>
 					</li>
 					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath }/ListReviewController?page=${pn.totalPage }" aria-label="Next">
+						<a class="page-link" href="${pageContext.request.contextPath }/review/myReviewList.do?page=${pn.totalPage }" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
 						</a>
 					</li>

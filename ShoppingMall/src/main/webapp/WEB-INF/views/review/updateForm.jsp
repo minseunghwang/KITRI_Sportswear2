@@ -9,9 +9,7 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 
-<link
-	href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script
 	src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -21,30 +19,30 @@
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/views/review/star-rating/star-rating/css/star-rating.css"
+	href="${pageContext.request.contextPath }/resources/star-rating/star-rating/css/star-rating.css"
 	media="all" type="text/css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/views/review/star-rating/star-rating/css/themes/krajee-fa/theme.css"
+	href="${pageContext.request.contextPath }/resources/star-rating/star-rating/css/themes/krajee-fa/theme.css"
 	media="all" type="text/css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/views/review/star-rating/star-rating/css/themes/krajee-svg/theme.css"
+	href="${pageContext.request.contextPath }/resources/star-rating/star-rating/css/themes/krajee-svg/theme.css"
 	media="all" type="text/css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/views/review/star-rating/star-rating/css/themes/krajee-uni/theme.css"
+	href="${pageContext.request.contextPath }/resources/star-rating/star-rating/css/themes/krajee-uni/theme.css"
 	media="all" type="text/css" />
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script
-	src="${pageContext.request.contextPath }/views/review/star-rating/star-rating/js/star-rating.js"
+	src="${pageContext.request.contextPath }/resources/star-rating/star-rating/js/star-rating.js"
 	type="text/javascript"></script>
 <script
-	src="${pageContext.request.contextPath }/views/review/star-rating/star-rating/js/themes/krajee-fa/theme.js"
+	src="${pageContext.request.contextPath }/resources/star-rating/star-rating/js/themes/krajee-fa/theme.js"
 	type="text/javascript"></script>
 <script
-	src="${pageContext.request.contextPath }/views/review/star-rating/star-rating/js/themes/krajee-svg/theme.js"
+	src="${pageContext.request.contextPath }/resources/star-rating/star-rating/js/themes/krajee-svg/theme.js"
 	type="text/javascript"></script>
 <script
-	src="${pageContext.request.contextPath }/views/review/star-rating/star-rating/js/themes/krajee-uni/theme.js"
+	src="${pageContext.request.contextPath }/resources/star-rating/star-rating/js/themes/krajee-uni/theme.js"
 	type="text/javascript"></script>
 
 <!-- 업로드 사진 미리보기 -->
@@ -87,7 +85,6 @@
 	}
 	
 	
-	
 	function ParentRedirect() {
 
 		self.close();
@@ -107,9 +104,8 @@
  		
  		formData.append('num', $('#hidden_r_num').val());
 
-
 		$.ajax({
-			url: "${pageContext.request.contextPath }/EditReviewController",
+			url: "${pageContext.request.contextPath }/review/EditReview.do",
 			data: formData,
 			async: false,	// ajax 동기처리로 바꿈
 			processData: false,
@@ -119,7 +115,6 @@
 				ParentRedirect();
 			}
 		});
-		
 	});
 	
 </script>

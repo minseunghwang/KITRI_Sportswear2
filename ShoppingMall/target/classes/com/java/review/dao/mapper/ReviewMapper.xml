@@ -44,4 +44,17 @@
 		from (select rownum as rnum, a.* from (select * from review where m_id=#{m_id} order by num desc) A where rownum<=#{end}) X where x.rnum>=#{start}
 		]]>
 	</select>
+	
+	<insert id="editReview" parameterType="com.java.review.dto.ReviewDto">
+		update review set rate=#{rate}, content=#{content}, img=#{img}, r_date=sysdate where num=#{num}
+	</insert>
+	
+	<select id="selectP_Num" parameterType="int" resultType="Integer">
+		select p_num from review where num = #{r_num}
+	</select>
+	
+	<select id="getMyreviewCnt" parameterType="String" resultType="Integer">
+		select count(*) from review where m_id=#{m_id}
+	</select>
+	
 </mapper>

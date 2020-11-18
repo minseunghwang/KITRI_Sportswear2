@@ -117,7 +117,7 @@ public class ProductServiceImpl implements ProductService{
 			pn.setEndPage(pn.getTotalPage());
 		}
 		
-//		request.setAttribute("pn", pn);
+		System.out.println(pn.toString());
 		mav.addObject("products", products);
 		mav.addObject("pn", pn);
 		mav.setViewName("product/categoryList");

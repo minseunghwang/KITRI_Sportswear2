@@ -46,12 +46,19 @@ public class ReviewController {
 		return mav;
 	}
 	
-	
 	@RequestMapping(value="/review/EachReviewPopup.do")
 	public ModelAndView UpdateReview(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav =new ModelAndView();
 		mav.addObject("request",request);
 		reviewService.UpdateReview(mav);
+		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/review/EditReview.do")
+	public ModelAndView EditReview(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav =new ModelAndView("jsonView");
+		reviewService.EditReview(mav,request);
 		return mav;
 	}
 }

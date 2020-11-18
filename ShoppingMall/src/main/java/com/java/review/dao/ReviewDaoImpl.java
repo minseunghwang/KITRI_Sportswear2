@@ -25,8 +25,7 @@ public class ReviewDaoImpl implements ReviewDao{
 
 	@Override
 	public int selectP_Num(int r_num) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSessionTemplate.selectOne("selectP_Num", r_num);
 	}
 
 	@Override
@@ -106,12 +105,17 @@ public class ReviewDaoImpl implements ReviewDao{
 
 	@Override
 	public int getcountMine(String m_id) {
-		return 0;
+		return sqlSessionTemplate.selectOne("getMyreviewCnt", m_id);
 	}
 
 	@Override
 	public void add(ReviewDto reviewdto) {
 		sqlSessionTemplate.insert("addReview",reviewdto);
+	}
+
+	@Override
+	public void editReview(ReviewDto reviewdto) {
+		sqlSessionTemplate.insert("editReview",reviewdto);
 	}
 	
 }

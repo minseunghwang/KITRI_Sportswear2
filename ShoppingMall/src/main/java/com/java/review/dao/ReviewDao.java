@@ -30,5 +30,6 @@ public interface ReviewDao {
 	public List<ReviewDto> getMyReviewAll(String m_id, int page);
 	public int getcountMine(String m_id);
 	void add(ReviewDto reviewdto);
+	void editReview(ReviewDto reviewdto);
 	
 }
