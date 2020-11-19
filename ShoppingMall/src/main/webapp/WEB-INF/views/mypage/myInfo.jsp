@@ -77,7 +77,7 @@ body{
 			<!-- /leftNavigation -->
 			<div class = "membershowbox">
 				<div class="hellouser">
-					<img src="${pageContext.request.contextPath }/resources/sample_img/user_basic.png" alt="" width="75" height="75"> 
+					<img src="${pageContext.request.contextPath }/resources/upload_img/user_basic.png" alt="" width="75" height="75"> 
 					<h4 style="font-size:1.5em; "> &nbsp; ${sessionScope.id } 고객님, 안녕하세요!</h4>
 				</div>
 					<br>

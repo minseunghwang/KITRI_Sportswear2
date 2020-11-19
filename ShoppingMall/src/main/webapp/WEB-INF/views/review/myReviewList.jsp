@@ -107,8 +107,6 @@ table{
 							<td style="vertical-align: middle;"> ${r.content } </td>
 							<td style="vertical-align: middle;"> <img src="${pageContext.request.contextPath }/resources${r.img }" width="100" height="100"> </td>
 							<td style="vertical-align: middle;">${r.r_date } </td>
-							<%-- <td><a href="${pageContext.request.contextPath }/EachReviewController?r_num=${r.num }">수정하기</a> </td>
-							<td><button type="button" class="btn btn-link" onclick="showUpdatePopup('${r.num }');">팝업 수정</button> </td> --%>
 							<td style="vertical-align: middle;"><button type="submit" class="btn btn-outline-secondary" onclick="reviewUpdatePopup('${r.num }','${page }');">수정하기</button> </td>
 						</tr>
 					</c:forEach>

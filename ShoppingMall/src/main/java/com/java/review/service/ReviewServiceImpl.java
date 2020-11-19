@@ -129,9 +129,6 @@ public class ReviewServiceImpl implements ReviewService{
 			pn.setEndPage(pn.getTotalPage());
 		}
 		
-		System.out.println(pn.toString());
-		System.out.println(page);
-		
 		mav.addObject("pn",pn);
 		mav.addObject("page",page);
 		mav.addObject("list",list);
@@ -294,7 +291,7 @@ public class ReviewServiceImpl implements ReviewService{
 				}
 				
 				// 저장하는 부분
-//				UUID uid = UUID.randomUUID();		// 이름앞ㅇ ㅔ랜덤 난수 추가할때
+//				UUID uid = UUID.randomUUID();		// 이름앞에 랜덤 난수 추가할때
 				String saveName =multipartFile.getOriginalFilename();
 				
 				File saveFile = new File(uploadPath, saveName);

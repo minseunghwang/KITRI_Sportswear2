@@ -34,7 +34,6 @@ public class MemberServiceImp implements MemberService {
 
 	@Override
 	public void memberLoginOk(ModelAndView mav) {
-		// TODO Auto-generated method stub
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request =(HttpServletRequest)map.get("request");
 		Map<String, String> hmap=new HashMap<String, String>();
@@ -160,7 +159,6 @@ public class MemberServiceImp implements MemberService {
 
 	@Override
 	public void memberIdCheck(ModelAndView mav) {
-		// TODO Auto-generated method stub
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		Map<String, String> hmap=new HashMap<String, String>();
@@ -190,7 +188,6 @@ public class MemberServiceImp implements MemberService {
 		List<ProductOrderVO> recentList = productorderDao.getRecentOrderList(id);
 		
 		for(ProductOrderVO o:recentList) {
-			System.out.println(o.toString());
 			ProductDto p = productDao.select(o.getMax_p_num());
 			o.setProd_name(p.getName());
 			o.setProd_img(p.getImg());
@@ -243,7 +240,6 @@ public class MemberServiceImp implements MemberService {
 
 	@Override
 	public void memberDelete(ModelAndView mav) {
-		// TODO Auto-generated method stub
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpSession session=request.getSession(false);
@@ -254,6 +250,4 @@ public class MemberServiceImp implements MemberService {
 		mav.setViewName("/main/main");
 		
 	}
-
-
 }
