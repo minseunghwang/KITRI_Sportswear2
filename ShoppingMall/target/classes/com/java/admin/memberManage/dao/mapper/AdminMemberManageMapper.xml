@@ -20,5 +20,25 @@
 		from member
 		where id != 'admin'
 	</select>
+	
+	<select id="member_read" parameterType="String" resultMap="member_dto">
+		select *
+		from member
+		where id=#{id}
+	</select>
+	
+	<update id="member_edit" parameterType="com.java.member.dto.MemberDto">
+		update member
+		set pwd=#{pwd},
+			name=#{name},
+			email=#{email},
+			addr=#{addr}
+		where id=#{id}
+	</update>
+	
+	<delete id="member_delete">
+		delete from member
+		where id=#{id}
+	</delete>
 
 </mapper>

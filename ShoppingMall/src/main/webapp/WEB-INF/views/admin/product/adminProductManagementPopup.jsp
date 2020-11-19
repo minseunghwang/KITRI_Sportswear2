@@ -17,9 +17,21 @@
 		function quantityInsert(productNum, page) {
 			
 			var sel = document.getElementById("size");
+			var quantity= document.getElementById("quantity");
+			
 			var size = sel.options[sel.selectedIndex].value;
 			
 			var quantity = document.getElementById("quantity").value;
+			
+			if(size == ""){
+				alert("사이즈를 선택해 주세요.");
+				return false;
+			}
+			
+			if(quantity.length == 0){
+				alert("수량을 입력해주세요.");
+				return false;
+			}
 			
 			opener.location.href = '${pageContext.request.contextPath}/admin/product/adminProductSizeAdd.do?productNum=' + productNum + '&size=' + size + '&quantity=' + quantity + '&page='+ page;
 			self.close();
@@ -34,7 +46,7 @@
 			<table>
 				<tr> 
 					<td colspan="2" style="text-align: center;">
-						<img src="${product.img}"  width="100" height="150">
+						<img src="/product/resources/${product.img}"  width="100" height="150">
 					</td>
 				</tr>
 				<tr>

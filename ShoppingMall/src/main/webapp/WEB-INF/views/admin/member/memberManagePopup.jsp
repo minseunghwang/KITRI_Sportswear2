@@ -11,16 +11,16 @@
 
 <!-- Bootstrap core JavaScript -->
 <script
-	src="<%=request.getContextPath()%>/resource/vendor/jquery/jquery.min.js"></script>
+	src="<%=request.getContextPath()%>/resources/vendor/jquery/jquery.min.js"></script>
 <script
-	src="<%=request.getContextPath()%>/resource/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	src="<%=request.getContextPath()%>/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
 
 <script type="text/javascript">
  
 function closeToEditMember() {
-	opener.location.href="<%=request.getContextPath()%>/MemberManageEditController";
+		opener.location.href="<%=request.getContextPath()%>/admin/memberManage/memberManagePopupEdit.do";
 
 		self.close();
 
@@ -28,12 +28,16 @@ function closeToEditMember() {
 
 	function check() {
 		
-		
-		
 		var pwdtxt = document.f.pwd;
 		var addrtxt = document.f.addr;
 		
 		var params = $("#f").serialize();
+		
+		var id = $("#id").val();
+		var pwd = $("#pwd").val();
+		var name = $("#name").val();
+		var email = $("#email").val();
+		var addr = $("#addr").val();
 		
 		if (pwdtxt.value == "") {
 			alert("빈공란이 존재합니다.");
@@ -48,32 +52,30 @@ function closeToEditMember() {
 			addrtxt.focus();
 			return false;
 		}
-       
 		
-	
-	$
-				.ajax({
-					url : "${pageContext.request.contextPath }/MemberManageEditController",
+      
+		$.ajax({
+					url : "${pageContext.request.contextPath }/admin/memberManage/memberManagePopupEdit.do",
 					type : "post",
-					data : params,
+					data : {
+						"id" : id,
+						"pwd" : pwd,
+						"name" : name,
+						"email" : email,
+						"addr" : addr
+					},
+				    dataType: "json",	
 					success : function(data) {
-
+						alert("수정되었습니다.");
 						opener.parent.location.reload();
 						self.close();
 					},
 					error : function(request, status, error) {
-						alert("code = " + request.status + " message = "
-								+ request.responseText + " error = " + error);
-					},
-					complete : function(data) {
-						//  실패했어도 완료가 되었을 때 처리
-						alert("무ㅡㅓ징?.");
+						alert("에러임");
+						alert(error);
+						console.log("code = " + request.status + " message = " + request.responseText + " error = " + error);
 					}
-
 				});
-
-	alert("수정되었습니다.");
-	
 	}
 
 	function checkrem() {
@@ -83,7 +85,7 @@ function closeToEditMember() {
 		if(flag){
 			$
 			.ajax({
-				url : "${pageContext.request.contextPath }/MemberManageDelController",
+				url : "${pageContext.request.contextPath }/admin/memberManage/memberManagePopupDelete.do",
 				type : "post",
 				data : params,
 				success : function(data) {
@@ -123,28 +125,28 @@ function closeToEditMember() {
 				
 				<div class="form-group">
 					<label for="ViewID">ID</label> 
-					<input type="text" class="form-control" name="id" value="${member.id}" readonly>
+					<input type="text" class="form-control" id="id" name="id" value="${member.id}" readonly>
 				</div>
 				
 				<div class="form-group">
 					<label for="EditPwd">Password</label> <input
-						type="password" class="form-control" name="pwd" value="${member.pwd }" >
+						type="password" class="form-control" id="pwd" name="pwd" value="${member.pwd }" >
 				</div>
 				
 				<div class="form-group">
 					<label for="ViewName">Name</label> <input
-						type="text" class="form-control" name="name" value="${member.name }" readonly>
+						type="text" class="form-control" name="name" id="name" value="${member.name }">
 						
 				</div>
 				
 				<div class="form-group">
 					<label for="EidtEmail">Email address</label> <input
-						type="email" class="form-control" name="email" value="${member.email }" aria-describedby="emailHelp" > 
+						type="email" class="form-control" name="email" id="email" value="${member.email }" aria-describedby="emailHelp" > 
 				</div>
 				<!-- 주소api 추후 추가 -->
 				<div class="form-group">
 					<label for="EditAddress">Address</label> <input
-						type="text" class="form-control" name="addr" value="${member.addr }">
+						type="text" class="form-control" name="addr" id="addr" value="${member.addr }">
 				</div>
 				
 			

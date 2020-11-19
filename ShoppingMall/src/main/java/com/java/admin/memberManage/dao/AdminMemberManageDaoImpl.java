@@ -21,4 +21,20 @@ public class AdminMemberManageDaoImpl implements AdminMemberManageDao{
 		return sqlSessionTemplate.selectList("memberList");
 	}
 
+	@Override
+	public MemberDto memberSelect(String id) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne("member_read",id);
+	}
+
+	@Override
+	public void memberManagementPopupEdit(MemberDto memberDto) {
+		sqlSessionTemplate.update("member_edit", memberDto);
+	}
+
+	@Override
+	public void memberManagementPopupDelete(Map<String, Object> hmap) {
+		sqlSessionTemplate.delete("member_delete", hmap);
+	}
+
 }

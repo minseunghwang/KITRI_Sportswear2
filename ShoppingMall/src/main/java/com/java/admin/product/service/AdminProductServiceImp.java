@@ -1,6 +1,7 @@
 package com.java.admin.product.service;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -109,8 +110,8 @@ public class AdminProductServiceImp implements AdminProductService{
 		
 		int maxSize = 1024 * 1024 * 10;
 		
-		String uploadPath = "C:\\spring3\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\webapps\\upload_img";
-//		String uploadPath = "C:\\Users\\kit\\git\\KITRI_Sportswear3\\ShoppingMall\\src\\main\\webapp\\resources\\upload_img";
+//		String uploadPath = "C:\\spring3\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\webapps\\upload_img";
+		String uploadPath = "C:\\Users\\kit\\git\\KITRI_Sportswear3\\ShoppingMall\\src\\main\\webapp\\resources\\upload_img";
 		
 		
 		try {
@@ -134,6 +135,18 @@ public class AdminProductServiceImp implements AdminProductService{
 				multipartFile = multipartHttpServletRequest.getFile(iterator.next());
 				if(multipartFile.isEmpty() == false){
 					productDto.setImg("/upload_img/" + multipartFile.getOriginalFilename());
+					//break;
+					String saveName =multipartFile.getOriginalFilename();
+					
+					File saveFile = new File(uploadPath, saveName);
+					
+					try {
+						multipartFile.transferTo(saveFile);
+					} catch (IllegalStateException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					break;
 				}
 			}
@@ -155,6 +168,18 @@ public class AdminProductServiceImp implements AdminProductService{
 						productImageVO.setImg("/upload_img/" + multipartFile.getOriginalFilename());
 						System.out.println(productImageVO.toString());
 						adminProductDao.productImgInsert(productImageVO);
+						
+						String saveName =multipartFile.getOriginalFilename();
+						
+						File saveFile = new File(uploadPath, saveName);
+						
+						try {
+							multipartFile.transferTo(saveFile);
+						} catch (IllegalStateException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			}
