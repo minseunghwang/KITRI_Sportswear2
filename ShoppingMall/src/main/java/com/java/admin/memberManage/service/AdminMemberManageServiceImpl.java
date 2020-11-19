@@ -1,5 +1,6 @@
 package com.java.admin.memberManage.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import com.java.admin.memberManage.dao.AdminMemberManageDao;
 import com.java.common.PaginationVO;
 import com.java.common.ProductSizeVO;
 import com.java.member.dto.MemberDto;
+import com.java.notice.dto.NoticeDto;
 import com.java.product.dto.ProductDto;
 
 @Configuration
@@ -26,44 +28,64 @@ public class AdminMemberManageServiceImpl implements AdminMemberManageService{
 	public void memberList(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-
-		int page = Integer.parseInt(request.getParameter("page"));	
-		int startRange = (page - 1) * 8 + 1;
-		int endRange = page * 8;
 		
 		List<MemberDto> members = null;
-		members = adminMemberManageDao.memberList(startRange,endRange);
-		
-		PaginationVO pn = new PaginationVO();
-		
-		// 페이징 처리
-		pn.setPage(page);					// 현재 페이지
-		pn.setCountList(8);					// 한 화면에 보여질 상품 수
-		pn.setCountPage(3);					// 하단 보여질 페이지 수 ex) << < 1 2 3 > >>
-		
-		pn.setTotalCount(members.size());	// 전체 상품 수 ex) 35개
-		
-		pn.setTotalPage(pn.getTotalCount() / pn.getCountList());
-		if(pn.getTotalCount() % pn.getCountList() > 0) {	// ex) 총 상품 35개, 한 페이지에 8개 표시 :: 4개의 페이지(8개 상품) + 1페이지(3개 상품)
-			pn.setTotalPage(pn.getTotalPage() + 1);
-		}
-		
-		if(pn.getTotalPage() < pn.getPage()) {
-			pn.setPage(pn.getTotalPage());
-		}
-		
-		pn.setStartPage((pn.getPage() - 1) / pn.getCountPage() * pn.getCountPage() + 1);
-		pn.setEndPage(pn.getStartPage() + pn.getCountPage() - 1);
-
-		if(pn.getEndPage() > pn.getTotalPage()) {
-			pn.setEndPage(pn.getTotalPage());
-		}
-		
-		mav.addObject("page", page);
+		members = adminMemberManageDao.memberList();
+				
 		mav.addObject("members", members);
-		mav.addObject("pn", pn);
 		mav.setViewName("/admin/member/memberManage");
 		
+	}
+
+	@Override
+	public void memberManagePopup(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+
+		String id = request.getParameter("id");
+		//int page = Integer.parseInt(request.getParameter("page"));
+
+		MemberDto member = adminMemberManageDao.memberSelect(id);
+		  
+		mav.addObject("member",member); 
+		mav.addObject("id",id);
+		//mav.addObject("page",page);
+		mav.setViewName("/admin/member/memberManagePopup");
+	}
+
+	@Override
+	public void memberManagementPopupEdit(ModelAndView mav, HttpServletRequest request) {
+		Map<String, Object> map = mav.getModelMap();
+
+//		MemberDto memberDto = (MemberDto) map.get("memberDto");
+		
+        MemberDto memberDto = new MemberDto();
+        memberDto.setId(request.getParameter("id"));
+        memberDto.setPwd(request.getParameter("pwd"));
+        memberDto.setName(request.getParameter("name"));
+        memberDto.setEmail(request.getParameter("email"));
+        memberDto.setAddr(request.getParameter("addr"));
+		
+		adminMemberManageDao.memberManagementPopupEdit(memberDto);		
+		
+		mav.addObject("id", memberDto.getId());
+//		mav.setViewName("/admin/member/memberManage");
+	}
+
+	@Override
+	public void memberManagePopupDelete(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+
+		String id = request.getParameter("id");
+
+		Map<String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("id", request.getParameter("id"));
+
+		adminMemberManageDao.memberManagementPopupDelete(hmap);
+
+		mav.addObject("id", id);
+		mav.setViewName("/admin/member/memberManage");
 	}
 
 }

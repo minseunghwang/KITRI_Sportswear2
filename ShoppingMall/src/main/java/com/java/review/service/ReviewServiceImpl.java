@@ -276,7 +276,8 @@ public class ReviewServiceImpl implements ReviewService{
 
 	    int maxSize =1024 *1024 *10;
 	    
-	    String uploadPath = "C:\\Users\\KITRI\\git\\KITRI_Sportswear2\\ShoppingMall\\src\\main\\webapp\\resources\\review_img";
+	    //String uploadPath = "C:\\Users\\KITRI\\git\\KITRI_Sportswear2\\ShoppingMall\\src\\main\\webapp\\resources\\review_img";
+	    String uploadPath = "C:\\Users\\kit\\git\\KITRI_Sportswear3\\ShoppingMall\\src\\main\\webapp\\resources\\upload_img"; //진실
 
 	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
 	    System.out.println("파일이름: " + multipartHttpServletRequest.getFileNames());

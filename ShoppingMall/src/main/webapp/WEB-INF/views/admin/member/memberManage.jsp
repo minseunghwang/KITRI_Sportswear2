@@ -15,11 +15,11 @@
 
 <!-- Bootstrap core CSS -->
 <link
-	href="<%=request.getContextPath()%>/resource/vendor/bootstrap/css/bootstrap.min.css"
+	href="<%=request.getContextPath()%>/resources/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="<%=request.getContextPath()%>/resource/css/shop-item.css"
+<link href="<%=request.getContextPath()%>/resources/css/shop-item.css"
 	rel="stylesheet">
 	
 	
@@ -34,7 +34,7 @@
 		
 		var frmData = document.memberList;
 		frmData.target = pop_title;
-		frmData.action = "<%=request.getContextPath()%>/MemberManagePopupController?currentId=" + currentId;
+		frmData.action = "<%=request.getContextPath()%>/admin/memberManage/memberManagePopup.do?id=" + id;
 		console.log("currentId: " + currentId);
 		console.log(frmData.action);
 		
@@ -106,7 +106,6 @@ body{
 							</tbody>
 							</c:forEach>
 							</table>
-						
 						</form>
 				</div>
 				<!-- /.managememberbox -->
@@ -117,11 +116,15 @@ body{
 		</div>
 		<!-- /.row -->
 		
+		
 	</div>
 	<!-- /.container -->
 	
 	<!-- footer -->
 	<%@include file="/WEB-INF/views/common/footer2.jsp"%>
+<!-- Optional JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
 </body>
 </html>
