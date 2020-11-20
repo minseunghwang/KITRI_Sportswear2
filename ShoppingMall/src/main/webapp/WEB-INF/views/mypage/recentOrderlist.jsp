@@ -56,7 +56,7 @@ table{
 				<div class="listtitle">
 					<h4>최근 주문 목록</h4>
 				<!-- <hr style="border: 0; height: 3px; background: #ccc;"> -->
-					<a href="${pageContext.request.contextPath }/AllOrderListController?o_state=1&page=1" id="orderlistmore" style="text-align: right;"> more >> </a>		
+					<a href="${pageContext.request.contextPath }/productorder/orderInquiry.doc?o_state=1&page=1" id="orderlistmore" style="text-align: right;"> more >> </a>		
 				</div>
 				<form id="recentorderList" name="recentorderList" method="post">
 					<table class="table table-hover table-sm mt-3 mb-5" >
@@ -74,12 +74,12 @@ table{
 						<c:forEach var="o" items="${list }">
 							<tr class="text-center">
 								<td name="code_num" style="vertical-align: middle;">
-								 <a id="code_num_link" style="text-decoration: none;" href="${pageContext.request.contextPath }/OrderlistController2?code_num=${o.code_num }">${o.code_num }</a>
+								 <a id="code_num_link" style="text-decoration: none;" href="${pageContext.request.contextPath }/productorder/orderDetail.do?code_num=${o.code_num }">${o.code_num }</a>
 								</td>
 								<td style="vertical-align: middle;">${o.max_o_date }</td>
 								<td style="vertical-align: middle;">${o.prod_name } <span style="font-size:12px; word-break:break-all;">..포함 ${o.ctnrow} 개</span>
 								</td>
-								<td style="vertical-align: middle;"><img src="${o.prod_img }" width="100" height="100"> </td>
+								<td style="vertical-align: middle;"><img src="/product/resources${o.prod_img }" width="100" height="100"> </td>
 								<td style="vertical-align: middle;">${o.priceView } </td>
 							</tr>																
 						</c:forEach>

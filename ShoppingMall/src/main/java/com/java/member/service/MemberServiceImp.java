@@ -202,7 +202,6 @@ public class MemberServiceImp implements MemberService {
 
 	@Override
 	public void memberEditPage(ModelAndView mav) {
-		// TODO Auto-generated method stub
 		Map<String, Object> map =mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpSession session=request.getSession(false);
