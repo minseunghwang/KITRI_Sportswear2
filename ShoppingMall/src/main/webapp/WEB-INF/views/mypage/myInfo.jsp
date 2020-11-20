@@ -101,7 +101,8 @@ body{
 	<%@include file="/WEB-INF/views/common/footer2.jsp"%>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/vendor/jquery/jquery.min.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
 </body>
 </html>

@@ -296,11 +296,6 @@
 		$(document).ready(function() {
 			var sessionId = "${sessionScope.id}";
 			
-			if(sessionId == ""){
-				alert("로그인 후 이용해 주세요");
-				location.href = "${pageContext.request.contextPath }/member/login.do";
-			}
-			
 			// 사용자별 장바구니에 있는 상품개수 표시
 			$.ajax({
 				type : "POST",

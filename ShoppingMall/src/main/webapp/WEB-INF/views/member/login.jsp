@@ -51,7 +51,10 @@ body{
 </style>
 
 
-<script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js">
+
+
+</script>
  
 
 </head>
@@ -65,7 +68,7 @@ body{
 	<div class = "logincomponent">
 		<form action="${pageContext.request.contextPath }/member/loginOk.do" name="f" method="post">
 			<fieldset>
-				<legend style="text-align:center;">LOG IN</legend>
+				<legend style="text-align:center;">LOGIN</legend>
 					<br>
 				<div class="form-group1">
 					<!-- <label for="InputID">ID</label>  -->
