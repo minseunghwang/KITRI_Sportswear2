@@ -85,4 +85,5 @@ public class PaginationDto {
 				+ totalCount + ", totalPage=" + totalPage + ", startPage=" + startPage + ", endPage=" + endPage + "]";
 	}
 	
+	
 }
