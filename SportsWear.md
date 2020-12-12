@@ -36,7 +36,6 @@
 <p>
 
 - 주문 페이지
-<br>
 ![20201127_171740_12](https://user-images.githubusercontent.com/49888816/101984933-eb5f9380-3cc7-11eb-9583-81ea9086f234.jpg)
 <br>
 <p>
