@@ -2,11 +2,11 @@
 
 - Main 페이지(비로그인)
 ![20201127_171740_5](https://user-images.githubusercontent.com/49888816/101984915-d125b580-3cc7-11eb-900d-ee52a6f4ae94.jpg)
-                                
+<br>
 
 - 로그인 페이지
 ![20201127_171740_6](https://user-images.githubusercontent.com/49888816/101984917-d551d300-3cc7-11eb-9084-f5623196a3bc.jpg)
-
+<br>
 
 - Main 페이지(로그인)
 ![20201127_171740_7](https://user-images.githubusercontent.com/49888816/101984920-d71b9680-3cc7-11eb-9c4e-795767c3b6b6.jpg)
