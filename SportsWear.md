@@ -1,8 +1,14 @@
 # KITRI_Sportswear2
 
+[Main화면(비로그인]
 ![20201127_171740_5](https://user-images.githubusercontent.com/49888816/101984915-d125b580-3cc7-11eb-900d-ee52a6f4ae94.jpg)
+
+[로그인화면]
 ![20201127_171740_6](https://user-images.githubusercontent.com/49888816/101984917-d551d300-3cc7-11eb-9084-f5623196a3bc.jpg)
+
+[Main화면(로그인]
 ![20201127_171740_7](https://user-images.githubusercontent.com/49888816/101984920-d71b9680-3cc7-11eb-9c4e-795767c3b6b6.jpg)
+
 ![20201127_171740_8](https://user-images.githubusercontent.com/49888816/101984922-d97df080-3cc7-11eb-9fb3-16c257a72c04.jpg)
 ![20201127_171740_9](https://user-images.githubusercontent.com/49888816/101984924-db47b400-3cc7-11eb-93ca-d74b92d0e6ef.jpg)
 ![20201127_171740_10](https://user-images.githubusercontent.com/49888816/101984927-ddaa0e00-3cc7-11eb-9ac2-0ee159b08d9c.jpg)
